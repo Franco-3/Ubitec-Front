@@ -1,0 +1,615 @@
+/* Colores */
+
+:root{
+    --blanco:#ffffff;
+    --oscuro: #212121;
+    --primario: #146c43;
+    --secundario: #0a884d;
+    --gris: #757575;
+    --grisSuave: #dddddd
+}
+
+/* Globales */
+html{
+    font-size: 62.5%;
+    box-sizing: border-box;
+
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+.logogps {
+	background-image: url("../css/logoubitec.gif");
+	background-size: 100% 100%;
+	width: 100px;
+	height: 100px;
+}
+header {
+    background-image: linear-gradient(to top, var(--grisSuave) 0%, var(--blanco) 100%  );
+    border-bottom: 4px solid #080404c7;
+    padding: 10px 0 5px 0;
+    width: 100%;
+}
+header span{
+	font-family: thertole;
+	font-size: 70px;
+	margin-left: 100%;
+	text-shadow: 4px 4px 4px #07c22f;
+    animation: animate 3s infinite;
+}
+@keyframes animate{
+	0% {color: #8a9597;}
+	33% {color: #191919;}
+    66% {color: gray;}
+    100% {color: white;}
+}
+@font-face {
+	font-family: thertole;
+	src: url("Thertole.otf");
+}
+body{
+    font-size: 16px; /* 1rem = 10px */
+    font-family: 'Krub', sans-serif;
+    background-image: linear-gradient(to top, var(--grisSuave) 0%, var(--blanco) 100%  );
+}
+
+.sombra{
+    -webkit-box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.75);
+    background-color: var(--blanco);
+    padding: 2rem 7rem ;
+    border-radius: 1rem;
+}
+
+
+/* tamaño texto */
+h1{
+    font-size: 3.8rem;
+    text-align: center;
+}
+h2{
+    font-size: 2.8rem;
+    text-align: center;
+}
+
+h3{
+    font-size: 1.8rem;
+    text-align: center;
+}
+/* navegacion */
+.nav-bg{
+    background-color: var(--secundario);
+}
+.contenedor{
+    max-width: 90rem;
+    margin: 0 auto;
+}
+
+.navegacion-principal{
+    display: flex; /* se ativa el display flex para utilizar flexbox */
+    flex-direction: column; /* se elije la direccion de la caja colum(align-items para centrar h) o row(permite usar justify-content para centrar h) */
+
+}
+
+/* media query para la navegacion */
+@media (min-width: 768px) {
+    .navegacion-principal{
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+.navegacion-principal a{
+    display: block;
+    text-align: center;
+
+    color: var(--blanco);
+    text-decoration: none;
+    font-size: 2rem;
+    font-weight: 700;
+    padding: 1rem;
+    transition: .2s;
+}
+
+.navegacion-principal a:hover{
+    background-color: var(--primario);
+    transition: .2s;
+    color: var(--oscuro);
+}
+
+/* contenido imagen central */
+
+.hero{
+    background-image: url(../img/fondogps.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: center;
+    height: 690px;
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.contenido-hero{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.contenido-hero h2, .contenido-hero p {
+    color: var(--blanco);
+}
+
+/* boton contacto */
+
+.boton{
+    background-color: var(--secundario);
+    padding: 1rem 3rem ;
+    border-radius: .8rem;
+    color: var(--blanco);
+    text-decoration: none;
+    font-size: 2rem;
+    margin-top: 2rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    width: 70%;
+    text-align: center;
+}
+@media (min-width: 768px) {
+    .boton{
+        width: auto;
+    }
+}
+
+.boton:hover{
+    background-color: var(--primario);
+    transition: .2s;
+    color: var(--oscuro);
+}
+
+.hijo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.hijo input{
+    margin: 2rem;
+}
+
+.form{
+	width: 100%;
+	padding: 12px;
+	margin-bottom: 4%;
+	box-sizing: border-box;
+	font-size: 18px;
+    outline: none;
+    border-radius: 10px;
+    border: 1px solid grey;
+}
+
+.return{
+    margin-top: 1rem;
+}
+
+/* display flex,  align items flex end para bajar contenido  */
+
+
+/* //////////////////////////////////////////////////////////////////////////////////*/
+
+
+
+.fondo {
+	margin: 0;
+	padding: 0;
+	font-family: 'Open Sans', sans-serif;
+	background-image: url(../css/fondoindex.jpg);
+	background-attachment: fixed;
+	background-size: 100% 100%;
+}
+.logogps {
+	background-image: url("logoubitec.gif");
+	background-size: 100% 100%;
+	width: 100px;
+	height: 100px;
+}
+header {
+    border-bottom: 4px solid #080404c7;
+    padding: 0px 0 5px 0;
+    width: 100%;
+}
+header span{
+	font-family: thertole;
+	font-size: 50px;
+	margin-left: 100%;
+	text-shadow: 4px 4px 4px #07c22f;
+   	animation: animate 3s infinite;
+}
+.deslogear, .historial, .account {
+	position: absolute;
+	right: 0%;
+	top: 0%;
+	color: white;
+	font-size: 18px;
+	background-color: red;
+	border-radius: 10px;
+	margin: 40px 2% 0% 0%;
+	padding: 14px;
+	border: 0px;
+}
+.deslogear:hover, .account:hover, .historial:hover {
+	background-color: #a30000;
+	cursor: pointer;
+	transition: .3s;
+}
+.historial{
+	right: 110px;
+}
+.account {
+	right: 220px;
+}
+h1 {
+	padding: 0% 0% 4% 0%;
+	margin: 0%;
+	text-align: center;
+	color: rgb(206, 203, 203);
+}
+.caja {
+    width: 70%;
+    margin: 20px auto;
+    padding: 2% 6.5% 0% 6.5%;
+    box-sizing: border-box;
+	background-color: #080404c7;
+	border-radius: 20px;
+}
+input[type="text"], input[type="password"] {
+	width: 100%;
+	padding: 12px;
+	margin-bottom: 5%;
+	box-sizing: border-box;
+	font-size: 18px;
+    outline: none;
+    border-radius: 10px;
+    border: 1px solid grey;
+}
+input[type="submit"], input[type="button"] {
+	width: 100%;
+    padding: 13px;
+    margin-bottom: 4%;
+    color: #fff;
+    font-size: 19px;
+	background-color: #0a884d;
+    border: 0;
+    border-radius: 10px;
+    transition: .3s;
+}
+input[type="submit"]:hover, input[type="button"]:hover {
+	cursor: pointer;
+    background-color: #146c43;
+    transition: .3s;
+}
+.mensaje {
+	padding-bottom: 4%;
+	text-align: center;
+	color: white;
+}
+.cajados {
+	width: 96%;
+	margin: 2%;
+	padding: 2%;
+	box-sizing: border-box;
+	background-color: #080404c7;
+	border-radius: 10px;
+}
+.cajados input[type="text"] {
+	width: 90.6%;
+	margin: 0 2% 0 0;
+	padding: 14px;
+}
+#add, #add_start, #add_end {
+	width: 7%;
+	background-color: red;
+	color: white;
+	padding: 14px 0%;
+	margin: 0%;
+}
+#add:hover, #submit:hover, #add_end:hover, #add_start:hover, .cajatres input:hover, .eliminar input:hover, #delete:hover, #new:hover {
+	background-color: #a30000;
+}
+.cajatres{
+	display: inline-block;
+	width: 46.9%;
+	background-color: #080404c7;
+	color: #fff;
+	margin: 0% 0% 2% 2%;
+	padding: 2%;
+	border-radius: 10px;
+	box-sizing: border-box;
+}
+.cajatres input {
+	width: 100%;
+	margin: 1% 0 0 0;
+	background-color: red;
+}
+.eliminar {
+	position: static;
+	width: 100%;
+}
+.eliminar input {
+	width: 30%;
+	background-color: red;
+	margin: 8px 0 0 0;
+	padding: 10px;
+	float: left;
+}
+.map-table {
+	margin: 0 2% 2% 2%;
+	overflow: hidden;
+}
+#map, table {
+	float: left;
+}
+#map {
+	border: 3px solid #080404;
+	border-radius: 6px;
+	box-sizing: border-box;
+	height: 550px;
+	width: 49%;
+}
+#submit {
+	width: 49%;
+	margin: 0 0 2% 2%;
+	background-color: red;
+}
+table {
+	width: 49%;
+	margin: 0% 0% 2% 2%;
+	background-color: #e1e4e5;
+	font-weight: bold;
+	border: 1px 2px;
+	border-style: solid;
+	border-color: black;
+	border-radius: 8px;
+	border-spacing: 0;
+}
+table td {
+	border-bottom: 1px solid black;
+	padding: 10px;
+}
+/*Checkbox de entregado*/
+table label input {
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+	height: 0;
+	width: 0;
+}
+table label {
+	display: block;
+	position: relative;
+	cursor: pointer;
+	font-size: 20px;
+	user-select: none;
+}
+.check {
+	position: relative;
+	left: 95%;
+	top: 15px;
+	box-sizing: border-box;
+	height: 1.3em;
+	width: 1.3em;
+	background-color: #ccc;
+	border: 2px solid red;
+	border-radius: 25px;
+	transition: 0.15s;
+}
+table label input:checked ~ .check {
+	background-color: limegreen;
+	border: none;
+	border-radius: 25px;
+	transition: 0.15s;
+}
+.check:after {
+	content: "";
+	position: absolute;
+	display: none;
+}
+table label .check:after {
+	left: 0.45em;
+	top: 0.25em;
+	width: 0.25em;
+	height: 0.5em;
+	border: solid white;
+	border-width: 0 0.15em 0.15em 0;
+	transform: rotate(45deg);
+}
+table label input:checked ~ .check:after {
+	display: block;
+}
+#delete, #new{
+	background-color: red;
+	width: 49%;
+	margin: 0 0% 2% 2%;
+}
+#directions-panel {
+	width: 49%;
+	margin-left: 2%;
+	padding: 12px;
+	float: left;
+	background-color: #e1e4e5;
+	border: 3px solid black;
+	border-radius: 10px;
+	box-sizing: border-box;
+}
+
+.top{
+	top: .1px;
+	position: sticky;
+	display: block;
+	z-index: 3;
+}
+
+
+
+@keyframes animate{
+	0% {color: #8a9597;}
+	33% {color: #191919;}
+    66% {color: gray;}
+    100% {color: white;}
+}
+@font-face {
+	font-family: thertole;
+	src: url("../css/Thertole.otf");
+}
+@media screen and (min-width:1080px) and (max-width:1920px){
+    header span {
+		font-size: 76px;
+    }
+	.deslogear a {
+		margin: 1.7% 2% 0 0;
+		padding: 15px;
+		font-size: 19px;
+	}
+    #map {
+    	height: 800px;
+    }
+}
+@media screen and (min-width:600px) and (max-width:1079px){
+	h1 {
+		font-size: 30px;
+	}
+	.logogps {
+		width: 70px;
+		height: 70px;
+	}
+	.deslogear, .historial, .account {
+		padding: 12px;
+	}
+	.historial {
+		right: 11%;
+	}
+	.account {
+		right: 22%;
+	}
+	.cajados input[type="text"] {
+		width: 89.3%;
+		padding: 12px;
+	}
+	#add, #add_start {
+		width: 8.2%;
+		padding: 12px 0%;
+	}
+}
+@media screen and (min-width:320px) and (max-width:599px) and (orientation:portrait){
+	.fondo {
+		background-image: url("../css/fondoindex-res.jpg");
+	}
+	.logogps {
+		width: 50px;
+		height: 50px;
+	}
+	header {
+		border-bottom: none;
+		margin-bottom: 1%;
+	}
+	header span {
+		margin-bottom: 1%;
+		font-size: 45px;
+	}
+	.deslogear {
+		padding: 10px;
+		margin: 5% 3% 0% 0%;
+	}
+	.historial {
+		padding: 10px;
+		margin: 5% 0 0% 0%;
+	}
+	.account{
+		display: none;
+	}
+
+	.caja {
+		width: 92%;
+		padding: 20px 30px 0 30px;
+		margin: 20px auto;
+		border-radius: 20px;
+	}
+	.caja input, .caja input[type="text"] {
+		margin-bottom: 10%;
+	}
+	.mensaje{
+		padding-bottom: 8%;
+	}
+	.cajados {
+		width: 100%;
+		border-radius: 0px;
+		margin: 0;
+		padding: 0;
+	}
+	.cajados input[type="text"] {
+		width: 70%;
+		padding: 10px;
+		margin: 3%;
+	}
+	#add , #add_start, #add_end {
+		width: 19.5%;
+		padding: 11px 0px;
+		margin: 12px 3% 12px 0%;
+		font-size: 18px;
+	}
+	.cajatres {
+		display: block;
+		width: 94%;
+		margin: 10px auto;
+		padding: 15px;
+	}
+	.cajatres input {
+		padding: 10px;
+	}
+	.map-table{
+		margin: 0%;
+		overflow: none;
+	}
+	#map, table {
+		float: none;
+	}
+	#map {
+		box-sizing: border-box;
+		width: 94%;
+		height: 450px;
+		margin: 0px auto;
+	}
+	#submit {
+		width: 94%;
+		margin: 10px 3% 0 3%;
+	}
+	table {
+		width: 94%;
+		text-align: left;
+		margin: 10px auto;
+	}
+	.check {
+		left: 92%;
+	}
+	#delete {
+		width: 44%;
+		margin: 0 2% 0 4%;
+	}
+	#new {
+		width: 44.8%;
+		margin: 0 4% 0 0;
+	}
+	#directions-panel {
+		width: 94%;
+		margin: 10px 3%;
+		padding: 2.5%;
+	}
+}
