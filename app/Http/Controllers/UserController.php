@@ -14,15 +14,6 @@ class UserController extends Controller
         return view('backend.home');
     }
 
-    public function login()
-    {
-        return view('backend.users.login');
-    }
-
-    public function signup()
-    {
-        return view('backend.users.signup');
-    }
 
     /**
      * Show the form for creating a new resource.

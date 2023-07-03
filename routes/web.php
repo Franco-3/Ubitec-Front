@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RutasController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -20,8 +21,16 @@ use App\Http\Controllers\UserController;
     return view('backend/home');
 }); */
 
-Route::get('/', [UserController::class, 'index'])->name('users.index');
-Route::get('/login', [UserController::class, 'login'])->name('users.login');
-Route::get('/signup', [UserController::class, 'signup'])->name('users.signup');
+/* Route::get('/', function (){
+    return redirect('/home')
+}); */
 
-//Route::resource('users', UserController::class);
+Route::get('/', [UserController::class, 'index'])->name('users.index');
+//Route::get('/login', [UserController::class, 'login'])->name('users.login');
+//Route::get('/signup', [UserController::class, 'signup'])->name('users.signup');
+
+Route::resource('rutas', RutasController::class);
+
+Auth::routes();
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
