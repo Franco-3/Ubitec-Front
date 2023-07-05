@@ -11,6 +11,8 @@ class RutasController extends Controller
      */
     public function index()
     {
+        session_start();
+        ob_start();
         return view('backend.rutas.index');
     }
 
@@ -79,8 +81,8 @@ class RutasController extends Controller
                 'description' => 'required',
             ]
         );
-        
-        
+
+
         $categoria->update($validatedData);
         $categoria->name = $request->input('name');
         $categoria->description = $request->input('description');

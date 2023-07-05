@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\HistorialController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RutasController;
 use App\Http\Controllers\UserController;
+use App\Models\Historial;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +32,7 @@ Route::get('/', [UserController::class, 'index'])->name('users.index');
 //Route::get('/signup', [UserController::class, 'signup'])->name('users.signup');
 
 Route::resource('rutas', RutasController::class);
+Route::resource('historial', HistorialController::class);
 
 Auth::routes();
 

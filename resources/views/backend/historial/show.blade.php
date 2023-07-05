@@ -1,4 +1,4 @@
-@extends('backend.layouts.main')
+{{-- @extends('backend.layouts.main')
 @section('title', 'Historial')
 @section('menu')
 @parent
@@ -9,7 +9,7 @@
 @section('content')
 
 <li class="nav-item active">
-    <h1>Historial</h1>
+    <h1>Rutas</h1>
 </li>
 
-@endsection
+@endsection --}}

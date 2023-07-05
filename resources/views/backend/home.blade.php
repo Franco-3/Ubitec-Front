@@ -37,7 +37,7 @@
 </div>
 
 <div class="jumbotron">
-    <div class="container">
+    <div class="container mb-3">
         <div class="card mt-3 text-center">
             <div class="card-body">
                 <div class="card mt-3">
