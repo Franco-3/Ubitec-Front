@@ -8,7 +8,6 @@
 
 <?php
 
-session_start();
 
 $server = 'localhost';
     $username = 'root';
@@ -21,10 +20,10 @@ $server = 'localhost';
         die('Connection failed: '.$e->getMessage());
     }
 
-$start = "";
-$array = "";
-$end = "";
+
+
 if(isset($_SESSION['direc'])){
+  
   $array = $_SESSION['direc'];
 }
 
@@ -49,6 +48,9 @@ if(!isset($_SESSION['data'])){
 						<?php
 							//evalua si la ruta de inicio fue ingresada
 							if(empty($_SESSION['startEnd']['ruta_inicio'])):
+								$start = "";
+								$array = "";
+								$end = ""; 
 						?>
 							<input class="form-control" type="text" id="search_input" name="searchStart"  placeholder="Ingrese direccion de comienzo">
 							<input name="add_start" type="submit" class="btn btn-success" id="add_start" value="Añadir">
@@ -161,10 +163,44 @@ if(!isset($_SESSION['data'])){
 							<input type="submit" id="submit" value="Ordenar y mostrar" />
 					</div>
 			</div>
+
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
 
 			<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyDGc0UBAR_Y30fX31EvaU65KATMx0c0ItI&callback=initMap&v=weekly" async defer></script>
 
+</div>
+
+<div class="container">
+	<table class="table table-striped table-dark">
+	<thead>
+		<tr>
+		<th scope="col">#</th>
+		<th scope="col">Dirección</th>
+		<th scope="col">N° de Paquete</th>
+		<th scope="col">Estado</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+		<th scope="row">1</th>
+		<td></td>
+		<td></td>
+		<td></td>
+		</tr>
+		<tr>
+		<th scope="row">2</th>
+		<td></td>
+		<td></td>
+		<td></td>
+		</tr>
+		<tr>
+		<th scope="row">3</th>
+		<td></td>
+		<td></td>
+		<td></td>
+		</tr>
+	</tbody>
+	</table>
 </div>
 
 

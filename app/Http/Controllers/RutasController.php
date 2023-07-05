@@ -11,6 +11,8 @@ class RutasController extends Controller
      */
     public function index()
     {
+        session_start();
+        ob_start();
         return view('backend.rutas.index');
     }
 
