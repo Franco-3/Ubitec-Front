@@ -23,7 +23,8 @@ return new class extends Migration
             $table->float('latitud');
             $table->float('longitud');
             $table->char('tipo');
-            $table->integer('orden');
+            $table->integer('orden')->nullable();
+            $table->string('estado')->nullable();
             $table->timestamps();
         });
     }

@@ -25,7 +25,7 @@ return new class extends Migration
                     ->on('usuarios')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
-            $table->integer('idVehiculo')->unsigned();
+            $table->integer('idVehiculo')->unsigned()->nullable();
             $table->foreign('idVehiculo')
                     ->references('idVehiculo')
                     ->on('vehiculos')
