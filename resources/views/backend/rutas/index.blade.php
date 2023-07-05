@@ -23,7 +23,6 @@ $server = 'localhost';
 
 
 if(isset($_SESSION['direc'])){
-
   $array = $_SESSION['direc'];
 }
 
@@ -48,9 +47,6 @@ if(!isset($_SESSION['data'])){
 						<?php
 							//evalua si la ruta de inicio fue ingresada
 							if(empty($_SESSION['startEnd']['ruta_inicio'])):
-								$start = "";
-								$array = "";
-								$end = "";
 						?>
                         <div style="display: flex; justify-content: center;">
                             <div style="flex: 1; margin-right: 10px;">
@@ -178,7 +174,6 @@ if(!isset($_SESSION['data'])){
 							<input class="invisible" type="submit" id="submit" value="Ordenar y mostrar" />
 					</div>
 			</div>
-
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 			<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyDGc0UBAR_Y30fX31EvaU65KATMx0c0ItI&callback=initMap&v=weekly" async defer></script>
