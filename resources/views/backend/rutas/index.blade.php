@@ -6,38 +6,7 @@
 @endsection
 @section('content')
 
-<?php
 
-
-$server = 'localhost';
-    $username = 'root';
-    $password = '';
-    $database = 'ubitec';
-
-    try{
-        $conn = new PDO("mysql:host=$server;dbname=$database;", $username, $password);
-    }catch(PDOexception $e){
-        die('Connection failed: '.$e->getMessage());
-    }
-
-
-
-if(isset($_SESSION['direc'])){
-  $array = $_SESSION['direc'];
-}
-
-if(isset($_SESSION['startEnd']) && !empty($_SESSION['startEnd']['ruta_inicio'])){
-  $start = $_SESSION['startEnd']['ruta_inicio'];
-}
-
-if(isset($_SESSION['startEnd']) && !empty($_SESSION['startEnd']['ruta_final'])){
-  $end = $_SESSION['startEnd']['ruta_final'];
-}
-
-if(!isset($_SESSION['data'])){
-    $_SESSION['data'] = array();
-}
-?>
 
 <div class="container mt-2">
     <div class="card">
