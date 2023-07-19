@@ -47,7 +47,7 @@ Auth::routes();
 
 
 
-//API PARA COMUNICARSE CON GOOGLE
+//API PARA COMUNICARSE CON GOOGLE EN DESARROLLO
 
 Route::get('/google', function (){
     return view('backend.google');
