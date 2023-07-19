@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RutasController;
 use App\Http\Controllers\UserController;
 use App\Models\Historial;
+use App\Http\Controllers\TSPcontroller;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +29,9 @@ use App\Models\Historial;
     return redirect('/home')
 }); */
 
+
+
+
 Route::get('/', [UserController::class, 'index'])->name('users.index');
 //Route::get('/login', [UserController::class, 'login'])->name('users.login');
 //Route::get('/signup', [UserController::class, 'signup'])->name('users.signup');
@@ -36,4 +41,18 @@ Route::resource('historial', HistorialController::class);
 
 Auth::routes();
 
+
+
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+//API PARA COMUNICARSE CON GOOGLE
+
+Route::get('/google', function (){
+    return view('backend.google');
+});
+
+// Route::get('/google', [TSPcontroller::class, 'postDirections']);
+
+Route::post('/google', [TSPcontroller::class, 'postDirections'])->name('postDirections');
