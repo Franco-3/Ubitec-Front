@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
+
+
 
 class RutasController extends Controller
 {
@@ -13,8 +18,18 @@ class RutasController extends Controller
     {
         session_start();
         ob_start();
-        return view('backend.rutas.index');
+
+        $idUsuario = Auth::id();
+        session(['idUser' => $idUsuario]);
+
+        $idRuta = $this->findMaxIdRuta();//buscar la ruta mas actual para mostrar en el inicio
+        session(['idRuta' => $idRuta]);
+
+
+        return view('backend.rutas.index', compact('idUsuario'));
     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -101,4 +116,19 @@ class RutasController extends Controller
         //$categoria->delete();
         return redirect()->route('rutas.index');
     }
+
+    private function findMaxIdRuta(){
+
+        $idUsuario = 1; // Reemplaza esto por el idUsuario que desees consultar
+
+        $mayorIdRuta = DB::table('usuarios_ruta')
+                        ->join('rutas', 'usuarios_ruta.idRuta', '=', 'rutas.idRuta')
+                        ->where('usuarios_ruta.idUsuario', $idUsuario)
+                        ->max('usuarios_ruta.idRuta');
+
+        return $mayorIdRuta;
+
+    }
+
+
 }
