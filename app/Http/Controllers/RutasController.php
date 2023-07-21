@@ -22,11 +22,21 @@ class RutasController extends Controller
         $idUsuario = Auth::id();
         session(['idUser' => $idUsuario]);
 
-        $idRuta = $this->findMaxIdRuta();//buscar la ruta mas actual para mostrar en el inicio
-        session(['idRuta' => $idRuta]);
+        $idRuta = $this->findMaxIdRuta($idUsuario);//buscar la ruta mas actual para mostrar en el inicio
+
+        if(is_null($idRuta))
+        {
+            session(['idRuta' => 1]); //configrar para crear una nueva ruta en caso de que no exista ninguna
+        }
+        else{
+            session(['idRuta' => $idRuta]); //almacenar el id ruta actual en una variable de session
+        }
 
 
-        return view('backend.rutas.index', compact('idUsuario'));
+
+        $direcciones = $this->searchDirections(session('idRuta'));
+
+        return view('backend.rutas.index', compact('idUsuario', 'direcciones'));
     }
 
 
@@ -36,7 +46,7 @@ class RutasController extends Controller
      */
     public function create()
     {
-        //$categorias = Categoria::pluck('name', 'id');
+        
         return view('backend.rutas.create');
     }
 
@@ -117,9 +127,9 @@ class RutasController extends Controller
         return redirect()->route('rutas.index');
     }
 
-    private function findMaxIdRuta(){
+    private function findMaxIdRuta(string $id){
 
-        $idUsuario = 1; // Reemplaza esto por el idUsuario que desees consultar
+        $idUsuario = $id; // id del usuario
 
         $mayorIdRuta = DB::table('usuarios_ruta')
                         ->join('rutas', 'usuarios_ruta.idRuta', '=', 'rutas.idRuta')
@@ -129,6 +139,18 @@ class RutasController extends Controller
         return $mayorIdRuta;
 
     }
+
+    private function searchDirections(string $idRuta)
+    {
+        $direccionesUsuario = DB::table('rutas')
+                        ->join('direcciones', 'rutas.idRuta', '=', 'direcciones.idRuta')
+                        ->where('rutas.idRuta', $idRuta)
+                        ->select('direccion', 'latitud', 'longitud', 'tipo')
+                        ->get();
+
+        return $direccionesUsuario;
+    }
+
 
 
 }
