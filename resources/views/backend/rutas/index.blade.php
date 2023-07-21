@@ -160,24 +160,17 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr>
-		<th scope="row">1</th>
-		<td></td>
-		<td></td>
-		<td></td>
-		</tr>
-		<tr>
-		<th scope="row">2</th>
-		<td></td>
-		<td></td>
-		<td></td>
-		</tr>
-		<tr>
-		<th scope="row">3</th>
-		<td></td>
-		<td></td>
-		<td></td>
-		</tr>
+
+		@foreach ($direcciones as $indice => $direccion)
+			<tr>
+				<th scope="row">{{ $indice + 1 }}</th>
+				<td>{{$direccion->direccion}}</td>
+				<td>sin definir</td>
+				<td>no hay campo aun en BD</td>
+			</tr>
+		@endforeach
+
+
 	</tbody>
 	</table>
 </div>
