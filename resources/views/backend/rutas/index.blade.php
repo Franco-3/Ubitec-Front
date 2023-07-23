@@ -11,43 +11,49 @@
 <div class="container mt-2">
     <div class="card">
         <div class="card-body">
-            <form method="post" >
+            <form action="{{route('direcciones.store')}}" method="post" >
                     @csrf
-						<?php
-							//evalua si la ruta de inicio fue ingresada
-							if(empty($_SESSION['startEnd']['ruta_inicio'])):
-						?>
-                        <div style="display: flex; justify-content: center;">
-                            <div style="flex: 1; margin-right: 10px;">
-                                <input class="form-control" type="text" id="search_input" name="searchStart" placeholder="Ingrese dirección de comienzo">
-                            </div>
-                            <div style="flex: 1; margin-left: 10px;">
-                                <label for="add_start" class="btn btn-success">
-                                    <i class="bi bi-plus-circle"></i>
-                                </label>
-                                <input name="add_start" type="submit" id="add_start" style="display: none;">
-                            </div>
-                        </div>
+						@if (is_null(session('inicio')))
+							<div style="display: flex; justify-content: center;">
+								<div style="flex: 1; margin-right: 10px;">
+									<input class="form-control" type="text" id="search_input" name="direccion" placeholder="Ingrese dirección de comienzo">
+									<input type="hidden" value="inicio" name="tipo">
+								</div>
+								<div style="flex: 1; margin-left: 10px;">
+									<label for="add_start" class="btn btn-success">
+										<i class="bi bi-plus-circle"></i>
+									</label>
+									<input name="add_start" type="submit" id="add_start" style="display: none;">
+								</div>
+							</div>
+						@elseif(is_null(session('final')))
+							<div style="display: flex; justify-content: center;">
+								<div style="flex: 1; margin-right: 10px;">
+									<input class="form-control" type="text" id="search_input" name="direccion" placeholder="Ingrese dirección de final">
+									<input type="hidden" value="final" name="tipo">
+								</div>
+								<div style="flex: 1; margin-left: 10px;">
+									<label for="add_start" class="btn btn-success">
+										<i class="bi bi-plus-circle"></i>
+									</label>
+									<input name="add_start" type="submit" id="add_start" style="display: none;">
+								</div>
+							</div>
+						@else
+							<div style="display: flex; justify-content: center;">
+								<div style="flex: 1; margin-right: 10px;">
+									<input class="form-control" type="text" id="search_input" name="direccion" placeholder="Ingrese la direccion a agregar">
+									<input type="hidden" value="normal" name="tipo">
+								</div>
+								<div style="flex: 1; margin-left: 10px;">
+									<label for="add_start" class="btn btn-success">
+										<i class="bi bi-plus-circle"></i>
+									</label>
+									<input name="add_start" type="submit" id="add_start" style="display: none;">
+								</div>
+							</div>
+						@endif
 
-						<?php endif; ?>
-						<?php
-							//evalua si esta vacia la ruta final para pedir que sea ingresada (corregir boton añadir)
-							if(empty($_SESSION['startEnd']['ruta_final']) && !empty($_SESSION['startEnd']['ruta_inicio'])):
-						?>
-						<div>
-							<input type="text" id="search_input" name="searchEnd"  placeholder="Ingrese direccion final">
-							<input type="submit" class="btn btn-success" id="add_end" value="Añadir">
-						</div>
-						<?php
-							//evalua si estan ambas rutas ingresadas para pedir las direcciones
-							elseif(!empty($_SESSION['startEnd']['ruta_final']) && !empty($_SESSION['startEnd']['ruta_inicio'])):
-						?>
-							<input type="text" id="search_input" name="searchAddress"  placeholder="Por favor ingrese la direccion">
-							<input type="hidden" name="valores" value="<?php echo implode(",", $_SESSION['data']); ?>">
-							<input name="add" class="btn btn-success" type="submit" id="add" value="Añadir">
-						<?php
-							endif;
-						?>
 				</form>
         </div>
     </div>
