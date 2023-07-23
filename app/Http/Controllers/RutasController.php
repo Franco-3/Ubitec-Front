@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
-
-
+use App\Models;
+use App\Models\Ruta;
+use App\Models\Usuarios_ruta;
 
 class RutasController extends Controller
 {
@@ -26,7 +27,8 @@ class RutasController extends Controller
 
         if(is_null($idRuta))
         {
-            session(['idRuta' => 1]); //configrar para crear una nueva ruta en caso de que no exista ninguna
+            $newRuta = $this->store();
+            session(['idRuta' => $newRuta]); //configrar para crear una nueva ruta en caso de que no exista ninguna
         }
         else{
             session(['idRuta' => $idRuta]); //almacenar el id ruta actual en una variable de session
@@ -35,6 +37,7 @@ class RutasController extends Controller
 
 
         $direcciones = $this->searchDirections(session('idRuta'));
+
 
         return view('backend.rutas.index', compact('idUsuario', 'direcciones'));
     }
@@ -53,25 +56,21 @@ class RutasController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store()
     {
-        // $categoria = Categoria::findOrFail($id);
-        $validatedData = $request->validate(
-            [
-                'name' => 'required',
-                'description' => 'required',
-            ]
-        );
+        $ruta = new Ruta();
+        $ruta->estado = 'P';
+        $ruta->kmTotal = null;
+        $ruta->save();
 
-        //$categoria = new Categoria();
-        $categoria->name = $request->input('name');
-        $categoria->description = $request->input('description');
 
-        $categoria->update($validatedData);
-        $categoria->save();
+        $userRuta = new Usuarios_ruta();
+        $userRuta->idRuta = $ruta->id;
+        $userRuta->idUsuario = session('idUser');
+        $userRuta->idVehiculo = null;
+        $userRuta->save();
 
-        $request->session()->flash('status', 'Se guardó correctamente la categoria ' . $categoria->name);
-        return redirect()->route('rutas.index', $categoria->id);
+        return $ruta->id;
     }
 
     /**
