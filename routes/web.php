@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DireccionesController;
 use App\Http\Controllers\HistorialController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RutasController;
@@ -36,8 +37,12 @@ Route::get('/', [UserController::class, 'index'])->name('users.index');
 //Route::get('/login', [UserController::class, 'login'])->name('users.login');
 //Route::get('/signup', [UserController::class, 'signup'])->name('users.signup');
 
+
+
 Route::resource('rutas', RutasController::class);
 Route::resource('historial', HistorialController::class);
+
+Route::post('rutas', [DireccionesController::class, 'store'])->name('direcciones.store');
 
 Auth::routes();
 
