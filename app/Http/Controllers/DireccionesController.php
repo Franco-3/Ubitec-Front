@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\Direcciones;
 
 class DireccionesController extends Controller
 {
@@ -27,7 +29,26 @@ class DireccionesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate(
+            [
+                'direccion' => 'required',
+                'tipo' => 'required',
+            ]
+        );
+
+        $direccion = new Direcciones();
+        $direccion->idRuta = session('idRuta');
+        $direccion->direccion = $request->input('direccion');
+        $direccion->latitud = 100; //definidos fijos por el momento - para trabajar luego
+        $direccion->longitud = 200; //definidos fijos por el momento - para trabajar luego
+        $direccion->tipo = $request->input('tipo');
+        $direccion->orden = null;
+
+        $direccion->update($validatedData);
+        $direccion->save();
+
+        // $request->session()->flash('status', 'Se guardó correctamente la categoria ' . $categoria->name);
+        return redirect()->route('rutas.index');
     }
 
     /**
@@ -61,4 +82,7 @@ class DireccionesController extends Controller
     {
         //
     }
+
+
+
 }
