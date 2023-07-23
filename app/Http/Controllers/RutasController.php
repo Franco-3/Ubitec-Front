@@ -46,7 +46,7 @@ class RutasController extends Controller
      */
     public function create()
     {
-        
+
         return view('backend.rutas.create');
     }
 
@@ -80,7 +80,7 @@ class RutasController extends Controller
     public function show(string $id)
     {
         //$categoria = Categoria::findOrFail($id);
-        return view('backend.rutas.show');
+        return view('backend.rutas.sh.ow');
     }
 
     /**
@@ -143,12 +143,34 @@ class RutasController extends Controller
     private function searchDirections(string $idRuta)
     {
         $direccionesUsuario = DB::table('rutas')
-                        ->join('direcciones', 'rutas.idRuta', '=', 'direcciones.idRuta')
-                        ->where('rutas.idRuta', $idRuta)
-                        ->select('direccion', 'latitud', 'longitud', 'tipo')
-                        ->get();
+                            ->join('direcciones', 'rutas.idRuta', '=', 'direcciones.idRuta')
+                            ->where('rutas.idRuta', $idRuta)
+                            ->select('direccion', 'latitud', 'longitud', 'tipo')
+                            ->get();
 
-        return $direccionesUsuario;
+
+        //buscar las direcciones de inicio y final
+        $inicio = null;
+        $final = null;
+
+        foreach ($direccionesUsuario as $direccion) {
+            if ($direccion->tipo === 'inicio') {
+                $inicio = $direccion;
+            } elseif ($direccion->tipo === 'final') {
+                $final = $direccion;
+            }
+        }
+        //guardar en session el inicio y final
+        session(['inicio' => $inicio]);
+        session(['final' => $final]);
+
+
+        // Filtrar las direcciones para eliminar "inicio" y "final"
+        $direccionesUsuario = $direccionesUsuario->filter(function ($direccion) {
+            return $direccion->tipo !== 'inicio' && $direccion->tipo !== 'final';
+        });
+
+    return $direccionesUsuario;
     }
 
 
