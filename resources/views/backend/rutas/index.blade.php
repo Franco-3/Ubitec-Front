@@ -58,30 +58,16 @@
         </div>
     </div>
 
-                <?php
-						//evalua si la ruta de inicio fue ingresada para mostrarla con su boton de cambiar
-					if(!empty($_SESSION['startEnd']['ruta_inicio'])):
-				?>
-					<div class="container">
-						<div class="cajatres">
-							<form method="POST">
-								<label for="start">Direccion de comienzo: <?php echo $_SESSION['startEnd']['ruta_inicio']; ?> </label>
-								<input type="submit" name="change_start" value="Cambiar ruta inicio" />
-							</form>
-						</div>
-						<!-- evalua si la ruta final fue ingresada para mostrarla con su boton de cambiar -->
-						<?php if(!empty($_SESSION['startEnd']['ruta_final'])): ?>
-							<div class="cajatres">
-								<form method="POST">
-									<label for="start">Direccion Final: <?php echo $_SESSION['startEnd']['ruta_final']; ?> </label>
-									<input type="submit" name="change_end" value="Cambiar ruta Final" />
-								</form>
-							</div>
-					</div>
-					<?php endif; ?>
-				<?php
-						endif;
-				?>
+	<!-- mostrar direcciones de inicio y final  ToDo: hay que agregar los botones para modificarlas -->
+	<div>
+		@if (Session::has('inicio'))
+			<div>Direccion inicio: {{ session('inicio')->direccion }}</div>
+		@endif
+		@if (Session::has('final'))
+			<div>Direccion inicio: {{ session('final')->direccion }}</div>
+		@endif
+	</div>
+
             <!-- Mapa desplegable -->
             <div class="container mt-2">
                 <div class="row">
@@ -103,52 +89,9 @@
                 </div>
             </div>
             <!-- Mapa desplegable -->
-			<div class="map-table" name="map">
-
-					<div class="info">
-						<?php
-							//evalua si hay direccion de inicio o alguna direccion cargada para mostrar la estructura y tabla
-							if(!empty($_SESSION['direc']) && !empty($_SESSION['startEnd']['ruta_inicio'])):
-						?>
-						<table>
-							<tr>
-								<td>Direcciones</td>
-							</tr>
-								<!-- Imprime tabla con boton para eliminar -->
-								<?php
-									for($var=0; $var < count($_SESSION['direc']); $var++):
-								?>
-								<form method="POST">
-									<tr><td>
-										<?php echo $_SESSION['direc'][$var]; ?>
-										<input type="hidden" name="deleteValue" value="<?php echo $_SESSION['direc'][$var]; ?>" />
-										<div class="eliminar">
-											<input type="submit" name="deleteOne" value="Eliminar"><!--boton para eliminar individual -->
-											<label><input type='checkbox'><div class='check'></div></label>
-										</div>
-									</td></tr>
-								</form>
-								<?php
-									endfor;
-								?>
+			<div class="map-table" name="map"></div>
 
 
-
-						</table>
-						<!-- boton eliminar toodo -->
-						<form method="POST">
-							<input type="submit" id="delete" name="delete" value="Eliminar todo" />
-							<input type="submit" id="new" name="new" value="Nueva Ruta" />
-							<input type="submit" onclick="exportToCsv()" value="Descargar en Exel" />
-						</form>
-
-						<div id="directions-panel"><strong>Rutas ordenadas</strong></div>
-
-						<?php endif; ?>
-                        <!-- boton ordenar y mostrar -->
-							<input class="invisible" type="submit" id="submit" value="Ordenar y mostrar" />
-					</div>
-			</div>
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 			<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyDGc0UBAR_Y30fX31EvaU65KATMx0c0ItI&callback=initMap&v=weekly" async defer></script>
@@ -166,7 +109,6 @@
 		</tr>
 	</thead>
 	<tbody>
-
 		@foreach ($direcciones as $indice => $direccion)
 			<tr>
 				<th scope="row">{{ $indice + 1 }}</th>
@@ -181,6 +123,6 @@
 	</table>
 </div>
 
-
+<a href="{{ route('rutas.create') }}">nueva ruta</a>
 
 @endsection
