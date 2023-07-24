@@ -49,8 +49,11 @@ class RutasController extends Controller
      */
     public function create()
     {
+        $newRuta = $this->store();
+        session(['idRuta' => $newRuta]);
 
-        return view('backend.rutas.create');
+        $direcciones = $this->searchDirections(session('idRuta'));
+        return view('backend.rutas.index', compact('direcciones'));
     }
 
     /**
@@ -58,12 +61,13 @@ class RutasController extends Controller
      */
     public function store()
     {
+        // generar nueva ruta
         $ruta = new Ruta();
         $ruta->estado = 'P';
         $ruta->kmTotal = null;
         $ruta->save();
 
-
+        //enlazar la ruta y el usuario en la tabla usuarios_ruta
         $userRuta = new Usuarios_ruta();
         $userRuta->idRuta = $ruta->id;
         $userRuta->idUsuario = session('idUser');
@@ -144,7 +148,7 @@ class RutasController extends Controller
         $direccionesUsuario = DB::table('rutas')
                             ->join('direcciones', 'rutas.idRuta', '=', 'direcciones.idRuta')
                             ->where('rutas.idRuta', $idRuta)
-                            ->select('direccion', 'latitud', 'longitud', 'tipo')
+                            ->select('idDireccion','direccion', 'latitud', 'longitud', 'tipo')
                             ->get();
 
 
