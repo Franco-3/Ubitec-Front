@@ -42,9 +42,11 @@ Route::get('/', [UserController::class, 'index'])->name('users.index');
 Route::resource('rutas', RutasController::class);
 Route::resource('historial', HistorialController::class);
 
-Route::post('rutas', [DireccionesController::class, 'store'])->name('direcciones.store');
+Route::post('direcciones/rutas', [DireccionesController::class, 'store'])->name('direcciones.store');
 
 Auth::routes();
+
+
 
 
 
