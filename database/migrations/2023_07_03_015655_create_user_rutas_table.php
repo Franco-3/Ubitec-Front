@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('user_ruta', function (Blueprint $table) {
             $table->increments('idUserRuta');
             $table->unsignedInteger('idRuta');
-            $table->unsignedInteger('id');
+            $table->unsignedBigInteger('idUsuario');
             $table->unsignedInteger('idVehiculo')->nullable();
             $table->timestamps();
 
             $table->foreign('idRuta')->references('idRuta')->on('ruta');
-            $table->foreign('id')->references('id')->on('users');
+            $table->foreign('idUsuario')->references('id')->on('users');
             $table->foreign('idVehiculo')->references('idVehiculo')->on('vehiculos');
         });
     }

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('vehiculos', function (Blueprint $table) {
             $table->increments('idVehiculo');
-            $table->unsignedInteger('id');
+            $table->unsignedBigInteger('id');
             $table->string('patente', 7);
             $table->string('nombre', 100);
             $table->timestamps();

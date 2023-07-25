@@ -134,10 +134,10 @@ class RutasController extends Controller
 
         $idUsuario = $id; // id del usuario
 
-        $mayorIdRuta = DB::table('usuarios_ruta')
-                        ->join('rutas', 'usuarios_ruta.idRuta', '=', 'rutas.idRuta')
-                        ->where('usuarios_ruta.idUsuario', $idUsuario)
-                        ->max('usuarios_ruta.idRuta');
+        $mayorIdRuta = DB::table('user_ruta')
+                        ->join('ruta', 'user_ruta.idRuta', '=', 'ruta.idRuta')
+                        ->where('user_ruta.idUsuario', $idUsuario)
+                        ->max('user_ruta.idRuta');
 
         return $mayorIdRuta;
 
@@ -145,9 +145,9 @@ class RutasController extends Controller
 
     private function searchDirections(string $idRuta)
     {
-        $direccionesUsuario = DB::table('rutas')
-                            ->join('direcciones', 'rutas.idRuta', '=', 'direcciones.idRuta')
-                            ->where('rutas.idRuta', $idRuta)
+        $direccionesUsuario = DB::table('ruta')
+                            ->join('direcciones', 'ruta.idRuta', '=', 'direcciones.idRuta')
+                            ->where('ruta.idRuta', $idRuta)
                             ->select('idDireccion','direccion', 'latitud', 'longitud', 'tipo')
                             ->get();
 

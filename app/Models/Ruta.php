@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ruta extends Model
 {
     use HasFactory;
-    protected $table = 'Rutas';
+    protected $table = 'Ruta';
     protected $fillable = ['estado', 'kmTotal'];
 
     public $timestapms = true;
