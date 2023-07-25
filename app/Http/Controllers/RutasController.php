@@ -12,6 +12,7 @@ use App\Models\Usuarios_ruta;
 
 class RutasController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
@@ -83,7 +84,7 @@ class RutasController extends Controller
     public function show(string $id)
     {
         //$categoria = Categoria::findOrFail($id);
-        return view('backend.rutas.sh.ow');
+        return redirect()->route('rutas.index');
     }
 
     /**
@@ -94,7 +95,7 @@ class RutasController extends Controller
         //$categoria = Categoria::findOrFail($id);
         //$users = User::pluck('name', 'id');
         //return view('backend.categorias.edit', compact('noticia', 'users'));
-        return view('backend.rutas.edit');
+        return redirect()->route('rutas.index');
     }
 
     /**
@@ -102,22 +103,6 @@ class RutasController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //$categoria = Categoria::findOrFail($id);
-        $validatedData = $request->validate(
-            [
-                'name' => 'required',
-                'description' => 'required',
-            ]
-        );
-
-
-        $categoria->update($validatedData);
-        $categoria->name = $request->input('name');
-        $categoria->description = $request->input('description');
-        $categoria->save();
-
-        $request->session()->flash('status', 'Se guardó correctamente la noticia ' . $categoria->titulo);
-        return redirect()->route('rutas.index', $categoria->id);
     }
 
     /**

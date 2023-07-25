@@ -39,13 +39,18 @@ Route::get('/', [UserController::class, 'index'])->name('users.index');
 
 
 
-Route::resource('rutas', RutasController::class);
-Route::resource('historial', HistorialController::class);
+// Route::resource('rutas', RutasController::class);
+// Route::resource('historial', HistorialController::class);
 
-Route::post('direcciones/rutas', [DireccionesController::class, 'store'])->name('direcciones.store');
+// Route::post('direcciones/rutas', [DireccionesController::class, 'store'])->name('direcciones.store');
 
 Auth::routes();
 
+Route::middleware('auth')->group(function () {
+    Route::resource('rutas', RutasController::class);
+    Route::resource('historial', HistorialController::class);
+    Route::post('direcciones/rutas', [DireccionesController::class, 'store'])->name('direcciones.store');
+});
 
 
 
