@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('orden')->nullable();
             $table->timestamps();
 
-            $table->foreign('idRuta')->references('idRuta')->on('ruta');
+            $table->foreign('idRuta')->references('idRuta')->on('rutas');
         });
     }
 
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('direccions');
+        Schema::dropIfExists('direcciones');
     }
 };

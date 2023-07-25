@@ -70,8 +70,8 @@ class RutasController extends Controller
         //enlazar la ruta y el usuario en la tabla usuarios_ruta
         $userRuta = new Usuarios_ruta();
         $userRuta->idRuta = $ruta->id;
-        $userRuta->idUsuario = session('idUser');
-        $userRuta->idVehiculo = null;
+        $userRuta->id = session('idUser');
+        $userRuta->idVehiculo = 0;
         $userRuta->save();
 
         return $ruta->id;
@@ -134,10 +134,10 @@ class RutasController extends Controller
 
         $idUsuario = $id; // id del usuario
 
-        $mayorIdRuta = DB::table('usuarios_ruta')
-                        ->join('rutas', 'usuarios_ruta.idRuta', '=', 'rutas.idRuta')
-                        ->where('usuarios_ruta.idUsuario', $idUsuario)
-                        ->max('usuarios_ruta.idRuta');
+        $mayorIdRuta = DB::table('user_ruta')
+                        ->join('rutas', 'user_ruta.idRuta', '=', 'rutas.idRuta')
+                        ->where('user_ruta.idUsuario', $idUsuario)
+                        ->max('user_ruta.idRuta');
 
         return $mayorIdRuta;
 

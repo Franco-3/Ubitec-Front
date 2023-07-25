@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedInteger('idVehiculo')->nullable();
             $table->timestamps();
 
-            $table->foreign('idRuta')->references('idRuta')->on('ruta');
+            $table->foreign('idRuta')->references('idRuta')->on('rutas');
             $table->foreign('id')->references('id')->on('users');
             $table->foreign('idVehiculo')->references('idVehiculo')->on('vehiculos');
         });

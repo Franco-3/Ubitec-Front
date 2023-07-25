@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ruta', function (Blueprint $table) {
+        Schema::create('rutas', function (Blueprint $table) {
             $table->increments('idRuta');
             $table->char('estado', 1);
             $table->float('kmTotal')->nullable();
