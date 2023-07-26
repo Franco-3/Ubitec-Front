@@ -13,14 +13,21 @@ return new class extends Migration
     {
         Schema::create('paquetes', function (Blueprint $table) {
             $table->increments('idPaquete');
-            $table->unsignedInteger('idDireccion');
-            $table->unsignedInteger('idVehiculo')->nullable();
-            $table->string('descripcion', 50);
+            $table->integer('idDireccion')->unsigned();
+            $table->foreign('idDireccion')
+                    ->references('idDireccion')
+                    ->on('direcciones')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+            $table->integer('idVehiculo')->unsigned()->nullable();
+            $table->foreign('idVehiculo')
+                    ->references('idVehiculo')
+                    ->on('vehiculos')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+            $table->string('descripcion',50);
             $table->float('pesoUnitario')->nullable();
             $table->timestamps();
-
-            $table->foreign('idDireccion')->references('idDireccion')->on('direcciones');
-            $table->foreign('idVehiculo')->references('idVehiculo')->on('vehiculos');
         });
     }
 

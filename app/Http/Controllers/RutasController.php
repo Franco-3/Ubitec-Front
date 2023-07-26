@@ -8,11 +8,10 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use App\Models;
 use App\Models\Ruta;
-use App\Models\Usuarios_ruta;
+use App\models\User_ruta;
 
 class RutasController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      */
@@ -69,10 +68,10 @@ class RutasController extends Controller
         $ruta->save();
 
         //enlazar la ruta y el usuario en la tabla usuarios_ruta
-        $userRuta = new Usuarios_ruta();
+        $userRuta = new User_ruta();
         $userRuta->idRuta = $ruta->id;
-        $userRuta->id = session('idUser');
-        $userRuta->idVehiculo = 0;
+        $userRuta->idUsuario = session('idUser');
+        $userRuta->idVehiculo = null;
         $userRuta->save();
 
         return $ruta->id;
@@ -84,7 +83,7 @@ class RutasController extends Controller
     public function show(string $id)
     {
         //$categoria = Categoria::findOrFail($id);
-        return redirect()->route('rutas.index');
+        return view('backend.rutas.sh.ow');
     }
 
     /**
@@ -95,7 +94,7 @@ class RutasController extends Controller
         //$categoria = Categoria::findOrFail($id);
         //$users = User::pluck('name', 'id');
         //return view('backend.categorias.edit', compact('noticia', 'users'));
-        return redirect()->route('rutas.index');
+        return view('backend.rutas.edit');
     }
 
     /**
@@ -130,9 +129,9 @@ class RutasController extends Controller
 
     private function searchDirections(string $idRuta)
     {
-        $direccionesUsuario = DB::table('ruta')
-                            ->join('direcciones', 'ruta.idRuta', '=', 'direcciones.idRuta')
-                            ->where('ruta.idRuta', $idRuta)
+        $direccionesUsuario = DB::table('rutas')
+                            ->join('direcciones', 'rutas.idRuta', '=', 'direcciones.idRuta')
+                            ->where('rutas.idRuta', $idRuta)
                             ->select('idDireccion','direccion', 'latitud', 'longitud', 'tipo')
                             ->get();
 

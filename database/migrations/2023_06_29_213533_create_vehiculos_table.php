@@ -13,12 +13,15 @@ return new class extends Migration
     {
         Schema::create('vehiculos', function (Blueprint $table) {
             $table->increments('idVehiculo');
-            $table->unsignedBigInteger('id');
-            $table->string('patente', 7);
-            $table->string('nombre', 100);
+            $table->unsignedBigInteger('idUsuario');
+            $table->foreign('idUsuario')
+                    ->references('id')
+                    ->on('users')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+            $table->string('patente',7);
+            $table->string('nombre',100);
             $table->timestamps();
-
-            $table->foreign('id')->references('id')->on('users');
         });
     }
 

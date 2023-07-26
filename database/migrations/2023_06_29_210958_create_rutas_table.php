@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('rutas', function (Blueprint $table) {
             $table->increments('idRuta');
-            $table->char('estado', 1);
+            $table->char('estado');
             $table->float('kmTotal')->nullable();
             $table->timestamps();
         });

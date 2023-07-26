@@ -13,15 +13,18 @@ return new class extends Migration
     {
         Schema::create('direcciones', function (Blueprint $table) {
             $table->increments('idDireccion');
-            $table->unsignedInteger('idRuta');
-            $table->string('direccion', 100);
+            $table->integer('idRuta')->unsigned();
+            $table->foreign('idRuta')
+                    ->references('idRuta')
+                    ->on('rutas')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+            $table->string('direccion',100);
             $table->float('latitud');
             $table->float('longitud');
             $table->char('tipo');
             $table->integer('orden')->nullable();
             $table->timestamps();
-
-            $table->foreign('idRuta')->references('idRuta')->on('rutas');
         });
     }
 
