@@ -47,9 +47,14 @@ Route::get('/', [UserController::class, 'index'])->name('users.index');
 Auth::routes();
 
 Route::middleware('auth')->group(function () {
+
     Route::resource('rutas', RutasController::class);
     Route::resource('historial', HistorialController::class);
+
+
     Route::post('direcciones/rutas', [DireccionesController::class, 'store'])->name('direcciones.store');
+    Route::delete('direcciones/rutas/{direccion}', [DireccionesController::class, 'destroy'])->name('direcciones.destroy');
+
 });
 
 
