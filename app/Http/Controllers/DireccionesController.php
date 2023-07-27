@@ -78,9 +78,12 @@ class DireccionesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Direcciones $direccion)
     {
-        //
+        // Aquí puedes realizar cualquier lógica que necesites antes de eliminar la dirección
+        $direccion->delete();
+
+        return redirect()->route('rutas.index')->with('success', 'Dirección eliminada correctamente.');
     }
 
 

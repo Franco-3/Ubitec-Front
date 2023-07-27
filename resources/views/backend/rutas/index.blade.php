@@ -120,15 +120,23 @@
 		<th scope="col">Dirección</th>
 		<th scope="col">N° de Paquete</th>
 		<th scope="col">Estado</th>
+		<th scope="col">Acciones</th>
 		</tr>
 	</thead>
 	<tbody>
 		@foreach ($direcciones as $indice => $direccion)
 			<tr>
-				<th scope="row">{{ $indice + 1 }}</th>
+				<th scope="row">{{ $indice - 1 }}</th>
 				<td>{{$direccion->direccion}}</td>
 				<td>sin definir</td>
 				<td>no hay campo aun en BD</td>
+				<td>
+                    <form action="{{ route('direcciones.destroy', $direccion->idDireccion) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                    </form>
+                </td>
 			</tr>
 		@endforeach
 

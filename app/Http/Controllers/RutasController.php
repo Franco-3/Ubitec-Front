@@ -107,10 +107,9 @@ class RutasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy()
     {
-        //$categoria = Categoria::findOrFail($id);
-        //$categoria->delete();
+
         return redirect()->route('rutas.index');
     }
 
