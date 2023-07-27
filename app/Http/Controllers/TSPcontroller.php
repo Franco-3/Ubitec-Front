@@ -4,18 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\DB;
 
 class TSPcontroller extends Controller
 {
 
-    public function postDirections(Request $request)
+    public function postDirections()
     {
         // Parámetros de la solicitud
-        $origin = $request->input('origin');
-        $destination = $request->input('destination');
-        $waypoints = $request->input('waypoints');
-        $api_key = 'AIzaSyDGc0UBAR_Y30fX31EvaU65KATMx0c0ItI'; // Reemplaza con tu propia clave de API de Google Maps
+        $origin = session('inicio')->direccion;
+        $destination = session('final')->direccion;
 
+        // Obtener las direcciones usando la función searchDirections
+        $waypointsData = $this->searchDirections(session('idRuta'));
+        // Obtener el array de direcciones desde la respuesta de la función searchDirections
+        $waypoints = $waypointsData->map(function ($direccion) {
+            return $direccion->direccion;
+        })->toArray();
+
+        $api_key = 'AIzaSyDGc0UBAR_Y30fX31EvaU65KATMx0c0ItI'; // Reemplaza con tu propia clave de API de Google Maps
         // Construir la URL de la solicitud
         $url = 'https://maps.googleapis.com/maps/api/directions/json?';
         $url .= 'origin=' . urlencode($origin);
@@ -63,7 +70,7 @@ class TSPcontroller extends Controller
                 ],
                 'polyline' => $polyline
             ];
-
+            dd($responseData);
             // Retornar las ciudades y sus coordenadas
             return view('backend.google', compact('responseData'));
 
@@ -73,7 +80,23 @@ class TSPcontroller extends Controller
         }
     }
 
+    private function searchDirections(string $idRuta)
+    {
+        $direccionesUsuario = DB::table('rutas')
+                            ->join('direcciones', 'rutas.idRuta', '=', 'direcciones.idRuta')
+                            ->where('rutas.idRuta', $idRuta)
+                            ->select('idDireccion','direccion', 'latitud', 'longitud', 'tipo')
+                            ->get();
 
+
+        // Filtrar las direcciones para eliminar "inicio" y "final"
+        $direccionesUsuario = $direccionesUsuario->filter(function ($direccion) {
+            return $direccion->tipo !== 'inicio' && $direccion->tipo !== 'final';
+        });
+
+        return $direccionesUsuario;
+
+    }
 
     private function decodePolylineToArray($encoded)
     {
