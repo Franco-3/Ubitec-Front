@@ -22,9 +22,11 @@ use Illuminate\Support\Facades\Auth;
 */
 
 
-Route::get('/', [UserController::class, 'index'])->name('users.index');
+//Route::get('/', [UserController::class, 'index'])->name('users.index');
 
-
+Route::get('/', function (){
+    return view('backend/home');
+});
 
 // Route::resource('rutas', RutasController::class);
 // Route::resource('historial', HistorialController::class);
