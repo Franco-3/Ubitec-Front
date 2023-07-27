@@ -59,13 +59,27 @@
     </div>
 
 	<!-- mostrar direcciones de inicio y final  ToDo: hay que agregar los botones para modificarlas -->
-	<div>
-		@if (Session::has('inicio'))
-			<div>Direccion inicio: {{ session('inicio')->direccion }}</div>
-		@endif
-		@if (Session::has('final'))
-			<div>Direccion inicio: {{ session('final')->direccion }}</div>
-		@endif
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<div class="card">
+					<div class="card-title">Direccion inicio:</div>
+					@if (Session::has('inicio'))
+						<div> {{ session('inicio')->direccion }}</div>
+					@endif
+				</div>
+			</div>
+			<div class="col">
+				<div class="card">
+					<div class="card-title">Direccion final:</div>
+					@if (Session::has('final'))
+						<div> {{ session('final')->direccion }}</div>
+					@endif
+				</div>
+			</div>
+		</div>
+		
+		
 	</div>
 
             <!-- Mapa desplegable -->

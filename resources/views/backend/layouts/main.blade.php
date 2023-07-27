@@ -34,6 +34,8 @@
                 <li class="nav-item active">
                     <a href="/" class="logogps nav-link"><h2>UBITEC<span class="sr-only"></h2></span></a>
                 </li>
+                <li class="nav-item"><a class="nav-link  " href="{{ route('users.index') }}">Usuarios</a></li>
+                <li class="nav-item"><a class="nav-link  " href="{{ route('vehiculos.index') }}">Vehiculos</a></li>
                 @show
             </ul>
 

@@ -5,6 +5,7 @@ use App\Http\Controllers\HistorialController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RutasController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VehiculoController;
 use App\Models\Historial;
 use App\Http\Controllers\TSPcontroller;
 use Illuminate\Support\Facades\Auth;
@@ -20,22 +21,8 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-//Route::get('/', [NoticiaController::class, 'index'])->name('noticias.index');
-
-/* Route::get('/', function () {
-    return view('backend/home');
-}); */
-
-/* Route::get('/', function (){
-    return redirect('/home')
-}); */
-
-
-
 
 Route::get('/', [UserController::class, 'index'])->name('users.index');
-//Route::get('/login', [UserController::class, 'login'])->name('users.login');
-//Route::get('/signup', [UserController::class, 'signup'])->name('users.signup');
 
 
 
@@ -47,17 +34,12 @@ Route::get('/', [UserController::class, 'index'])->name('users.index');
 Auth::routes();
 
 Route::middleware('auth')->group(function () {
+    Route::resource('users', UserController::class);
+    Route::resource('vehiculos', VehiculoController::class);
     Route::resource('rutas', RutasController::class);
     Route::resource('historial', HistorialController::class);
     Route::post('direcciones/rutas', [DireccionesController::class, 'store'])->name('direcciones.store');
 });
-
-
-
-
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
 
 //API PARA COMUNICARSE CON GOOGLE EN DESARROLLO
 
