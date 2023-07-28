@@ -18,7 +18,7 @@ var map;
 
 }
 var toExel = [];
-
+console.log(window.responseData);
 function calculateAndDisplayRoute(directionsService, directionsRenderer) {
   const waypts = [];
   var pase = '<?php echo json_encode($array);?>';

@@ -107,8 +107,12 @@
 
 
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
 			<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyDGc0UBAR_Y30fX31EvaU65KATMx0c0ItI&callback=initMap&v=weekly" async defer></script>
+			@if (!empty($responseData))
+				<script>
+					window.responseData = @json($responseData);
+				</script>
+			@endif
 
 </div>
 
@@ -130,13 +134,16 @@
 				<td>{{$direccion->direccion}}</td>
 				<td>sin definir</td>
 				<td>no hay campo aun en BD</td>
-				<td>
-                    <form action="{{ route('direcciones.destroy', $direccion->idDireccion) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-                    </form>
-                </td>
+				@if (!empty($direccion->idDireccion))
+					<td>
+						<form action="{{ route('direcciones.destroy', $direccion->idDireccion) }}" method="POST">
+							@csrf
+							@method('DELETE')
+							<button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+						</form>
+					</td>
+				@endif
+
 			</tr>
 		@endforeach
 
@@ -145,6 +152,7 @@
 	</table>
 </div>
 
+<a href="{{ route('rutas.index') }}">Editar</a> <!-- este boton solo se debe mostrar si las rutas estan ordenadas, es para volver y editarlas -->
 <a href="{{ route('rutas.create') }}">nueva ruta</a>
-
+<a href="{{ route('direcciones.ordenar') }}">Ordenar Direcciones</a> <!-- faltan modificaciones de los datos que se muestran en la vista porque luego de la consulta a la API los datos a mostrar son diferentes -->
 @endsection
