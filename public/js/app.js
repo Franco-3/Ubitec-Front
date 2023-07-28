@@ -10,8 +10,12 @@ const map = L.map('map').setView([-33.38151239916761,-60.216151025578654], 13);
 const coordenadas =   window.responseData.data.coordinates //coordenadas que se agregaran como puntos en el mapa
 const polylinea = window.responseData.polyline; //polylnea que unira los puntos
 
+let contador = 1;
+
 coordenadas.forEach(element => {
-    L.marker(element).addTo(map);
+    const marker = L.marker(element).addTo(map);
+    marker.bindTooltip(`Punto ${contador}`, { permanent: true, className: 'custom-tooltip' }).openTooltip();
+    contador++;
 });
 
 var polyline = L.polyline(polylinea).addTo(map);
