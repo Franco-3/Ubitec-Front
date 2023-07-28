@@ -89,10 +89,10 @@ class TSPcontroller extends Controller
 
             } else {
                 $error = 'Error al obtener las direcciones: ' . $data['status'];
-                return view('error', compact('error'));
+                return redirect()->route('rutas.index', compact('error'));
             }
 
-        }else return view('backend.google'); //agregar la respuesta que el error sucedede porque no estan definidos el inicio y el final
+        }else return redirect()->route('rutas.index'); //agregar la respuesta que el error sucedede porque no estan definidos el inicio y el final
 
 
     }

@@ -7,21 +7,26 @@ const map = L.map('map').setView([-33.38151239916761,-60.216151025578654], 13);
 		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 	}).addTo(map);
 
-const coordenadas =   window.responseData.data.coordinates //coordenadas que se agregaran como puntos en el mapa
-const polylinea = window.responseData.polyline; //polylnea que unira los puntos
+try {
+  const coordenadas =   window.responseData.data.coordinates //coordenadas que se agregaran como puntos en el mapa
+  const polylinea = window.responseData.polyline; //polylnea que unira los puntos
+  let contador = 1;
 
-let contador = 1;
-
-coordenadas.forEach(element => {
+  coordenadas.forEach(element => {
     const marker = L.marker(element).addTo(map);
     marker.bindTooltip(`Punto ${contador}`, { permanent: true, className: 'custom-tooltip' }).openTooltip();
     contador++;
-});
+  });
 
-var polyline = L.polyline(polylinea).addTo(map);
-map.fitBounds(polyline.getBounds());
+  var polyline = L.polyline(polylinea).addTo(map);
+  map.fitBounds(polyline.getBounds());
+} catch (error) {
+  
+}
 
-//codigo para pasar autocompletar las direcciones que introduce el usuario
+
+
+  //codigo para pasar autocompletar las direcciones que introduce el usuario
   var searchInput = 'search_input';
 
   const center = { lat: -33.3334669, lng: -60.2110494 };
@@ -51,18 +56,8 @@ map.fitBounds(polyline.getBounds());
         latitude = places.geometry.location.lat();
         longitude = places.geometry.location.lng();
 
-        var marker = new google.maps.Marker({
-          position: {lat: latitude, lng: longitude},
-          map: map,
-          title: ''
-        });
-
-        map.setZoom(15);
-        map.setCenter({lat: latitude, lng: longitude});
-
-        window.location.href = "#map";
-
-
       });
 
   });
+
+
