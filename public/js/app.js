@@ -1,92 +1,23 @@
-var map;
-  function initMap() {
-    const directionsService = new google.maps.DirectionsService();
-    const directionsRenderer = new google.maps.DirectionsRenderer(/*{draggable: true}*/);
-    map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 10,
-    center: { lat: -33.3504261, lng: -60.2908364 },
-  });
 
-  submitBtn = document.getElementById("submit");
+// Crea un objeto de mapa en un contenedor HTML específico
+const map = L.map('map').setView([-33.38151239916761,-60.216151025578654], 13); 
 
-  directionsRenderer.setMap(map);
-  submitBtn.addEventListener("click", () => {
-    calculateAndDisplayRoute(directionsService, directionsRenderer);
-  });
+// Agrega un proveedor de mapas (por ejemplo, OpenStreetMap)
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+	}).addTo(map);
 
-  //
+const coordenadas =   window.responseData.data.coordinates //coordenadas que se agregaran como puntos en el mapa
+const polylinea = window.responseData.polyline; //polylnea que unira los puntos
 
-}
-var toExel = [];
-console.log(window.responseData);
-function calculateAndDisplayRoute(directionsService, directionsRenderer) {
-  const waypts = [];
-  var pase = '<?php echo json_encode($array);?>';
-  const longArray = pase.length;
+coordenadas.forEach(element => {
+    L.marker(element).addTo(map);
+});
 
-  for (let i = 0; i < longArray; i++) {
+var polyline = L.polyline(polylinea).addTo(map);
+map.fitBounds(polyline.getBounds());
 
-      waypts.push({
-        location: pase[i],
-        stopover: true,
-      });
-
-  }
-
-  directionsService
-    .route({
-      origin: '<?php echo $start; ?>',
-      destination: '<?php echo $end; ?>',
-      waypoints: waypts,
-      optimizeWaypoints: true,
-      travelMode: google.maps.TravelMode.DRIVING,
-    })
-    .then((response) => {
-      directionsRenderer.setDirections(response);
-
-      const route = response.routes[0];
-      const summaryPanel = document.getElementById("directions-panel");
-
-      summaryPanel.innerHTML = "";
-
-      // For each route, display summary information.
-      for (let i = 0; i < route.legs.length; i++) {
-        const routeSegment = i + 1;
-
-        summaryPanel.innerHTML +=
-          "<b>Ruta Número: " + routeSegment + "</b><br>";
-        summaryPanel.innerHTML += route.legs[i].start_address.substr(0,30) + "..." + " <strong>Hacia </strong> ";
-        summaryPanel.innerHTML += route.legs[i].end_address.substr(0,33) + "..." + "<br>";
-        summaryPanel.innerHTML += route.legs[i].distance.text + "<br><br>";
-
-        toExel.push(route.legs[i].end_address);
-      }
-    })
-    .catch((e) => window.alert("Directions request failed due to " + status));
-}
-
-    // Solution 2, Without FileSaver.js
-    var Results = [toExel];
-    exportToCsv = function() {
-      var CsvString = "";
-      Results.forEach(function(RowItem, RowIndex) {
-        RowItem.forEach(function(ColItem, ColIndex) {
-          ColItem = ColItem.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-          CsvString += ColItem + ",";
-          CsvString += "\r\n";
-        });
-
-      });
-      CsvString = "data:application/vnd.ms-excel;charset=utf-8," + encodeURIComponent(CsvString);
-      var x = document.createElement("A");
-      x.setAttribute("href", CsvString);
-      x.setAttribute("download", "Rutas.xls");
-      document.body.appendChild(x);
-      x.click();
-    };
-
-window.initMap = initMap;
-
+//codigo para pasar autocompletar las direcciones que introduce el usuario
   var searchInput = 'search_input';
 
   const center = { lat: -33.3334669, lng: -60.2110494 };
@@ -128,6 +59,6 @@ window.initMap = initMap;
         window.location.href = "#map";
 
 
-    });
+      });
 
   });
