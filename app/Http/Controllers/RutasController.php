@@ -83,7 +83,7 @@ class RutasController extends Controller
     public function show(string $id)
     {
         //$categoria = Categoria::findOrFail($id);
-        return view('backend.rutas.sh.ow');
+        return view('backend.rutas.show');
     }
 
     /**

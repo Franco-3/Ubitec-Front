@@ -24,9 +24,9 @@
             @enderror
         </div>
         <div class="form-group">
-            {{ Form::label('type', 'Tipo de usuario', ['class' => 'control-label']) }}
-            {{ Form::text('type', 'por definir', ['class' => 'form-control', 'readonly']) }}
-            @error('password')
+            {{ Form::label('tipo', 'Tipo de usuario', ['class' => 'control-label']) }}
+            {{ Form::text('tipo', old('tipo'), ['class' => 'form-control', 'readonly']) }}
+            @error('tipo')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>

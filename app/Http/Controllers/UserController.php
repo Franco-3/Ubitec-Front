@@ -35,7 +35,8 @@ class UserController extends Controller
             [
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                'password' => ['required', 'string', 'min:8', 'confirmed']
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+                'tipo' => ['required', 'string']
             ]
         );
 
@@ -43,11 +44,12 @@ class UserController extends Controller
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
-            'tipo' => $request->input('type'),
+            'tipo' => $request->input('tipo'),
         ]);
 
+
         $request->session()->flash('status', 'Se guardó correctamente el usuario ' . $user->name);
-        return redirect()->route('users.create');
+        return redirect()->route('users.index');
     }
 
     /**
@@ -78,16 +80,18 @@ class UserController extends Controller
             [
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users,id,' . $id],
-                'password' => ['required', 'string', 'min:8', 'confirmed']
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+                'tipo' => ['required', 'string']
             ]
         );
 
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->password = Hash::make($request->input('password'));
+        $user->tipo = $request->input('tipo');
         $user->save();
         $request->session()->flash('status', 'Se modificó correctamente el usuario ' . $user->name);
-        return redirect()->route('users.edit', $user->id);
+        return redirect()->route('users.show', $user->id);
     }
 
     /**
