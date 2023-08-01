@@ -32,16 +32,24 @@
             <span class="navbar-toggler-icon" ></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarsExample02">
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav me-5">
                 @section('menu')
                 <li class="nav-item">
                     <div class="logo"></div>
                 </li>
                 <li class="nav-item active">
-                    <a href="/" class="logogps nav-link"><h2>UBITEC<span class="sr-only"></h2></span></a>
+                    <a href="/" class="logogps nav-link" aria-expanded="false"><h2>UBITEC<span class="sr-only"></h2></span></a>
                 </li>
-                <li class="nav-item"><a class="nav-link  " href="{{ route('users.index') }}">Usuarios</a></li>
-                <li class="nav-item"><a class="nav-link  " href="{{ route('vehiculos.index') }}">Vehiculos</a></li>
+                @guest
+                @else
+                <li class="nav-item m-1"><a href="{{ url('/rutas') }}" class="nav-link">Rutas</a></li>
+                <li class="nav-item m-1"><a href="{{ url('/historial') }}" class="nav-link" aria-expanded="false">Historial</a></li>
+                @if(Auth::user()->tipo === '0')
+                <li class="nav-item m-1"><a class="nav-link" href="{{ route('users.index') }}" aria-expanded="false">Usuarios</a></li>
+                <li class="nav-item m-1"><a class="nav-link" href="{{ route('vehiculos.index') }}" aria-expanded="false">Vehiculos</a></li>
+                @endif
+                @endguest 
+                
                 @show
             </ul>
 

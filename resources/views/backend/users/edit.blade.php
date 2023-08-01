@@ -45,6 +45,10 @@
             {{ Form::label('password-confirm', 'Confirmar Password', ['class' => 'control-label']) }}
             {{ Form::password('password_confirmation', ['class' => 'form-control', 'placeholder' => 'Confirme el password']) }}
         </div>
+        <div class="form-group">
+            {{ Form::label('tipo', 'Tipo de usuario', ['class' => 'control-label']) }}
+            {{ Form::select('tipo',[0 =>'Administrador', 1 =>'Basico'] , null, ['class' => 'form-control', 'placeholder' => 'Seleccione el tipo de usuario']) }}
+        </div>
         </br><button type="submit" style="width: 100%;" class="btn btn-primary">Guardar</button>
     </div>
     {!! Form::close() !!}

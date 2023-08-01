@@ -8,7 +8,7 @@
         @endif
     </div>
     <div class="links">
-        {{ Form::open(['route' => 'users.store', 'files' => true]) }}
+        {{ Form::open(['route' => 'users.store']) }}
         @csrf
         @if ($errors->any())
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -46,9 +46,9 @@
             {{ Form::password('password_confirmation', ['class' => 'form-control', 'placeholder' => 'Ingrese el password']) }}
         </div>
         <div class="form-group">
-            {{ Form::label('type', 'Tipo de usuario', ['class' => 'control-label']) }}
-            {{ Form::select('type', [0 =>'Normal', 1=>'Administrador'], null, ['class' => 'form-control']) }}
-            @error('categoria')
+            {{ Form::label('tipo', 'Tipo de usuario', ['class' => 'control-label']) }}
+            {{ Form::select('tipo', [0 =>'Normal', 1=>'Administrador'], null, ['class' => 'form-control']) }}
+            @error('tipo')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>

@@ -1,9 +1,5 @@
 @extends('backend.layouts.main')
 @section('title', 'Ubitec - Rutas')
-@section('menu')
-@parent
-<li class="nav-item m-5"><a href="{{ url('/historial') }}" class="nav-link">Historial</a></li>
-@endsection
 @section('content')
 
 

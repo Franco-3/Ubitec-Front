@@ -21,32 +21,27 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-
-//Route::get('/', [UserController::class, 'index'])->name('users.index');
-
 Route::get('/', function (){
     return view('backend/home');
 });
 
-// Route::resource('rutas', RutasController::class);
-// Route::resource('historial', HistorialController::class);
-
-// Route::post('direcciones/rutas', [DireccionesController::class, 'store'])->name('direcciones.store');
-
 Auth::routes();
 
 Route::middleware('auth')->group(function () {
-    Route::resource('users', UserController::class);
-    Route::resource('vehiculos', VehiculoController::class);
 
     Route::resource('rutas', RutasController::class);
     Route::resource('historial', HistorialController::class);
-
 
     Route::post('direcciones/rutas', [DireccionesController::class, 'store'])->name('direcciones.store');
     Route::delete('direcciones/rutas/{direccion}', [DireccionesController::class, 'destroy'])->name('direcciones.destroy');
     Route::get('direcciones/ordenar', [TSPcontroller::class, 'postDirections'])->name('direcciones.ordenar');
 
+});
+
+//verificar si es admin
+Route::group(['middleware' => 'admin'], function () {
+    Route::resource('users', UserController::class);
+    Route::resource('vehiculos', VehiculoController::class);
 });
 
 //API PARA COMUNICARSE CON GOOGLE EN DESARROLLO
