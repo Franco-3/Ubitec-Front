@@ -52,8 +52,7 @@ class RutasController extends Controller
         $newRuta = $this->store();
         session(['idRuta' => $newRuta]);
 
-        $direcciones = $this->searchDirections(session('idRuta'));
-        return view('backend.rutas.index', compact('direcciones'));
+        return redirect()->route('rutas.index');
     }
 
     /**
@@ -83,7 +82,7 @@ class RutasController extends Controller
     public function show(string $id)
     {
         //$categoria = Categoria::findOrFail($id);
-        return view('backend.rutas.show');
+        return view('backend.rutas.sh.ow');
     }
 
     /**

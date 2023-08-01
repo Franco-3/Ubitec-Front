@@ -13,40 +13,40 @@
 							<div style="display: flex; justify-content: center;">
 								<div style="flex: 1; margin-right: 10px;">
 									<input class="form-control" type="text" id="search_input" name="direccion" placeholder="Ingrese dirección de comienzo">
-									<input type="hidden" value="inicio" name="tipo">
+									<input id="tipo" type="hidden" value="inicio" name="tipo">
 								</div>
-								<div style="flex: 1; margin-left: 10px;">
+{{-- 								<div style="flex: 1; margin-left: 10px;">
 									<label for="add_start" class="btn btn-success">
 										<i class="bi bi-plus-circle"></i>
 									</label>
 									<input name="add_start" type="submit" id="add_start" style="display: none;">
-								</div>
+								</div> --}}
 							</div>
 						@elseif(is_null(session('final')))
 							<div style="display: flex; justify-content: center;">
 								<div style="flex: 1; margin-right: 10px;">
 									<input class="form-control" type="text" id="search_input" name="direccion" placeholder="Ingrese dirección de final">
-									<input type="hidden" value="final" name="tipo">
+									<input id="tipo" type="hidden" value="final" name="tipo">
 								</div>
-								<div style="flex: 1; margin-left: 10px;">
+{{-- 								<div style="flex: 1; margin-left: 10px;">
 									<label for="add_start" class="btn btn-success">
 										<i class="bi bi-plus-circle"></i>
 									</label>
 									<input name="add_start" type="submit" id="add_start" style="display: none;">
-								</div>
+								</div> --}}
 							</div>
 						@else
 							<div style="display: flex; justify-content: center;">
 								<div style="flex: 1; margin-right: 10px;">
 									<input class="form-control" type="text" id="search_input" name="direccion" placeholder="Ingrese la direccion a agregar">
-									<input type="hidden" value="normal" name="tipo">
+									<input id="tipo" type="hidden" value="normal" name="tipo">
 								</div>
-								<div style="flex: 1; margin-left: 10px;">
+{{-- 								<div style="flex: 1; margin-left: 10px;">
 									<label for="add_start" class="btn btn-success">
 										<i class="bi bi-plus-circle"></i>
 									</label>
 									<input name="add_start" type="submit" id="add_start" style="display: none;">
-								</div>
+								</div> --}}
 							</div>
 						@endif
 
@@ -104,6 +104,10 @@
 
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 			{{-- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyDGc0UBAR_Y30fX31EvaU65KATMx0c0ItI&callback=initMap&v=weekly" async defer></script> --}}
+			<script>
+				// Define una variable global de JavaScript con el token CSRF
+				window.csrfToken = "{{ csrf_token() }}";
+			</script>
 			@if (!empty($responseData))
 				<script>
 					window.responseData = @json($responseData);
@@ -124,9 +128,11 @@
 		</tr>
 	</thead>
 	<tbody>
-		@foreach ($direcciones as $indice => $direccion)
+		<?php $indice = 0 ?>
+		@foreach ($direcciones as  $direccion)
+			<?php $indice++ ?>
 			<tr>
-				<th scope="row">{{ $indice - 1 }}</th>
+				<th scope="row">{{$indice}}</th>
 				<td>{{$direccion->direccion}}</td>
 				<td>sin definir</td>
 				<td>no hay campo aun en BD</td>
@@ -139,7 +145,6 @@
 						</form>
 					</td>
 				@endif
-
 			</tr>
 		@endforeach
 

@@ -25,7 +25,6 @@ try {
 }
 
 
-
   //codigo para pasar autocompletar las direcciones que introduce el usuario
   var searchInput = 'search_input';
 
@@ -55,9 +54,34 @@ try {
 
         latitude = places.geometry.location.lat();
         longitude = places.geometry.location.lng();
-
+        console.log(latitude, longitude)
+        guardarDireccion(latitude, longitude);
       });
 
   });
+
+
+  function guardarDireccion(latitude, longitude) {
+    $.ajax({
+        url: '/direcciones/rutas',
+        type: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': window.csrfToken // Agrega el token CSRF en el encabezado
+        },
+        data: {
+            'direccion': document.getElementById(searchInput).value,
+            'tipo': document.getElementById("tipo").value,
+            'latitud': latitude,
+            'longitud': longitude,
+        },
+        success: function (response) {
+          location.reload();
+        },
+        error: function (xhr) {
+            // Manejar errores si es necesario
+            console.log(xhr.responseText);
+        }
+    });
+}
 
 

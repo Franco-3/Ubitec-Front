@@ -35,20 +35,20 @@ class DireccionesController extends Controller
                 'tipo' => 'required',
             ]
         );
-
         $direccion = new Direcciones();
         $direccion->idRuta = session('idRuta');
         $direccion->direccion = $request->input('direccion');
-        $direccion->latitud = 100; //definidos fijos por el momento - para trabajar luego
-        $direccion->longitud = 200; //definidos fijos por el momento - para trabajar luego
+        $direccion->latitud = $request->input('latitud');
+        $direccion->longitud = $request->input('longitud');
         $direccion->tipo = $request->input('tipo');
         $direccion->orden = null;
 
         $direccion->update($validatedData);
         $direccion->save();
 
+
         // $request->session()->flash('status', 'Se guardó correctamente la categoria ' . $categoria->name);
-        return redirect()->route('rutas.index');
+        return $direccion;
     }
 
     /**
