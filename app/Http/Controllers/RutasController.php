@@ -25,7 +25,12 @@ class RutasController extends Controller
         session(['idUser' => $idUsuario]);
 
         //buscar la ruta mas actual para mostrar en el inicio
-        if(!Session::has('idRuta')) $idRuta = $this->findMaxIdRuta($idUsuario);
+        if(!Session::has('idRuta'))
+        {
+
+            $idRuta = $this->findMaxIdRuta($idUsuario);
+            session(['idRuta' => $idRuta]);
+        }
         else $idRuta = session('idRuta');
 
         if(is_null($idRuta))
@@ -33,7 +38,6 @@ class RutasController extends Controller
             $newRuta = $this->store();
             session(['idRuta' => $newRuta]); //configrar para crear una nueva ruta en caso de que no exista ninguna
         }
-
 
 
 

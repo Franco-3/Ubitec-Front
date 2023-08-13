@@ -119,7 +119,6 @@
 </div>
 
 
-<button id="exportBtn" onclick="downloadMap();">Экспорт в изображение без заголовка</button>
 <div class="container">
 	<table class="table table-striped table-dark">
 	<thead>
