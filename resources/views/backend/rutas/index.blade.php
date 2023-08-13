@@ -94,16 +94,18 @@
                 </div>
                 <div class="offcanvas-body">
                     <div class="container">
-                        <div style="height: 600px; width:600px;" id="map"></div>
+                        <div style="height: 600px; width:600px;" id="map" class="specific"></div>
                     </div>
                 </div>
             </div>
             <!-- Mapa desplegable -->
-			<div class="map-table" name="map"></div>
+			<div class="map-table" name="map"> </div>
 
 
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 			{{-- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyDGc0UBAR_Y30fX31EvaU65KATMx0c0ItI&callback=initMap&v=weekly" async defer></script> --}}
+			<script src="https://superal.github.io/canvas2image/canvas2image.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 			<script>
 				// Define una variable global de JavaScript con el token CSRF
 				window.csrfToken = "{{ csrf_token() }}";
@@ -116,6 +118,8 @@
 
 </div>
 
+
+<button id="exportBtn" onclick="downloadMap();">Экспорт в изображение без заголовка</button>
 <div class="container">
 	<table class="table table-striped table-dark">
 	<thead>

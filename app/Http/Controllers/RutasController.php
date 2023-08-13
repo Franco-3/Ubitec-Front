@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models;
 use App\Models\Ruta;
 use App\models\User_ruta;
+use Illuminate\Support\Facades\Session;
 
 class RutasController extends Controller
 {
@@ -23,16 +24,16 @@ class RutasController extends Controller
         $idUsuario = Auth::id();
         session(['idUser' => $idUsuario]);
 
-        $idRuta = $this->findMaxIdRuta($idUsuario);//buscar la ruta mas actual para mostrar en el inicio
+        //buscar la ruta mas actual para mostrar en el inicio
+        if(!Session::has('idRuta')) $idRuta = $this->findMaxIdRuta($idUsuario);
+        else $idRuta = session('idRuta');
 
         if(is_null($idRuta))
         {
             $newRuta = $this->store();
             session(['idRuta' => $newRuta]); //configrar para crear una nueva ruta en caso de que no exista ninguna
         }
-        else{
-            session(['idRuta' => $idRuta]); //almacenar el id ruta actual en una variable de session
-        }
+
 
 
 
