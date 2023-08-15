@@ -19,9 +19,9 @@ return new class extends Migration
                     ->on('rutas')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
-            $table->string('direccion',100);
-            $table->float('latitud');
-            $table->float('longitud');
+            $table->string('direccion',255);
+            $table->double('latitud');
+            $table->double('longitud');
             $table->char('tipo');
             $table->integer('orden')->nullable();
             $table->timestamps();
