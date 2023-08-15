@@ -6,9 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
-use App\Models;
+use App\Models\User_ruta;
 use App\Models\Ruta;
-use App\models\User_ruta;
 use Illuminate\Support\Facades\Session;
 
 class RutasController extends Controller
