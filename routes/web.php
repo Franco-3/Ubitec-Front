@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DireccionesController;
+use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\HistorialController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RutasController;
@@ -43,6 +44,17 @@ Route::group(['middleware' => 'admin'], function () {
     Route::resource('users', UserController::class);
     Route::resource('vehiculos', VehiculoController::class);
 });
+
+
+Route::get('/cargarExcel', function () {
+    return view('backend.excel');
+});
+
+Route::post('/cargar-excel', [ExcelController::class, 'cargarExcel'])->name('cargar.excel');
+Route::get('/generar-excel', [ExcelController::class, 'generarExcel'])->name('generar.excel');
+
+
+
 
 //API PARA COMUNICARSE CON GOOGLE EN DESARROLLO
 

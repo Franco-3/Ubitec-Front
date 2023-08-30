@@ -159,7 +159,7 @@ class RutasController extends Controller
             return $direccion->tipo !== 'inicio' && $direccion->tipo !== 'final';
         });
 
-    return $direccionesUsuario;
+        return $direccionesUsuario;
     }
 
 
