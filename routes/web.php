@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('rutas', RutasController::class);
     Route::resource('historial', HistorialController::class);
+    Route::resource('direcciones', DireccionesController::class);
 
     Route::post('direcciones/rutas', [DireccionesController::class, 'store'])->name('direcciones.store');
     Route::delete('direcciones/rutas/{direccion}', [DireccionesController::class, 'destroy'])->name('direcciones.destroy');
@@ -65,3 +66,7 @@ Route::get('/google', function (){
 // Route::get('/google', [TSPcontroller::class, 'postDirections']);
 
 Route::post('/google', [TSPcontroller::class, 'postDirections'])->name('postDirections');
+
+//Ruta para el CRUD direcciones
+//Route::resource('direcciones', 'DireccionesController');
+
