@@ -13,7 +13,10 @@ class DireccionesController extends Controller
      */
     public function index()
     {
-        //
+        //MOSTRAR DIRECCIONES
+        $direcciones = Direcciones::all();
+        return view('backend.direcciones.index', compact('direcciones'));
+
     }
 
     /**
@@ -21,7 +24,8 @@ class DireccionesController extends Controller
      */
     public function create()
     {
-        //
+        //CREAR DIRECCION
+        return view('backend.direcciones.create');
     }
 
     /**
@@ -48,7 +52,8 @@ class DireccionesController extends Controller
 
 
         // $request->session()->flash('status', 'Se guardó correctamente la categoria ' . $categoria->name);
-        return $direccion;
+        //return $direccion;
+        return redirect()->route('direcciones.index')->with('success', 'Dirección creada correctamente.');
     }
 
     /**
@@ -64,7 +69,10 @@ class DireccionesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        //EDITAR DIRECCIONES
+        $direccion = Direcciones::findOrFail($id);
+        return view('backend.direcciones.edit', compact('direccion'));
+
     }
 
     /**
@@ -72,7 +80,24 @@ class DireccionesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        //ACTUALIZAR DIRECCIONES
+        $direccion = Direcciones::findOrFail($id);
+
+        $request->validate([
+            'direccion' => 'required',
+            'latitud' => 'required',
+            'longitud' => 'required',
+        ]);
+
+        $direccion->update([
+            'direccion' => $request->input('direccion'),
+            'latitud' => $request->input('latitud'),
+            'longitud' => $request->input('longitud'),
+            'tipo' => $request->input('tipo'),
+            'orden' => $request->input('orden')
+        ]);
+
+        return redirect()->route('direcciones.index')->with('success', 'Dirección actualizada correctamente.');
     }
 
     /**
@@ -83,7 +108,7 @@ class DireccionesController extends Controller
         // Aquí puedes realizar cualquier lógica que necesites antes de eliminar la dirección
         $direccion->delete();
 
-        return redirect()->route('rutas.index')->with('success', 'Dirección eliminada correctamente.');
+        return redirect()->route('direcciones.index')->with('success', 'Dirección eliminada correctamente.');
     }
 
 
