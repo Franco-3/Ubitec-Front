@@ -14,7 +14,7 @@ class Vehiculo extends Model
      *
      * @var array<int, string>
      */
-    
+    protected $table = 'vehiculos';
     protected $primaryKey = 'idVehiculo';
     protected $fillable = [
         'idUsuario',
@@ -22,4 +22,5 @@ class Vehiculo extends Model
         'nombre',
     ];
 
+    public $timestapms = true;
 }

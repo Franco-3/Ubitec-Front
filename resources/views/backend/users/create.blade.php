@@ -47,7 +47,7 @@
         </div>
         <div class="form-group">
             {{ Form::label('tipo', 'Tipo de usuario', ['class' => 'control-label']) }}
-            {{ Form::select('tipo', [0 =>'Normal', 1=>'Administrador'], null, ['class' => 'form-control']) }}
+            {{ Form::select('tipo', [1 =>'Normal', 0=>'Administrador'], null, ['class' => 'form-control']) }}
             @error('tipo')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror

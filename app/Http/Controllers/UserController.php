@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User; //Referencia al Modelo User
 use Illuminate\Support\Facades\Hash; //Clase utilizada para encriptar la contraseña
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -14,7 +15,6 @@ class UserController extends Controller
     public function index()
     {
         $users = User::paginate(10);
-        //dd($users);
         return view('backend.users.index', compact('users'));
     }
 
@@ -39,12 +39,12 @@ class UserController extends Controller
                 'tipo' => ['required', 'string']
             ]
         );
-
         $user = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
             'tipo' => $request->input('tipo'),
+            'empresa' => session('empresa')
         ]);
 
 
@@ -81,7 +81,8 @@ class UserController extends Controller
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users,id,' . $id],
                 'password' => ['required', 'string', 'min:8', 'confirmed'],
-                'tipo' => ['required', 'string']
+                'tipo' => ['required', 'string'],
+                'empresa' => ['string']
             ]
         );
 
@@ -89,6 +90,7 @@ class UserController extends Controller
         $user->email = $request->input('email');
         $user->password = Hash::make($request->input('password'));
         $user->tipo = $request->input('tipo');
+        $user->empresa = $request->input('empresa');
         $user->save();
         $request->session()->flash('status', 'Se modificó correctamente el usuario ' . $user->name);
         return redirect()->route('users.show', $user->id);

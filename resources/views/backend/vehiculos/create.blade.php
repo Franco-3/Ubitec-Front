@@ -28,7 +28,7 @@
         </div>
         <div class="form-group">
             {{ Form::label('usuario', 'Usuario', ['class' => 'control-label']) }}
-            {{ Form::text('usuario', '-', ['class' => 'form-control', 'placeholder' => 'Ingrese la usuario', 'readonly']) }}
+            {{ Form::select('usuario', $users->pluck('email', 'id'), null, ['class' => 'form-control']) }}
             @error('usuario')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror

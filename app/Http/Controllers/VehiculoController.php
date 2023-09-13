@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Factories\VehiculoFactory;
 use App\Models\Vehiculo;
+use App\Models\User;
 
 class VehiculoController extends Controller
 {
@@ -23,8 +24,10 @@ class VehiculoController extends Controller
      */
     public function create()
     {
+        $empresa = session('empresa');
         $vehiculos = Vehiculo::pluck('nombre', 'idVehiculo');
-        return view('backend.vehiculos.create', compact('vehiculos'));
+        $users = User::where('empresa', $empresa)->get();
+        return view('backend.vehiculos.create', compact('vehiculos', 'users'));
     }
 
     /**
@@ -34,14 +37,16 @@ class VehiculoController extends Controller
     {
         $validatedData = $request->validate(
             [
-                'nombre' => 'required',
+                'name' => 'required',
                 'patente' => 'required',
+                'usuario' => 'required',
             ]
         );
 
         $vehiculo = new Vehiculo();
         $vehiculo->nombre = $request->input('name');
         $vehiculo->patente = $request->input('patente');
+        $vehiculo->idUsuario = $request->input('usuario');
 
         $vehiculo->update($validatedData);
         $vehiculo->save();
