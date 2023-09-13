@@ -17,15 +17,16 @@
             </tr>
         </thead>
         <tbody>
-{{--             <?php $indice = 0 ?>
-            @foreach ($direcciones as  $direccion)
+            <?php $indice = 0 ?>
+            @foreach ($vehiculosUsuario as  $vUsuario)
                 <?php $indice++ ?>
                 <tr>
                     <th scope="row">{{$indice}}</th>
-                    <td>{{$direccion->direccion}}</td>
-                    <td>sin definir</td>
-                    <td>no hay campo aun en BD</td>
-                    @if (!empty($direccion->idDireccion))
+                    <td>{{$vUsuario->nombre}}</td>
+                    <td>{{$vUsuario->patente}}</td>
+                    <td>{{$vUsuario->name}}</td>
+                    <td></td>
+{{--                     @if (!empty($direccion->idDireccion))
                         <td>
                             <form action="{{ route('direcciones.destroy', $direccion->idDireccion) }}" method="POST">
                                 @csrf
@@ -33,9 +34,9 @@
                                 <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
                             </form>
                         </td>
-                    @endif
+                    @endif --}}
                 </tr>
-            @endforeach --}}
+            @endforeach
 
 
         </tbody>

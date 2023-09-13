@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -14,7 +15,14 @@ class AdminController extends Controller
     {
         $empresa = Auth()->user()->empresa;
         session(['empresa' => $empresa]);
-        return view('admin.index');
+
+        $vehiculosUsuario = DB::table('users')
+                ->join('vehiculos', 'users.id', '=', 'vehiculos.idUsuario')
+                ->select('*')
+                ->where('users.empresa', '=', $empresa)
+                ->get();
+        // dd($vehiculosUsuario);
+        return view('admin.index', compact('vehiculosUsuario'));
     }
 
     /**
