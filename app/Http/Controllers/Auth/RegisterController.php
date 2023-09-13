@@ -66,12 +66,13 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $data['tipo'] = 'final';
-
+        $data['empresa'] = null;
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'tipo' => $data['tipo'] // Asignar el valor por defecto 'final' al campo 'tipo'
+            'tipo' => $data['tipo'], // Asignar el valor por defecto 'final' al campo 'tipo'
+            'empresa' => $data['empresa']
         ]);
     }
 }
