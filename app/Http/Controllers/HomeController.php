@@ -13,7 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        
     }
 
     /**
@@ -33,6 +33,6 @@ class HomeController extends Controller
         }
 
         // Si el usuario no está autenticado, muestra la vista 'home'
-        return view('home');
+        return view('backend.home');
     }
 }

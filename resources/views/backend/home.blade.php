@@ -2,6 +2,7 @@
 @section('title', 'UBITEC')
 
 @section('content')
+
 <style>
     .main-bg{
         width:100%;
