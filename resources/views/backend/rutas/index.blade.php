@@ -15,12 +15,7 @@
 									<input class="form-control" type="text" id="search_input" name="direccion" placeholder="Ingrese dirección de comienzo">
 									<input id="tipo" type="hidden" value="inicio" name="tipo">
 								</div>
-{{-- 								<div style="flex: 1; margin-left: 10px;">
-									<label for="add_start" class="btn btn-success">
-										<i class="bi bi-plus-circle"></i>
-									</label>
-									<input name="add_start" type="submit" id="add_start" style="display: none;">
-								</div> --}}
+
 							</div>
 						@elseif(is_null(session('final')))
 							<div style="display: flex; justify-content: center;">
@@ -28,12 +23,7 @@
 									<input class="form-control" type="text" id="search_input" name="direccion" placeholder="Ingrese dirección de final">
 									<input id="tipo" type="hidden" value="final" name="tipo">
 								</div>
-{{-- 								<div style="flex: 1; margin-left: 10px;">
-									<label for="add_start" class="btn btn-success">
-										<i class="bi bi-plus-circle"></i>
-									</label>
-									<input name="add_start" type="submit" id="add_start" style="display: none;">
-								</div> --}}
+
 							</div>
 						@else
 							<div style="display: flex; justify-content: center;">
@@ -41,12 +31,7 @@
 									<input class="form-control" type="text" id="search_input" name="direccion" placeholder="Ingrese la direccion a agregar">
 									<input id="tipo" type="hidden" value="normal" name="tipo">
 								</div>
-{{-- 								<div style="flex: 1; margin-left: 10px;">
-									<label for="add_start" class="btn btn-success">
-										<i class="bi bi-plus-circle"></i>
-									</label>
-									<input name="add_start" type="submit" id="add_start" style="display: none;">
-								</div> --}}
+
 							</div>
 						@endif
 

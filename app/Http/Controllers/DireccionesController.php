@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Direcciones;
+use Symfony\Component\Console\Input\Input;
+
+use function PHPUnit\Framework\isNull;
 
 class DireccionesController extends Controller
 {
@@ -33,6 +36,7 @@ class DireccionesController extends Controller
      */
     public function store(Request $request)
     {
+
         $validatedData = $request->validate(
             [
                 'direccion' => 'required',
@@ -46,11 +50,16 @@ class DireccionesController extends Controller
         $direccion->longitud = $request->input('longitud');
         $direccion->tipo = $request->input('tipo');
         $direccion->orden = null;
-
         $direccion->update($validatedData);
         $direccion->save();
 
 
+
+        if($request->input('tipo') === 'inicio' && is_null(session('final')))
+        {
+            $request->merge(['tipo' => 'final']);
+            $this->store($request);
+        }
         // $request->session()->flash('status', 'Se guardó correctamente la categoria ' . $categoria->name);
         //return $direccion;
         return redirect()->route('direcciones.index')->with('success', 'Dirección creada correctamente.');
