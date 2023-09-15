@@ -15,12 +15,18 @@ class HistorialController extends Controller
     public function index()
     {
         $rutas = DB::table('user_ruta')
-                ->join('rutas', 'user_ruta.idRuta', '=', 'rutas.idRuta')
-                ->join('direcciones', 'direcciones.idRuta', '=', 'rutas.idRuta')
-                ->select('tipo', 'rutas.idRuta', 'direccion' ,'rutas.created_at')
-                ->where('idUsuario', session('idUser'))
-                ->where('tipo', 'final')
-                ->get();
+        ->join('rutas', 'user_ruta.idRuta', '=', 'rutas.idRuta')
+        ->join('direcciones as inicio', function ($join) {
+            $join->on('inicio.idRuta', '=', 'rutas.idRuta')
+                 ->where('inicio.tipo', 'inicio');
+        })
+        ->join('direcciones as final', function ($join) {
+            $join->on('final.idRuta', '=', 'rutas.idRuta')
+                 ->where('final.tipo', 'final');
+        })
+        ->select('rutas.idRuta', 'inicio.direccion as direccion_inicio', 'final.direccion as direccion_final', 'rutas.created_at')
+        ->where('user_ruta.idUsuario', session('idUser'))
+        ->get();
         return view('backend.historial.index', compact('rutas'));
     }
 

@@ -47,6 +47,10 @@
 					<div class="card-title">Direccion inicio:</div>
 					@if (Session::has('inicio'))
 						<div> {{ session('inicio')->direccion }}</div>
+						<form action="" method="POST">
+							@csrf
+							<button class="btn btn-primary">Cambiar</button>
+						</form>
 					@endif
 				</div>
 			</div>
@@ -55,6 +59,10 @@
 					<div class="card-title">Direccion final:</div>
 					@if (Session::has('final'))
 						<div> {{ session('final')->direccion }}</div>
+						<form action="" method="POST">
+							@csrf
+							<button class="btn btn-primary">Cambiar</button>
+						</form>
 					@endif
 				</div>
 			</div>

@@ -19,9 +19,10 @@
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">
-                            Comienzo:----
+                            Comienzo: {{ $ruta->direccion_inicio}}
                         </p>
-                        <p>Final: {{ $ruta->direccion }}</p>
+
+                        <p>Final: {{ $ruta->direccion_final }}</p>
                         <a href="{{route ('historial.show', ['historial' => $ruta->idRuta])}}" class="btn btn-primary">Importar Ruta</a>
                     </div>
                 </div>
