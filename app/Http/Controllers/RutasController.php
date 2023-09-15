@@ -135,6 +135,7 @@ class RutasController extends Controller
                             ->join('direcciones', 'rutas.idRuta', '=', 'direcciones.idRuta')
                             ->where('rutas.idRuta', $idRuta)
                             ->select('idDireccion','direccion', 'latitud', 'longitud', 'tipo')
+                            ->orderBy('orden', 'asc')
                             ->get();
 
 
