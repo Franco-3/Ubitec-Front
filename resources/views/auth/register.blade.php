@@ -1,5 +1,5 @@
 @extends('backend.layouts.main')
-
+@section('title', 'Ubitec - Registro')
 @section('content')
 <div class="container mt-5 mb-5">
     <div class="row justify-content-center">
@@ -12,7 +12,7 @@
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('FirstName') }}</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -26,7 +26,35 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+                            <label for="lastName" class="col-md-4 col-form-label text-md-end">{{ __('LastName') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="lastName" type="text" class="form-control @error('lastName') is-invalid @enderror" name="lastName" value="{{ old('lastName') }}" required autocomplete="lastName">
+
+                                @error('lastName')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="telefono" class="col-md-4 col-form-label text-md-end">{{ __('Phone') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="telefono" type="text" class="form-control @error('telefono') is-invalid @enderror" name="telefono" value="{{ old('telefono') }}" required autocomplete="telefono">
+
+                                @error('telefono')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('EmailAddress') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -54,10 +82,57 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('ConfirmPassword') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="tipo" class="col-md-4 col-form-label text-md-end">{{ __('Type') }}</label>
+
+                            <div class="col-md-6">
+                                {{ Form::select('tipo', 
+                                    [0 => 'Particular', 1 => 'Empresa'], null, ['class' => 'form-control']) 
+                                }}
+
+                                @error('tipo')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <label for="empresa" class="col-md-4 col-form-label text-md-end">{{ __('Company') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="empresa" type="text" class="form-control @error('empresa') is-invalid @enderror" name="empresa" required autocomplete="empresa">
+
+                                @error('empresa')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="flota" class="col-md-4 col-form-label text-md-end">{{ __('Fleet') }}</label>
+
+                            <div class="col-md-6">
+                                {{ Form::select('flota', 
+                                    [0 => 'No tengo vehículo', 1 => 'De 15 a 50 vehículos', 2 => 'De 51 a 100 vehículos', 3 => 'Más de 100 vehículos']
+                                    , null, ['class' => 'form-control']) 
+                                }}
+
+                                @error('flota')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 

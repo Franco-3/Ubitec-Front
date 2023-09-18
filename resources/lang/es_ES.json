@@ -1,0 +1,13 @@
+{
+    "Register": "Registro",
+    "FirstName": "Nombre",
+    "LastName": "Apellido",
+    "Phone": "Telefono",
+    "Password": "Contraseña",
+    "ConfirmPassword": "Confirmar contraseña",
+    "EmailAddress": "Correo Electronico",
+    "Type": "Tipo",
+    "Fleet": "Flota",
+    "Company": "Empresa"
+
+}
