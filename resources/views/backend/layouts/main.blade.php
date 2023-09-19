@@ -17,12 +17,12 @@
 
     <style>
         .logo{
-            background-image: url(img/logoubitec.gif);
+            background-image: url(img/logogps.png);
             background-size: 100% 100%;
-            width: 50px;
-            height: 50px;
+            width: 3.5rem;
+            height: 3.5rem;
         }
-
+        
     </style>
 </head>
 <body class="bg-secondary-subtle d-flex flex-column min-vh-100">
