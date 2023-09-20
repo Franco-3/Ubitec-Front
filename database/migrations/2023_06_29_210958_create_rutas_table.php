@@ -15,6 +15,8 @@ return new class extends Migration
             $table->increments('idRuta');
             $table->char('estado');
             $table->float('kmTotal')->nullable();
+            $table->string('polyline');
+            $table->string('cities_polyline');
             $table->timestamps();
         });
     }
