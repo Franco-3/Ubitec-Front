@@ -7,14 +7,11 @@
     <title>@yield('title')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGc0UBAR_Y30fX31EvaU65KATMx0c0ItI&libraries=places"></script>
-
-    <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}" />
-
+    <script src="https://kit.fontawesome.com/3f6f78b811.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="/"/>
     <style>
         .logo{
             background-image: url(img/logogps.png);
@@ -22,7 +19,7 @@
             width: 3.5rem;
             height: 3.5rem;
         }
-        
+
     </style>
 </head>
 <body class="bg-secondary-subtle d-flex flex-column min-vh-100">
@@ -42,8 +39,8 @@
                 </li>
                 @guest
                 @else
-                <li class="nav-item m-1"><a href="{{ url('/rutas') }}" class="nav-link">Rutas</a></li>
-                <li class="nav-item m-1"><a href="{{ url('/historial') }}" class="nav-link" aria-expanded="false">Historial</a></li>
+                <li class="nav-item m-1 fw-bold"><a href="{{ url('/rutas') }}" class="nav-link">Rutas</a></li>
+                <li class="nav-item m-1 fw-bold"><a href="{{ url('/historial') }}" class="nav-link" aria-expanded="false">Historial</a></li>
                 @if(Auth::user()->tipo === '0')
                 <li class="nav-item m-1"><a class="nav-link" href="{{ route('users.index') }}" aria-expanded="false">Usuarios</a></li>
                 <li class="nav-item m-1"><a class="nav-link" href="{{ route('vehiculos.index') }}" aria-expanded="false">Vehiculos</a></li>
