@@ -69,7 +69,9 @@ class RegisterController extends Controller
         $data['empresa'] = null;
         return User::create([
             'name' => $data['name'],
+            'lastName' => $data['lastName'],
             'email' => $data['email'],
+            'telefono' => $data['telefono'],
             'password' => Hash::make($data['password']),
             'tipo' => $data['tipo'], // Asignar el valor por defecto 'final' al campo 'tipo'
             'empresa' => $data['empresa']
