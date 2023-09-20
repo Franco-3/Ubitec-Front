@@ -41,10 +41,10 @@
 
 	<!-- mostrar direcciones de inicio y final  ToDo: hay que agregar los botones para modificarlas -->
 	<div class="container">
-		<div class="row">
+		<div class="row mt-2">
 			<div class="col">
-				<div class="card">
-					<div class="card-title">Direccion inicio:</div>
+				<div class="card p-3">
+					<div class="card-title mx-auto fw-bold">Direccion inicio:</div>
 					@if (Session::has('inicio'))
 						<div> {{ session('inicio')->direccion }}</div>
 						<form action="" method="POST">
@@ -55,8 +55,8 @@
 				</div>
 			</div>
 			<div class="col">
-				<div class="card">
-					<div class="card-title">Direccion final:</div>
+				<div class="card p-3">
+					<div class="card-title mx-auto fw-bold">Direccion final:</div>
 					@if (Session::has('final'))
 						<div> {{ session('final')->direccion }}</div>
 						<form action="" method="POST">
@@ -132,16 +132,17 @@
 				<td>{{$direccion->direccion}}</td>
 				<td>sin definir</td>
 				<td>
-					<form action="">
-						<input type="checkbox" name="" id="">
-					</form>
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+						<label class="form-check-label" for="flexCheckDefault"></label>
+					</div>
 				</td>
 				@if (!empty($direccion->idDireccion))
 					<td>
 						<form action="{{ route('direcciones.destroy', $direccion->idDireccion) }}" method="POST">
 							@csrf
 							@method('DELETE')
-							<button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+							<button type="submit" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can" style="color: #ffffff;"></i></button>
 						</form>
 					</td>
 				@endif
@@ -153,8 +154,8 @@
 	</table>
 </div>
 
-<a href="{{ route('rutas.index') }}">Editar</a> <!-- este boton solo se debe mostrar si las rutas estan ordenadas, es para volver y editarlas -->
-<a href="{{ route('rutas.create') }}">nueva ruta</a>
-<a href="{{ route('tsp.ordenar') }}">Ordenar Direcciones</a> <!-- faltan modificaciones de los datos que se muestran en la vista porque luego de la consulta a la API los datos a mostrar son diferentes -->
-<a href="{{ route('google.ordenar') }}">Ordenar Direcciones google</a>
+<button class="btn btn-primary mx-auto mb-2 col-2"><a href="{{ route('rutas.index') }}" class="link-light text-decoration-none">Editar</a></button> <!-- este boton solo se debe mostrar si las rutas estan ordenadas, es para volver y editarlas -->
+<button class="btn btn-primary mx-auto mb-2 col-2"><a href="{{ route('rutas.create') }}" class="link-light text-decoration-none">Nueva ruta</a></button>
+<button class="btn btn-primary mx-auto mb-2 col-2"><a href="{{ route('tsp.ordenar') }}" class="link-light text-decoration-none">Ordenar Direcciones</a></button> <!-- faltan modificaciones de los datos que se muestran en la vista porque luego de la consulta a la API los datos a mostrar son diferentes -->
+<button class="btn btn-primary mx-auto mb-2 col-2"><a href="{{ route('google.ordenar') }} " class="link-light text-decoration-none">Ordenar Direcciones google</a></button>
 @endsection
