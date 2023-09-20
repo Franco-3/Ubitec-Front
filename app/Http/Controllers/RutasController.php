@@ -72,7 +72,7 @@ class RutasController extends Controller
 
         //enlazar la ruta y el usuario en la tabla usuarios_ruta
         $userRuta = new User_ruta();
-        $userRuta->idRuta = $ruta->id;
+        $userRuta->idRuta = $ruta->getKey();
         $userRuta->idUsuario = session('idUser');
         $userRuta->idVehiculo = null;
         $userRuta->save();
