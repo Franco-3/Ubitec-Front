@@ -131,7 +131,11 @@
 				<th scope="row">{{$indice}}</th>
 				<td>{{$direccion->direccion}}</td>
 				<td>sin definir</td>
-				<td>no hay campo aun en BD</td>
+				<td>
+					<form action="">
+						<input type="checkbox" name="" id="">
+					</form>
+				</td>
 				@if (!empty($direccion->idDireccion))
 					<td>
 						<form action="{{ route('direcciones.destroy', $direccion->idDireccion) }}" method="POST">

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use stdClass;
+use App\Models\Direcciones;
 
 
 class TSPcontroller extends Controller
@@ -37,6 +38,7 @@ class TSPcontroller extends Controller
 
             // Realizar la solicitud HTTP
             $response = Http::get($url);
+            
             // Decodificar la respuesta JSON
             $data = $response->json();
 
@@ -77,6 +79,19 @@ class TSPcontroller extends Controller
                 ];
 
                 //devolver las direcciones que se muetran en la tabla
+
+                $points =[];
+                $waypointsIndexes = $data['routes']['0']['waypoint_order'];//conseguir en indice de puntos de la rta
+                
+                $waypointsOriginals = array_values($waypointsData->toArray()); //los waypts originales llevados a array
+                
+                foreach ($waypointsOriginals as $indice => $point) {
+                    $index_waypoint = $waypointsIndexes[$indice];//conseguir el indice de el punto acutal
+                    $points[$index_waypoint] = $point; // asignar los datos al array en la posicion indicada en la rta
+
+                    $this->updateOrder($point->idDireccion, $index_waypoint);//actualizar la bd
+                }
+
                 $direcciones = [];
                 foreach ($cities as $city) {
                     $objeto = new stdClass(); // Creamos un objeto vacío
@@ -95,6 +110,13 @@ class TSPcontroller extends Controller
         }else return redirect()->route('rutas.index'); //agregar la respuesta que el error sucedede porque no estan definidos el inicio y el final
 
 
+    }
+
+    private function updateOrder(string $id,  $posicion)
+    {
+        $direccion = Direcciones::findOrFail($id);
+
+        $direccion->update(['orden' => $posicion]);
     }
 
     private function searchDirections(string $idRuta)
