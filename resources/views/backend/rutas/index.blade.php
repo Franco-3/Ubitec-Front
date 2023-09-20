@@ -156,4 +156,5 @@
 <a href="{{ route('rutas.index') }}">Editar</a> <!-- este boton solo se debe mostrar si las rutas estan ordenadas, es para volver y editarlas -->
 <a href="{{ route('rutas.create') }}">nueva ruta</a>
 <a href="{{ route('tsp.ordenar') }}">Ordenar Direcciones</a> <!-- faltan modificaciones de los datos que se muestran en la vista porque luego de la consulta a la API los datos a mostrar son diferentes -->
+<a href="{{ route('google.ordenar') }}">Ordenar Direcciones google</a>
 @endsection

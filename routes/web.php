@@ -38,7 +38,8 @@ Route::middleware('auth')->group(function () {
 
     Route::post('direcciones/rutas', [DireccionesController::class, 'store'])->name('direcciones.store');
     Route::delete('direcciones/rutas/{direccion}', [DireccionesController::class, 'destroy'])->name('direcciones.destroy');
-    Route::get('tsp/ordenar', [TSPcontroller::class, 'postDirections'])->name('tsp.ordenar');
+    Route::get('tsp/ordenar', [TSPcontroller::class, 'osrmOrder'])->name('tsp.ordenar');
+    Route::get('google/ordenar', [TSPcontroller::class, 'postDirections'])->name('google.ordenar');
 
 });
 
