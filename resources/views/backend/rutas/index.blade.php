@@ -2,7 +2,11 @@
 @section('title', 'Ubitec - Rutas')
 @section('content')
 
-
+@if(session('error'))
+    <div class="alert alert-danger">
+        <p>Lo sentimos, se produjo un error: {{session('error')}}</p>
+    </div>
+@endif
 
 <div class="container mt-2">
     <div class="card">
@@ -154,7 +158,7 @@
 	</table>
 </div>
 
-<button class="btn btn-primary mx-auto mb-2 col-2"><a href="{{ route('rutas.index') }}" class="link-light text-decoration-none">Editar</a></button> <!-- este boton solo se debe mostrar si las rutas estan ordenadas, es para volver y editarlas -->
+
 <button class="btn btn-primary mx-auto mb-2 col-2"><a href="{{ route('rutas.create') }}" class="link-light text-decoration-none">Nueva ruta</a></button>
 <button class="btn btn-primary mx-auto mb-2 col-2"><a href="{{ route('tsp.ordenar') }}" class="link-light text-decoration-none">Ordenar Direcciones</a></button> <!-- faltan modificaciones de los datos que se muestran en la vista porque luego de la consulta a la API los datos a mostrar son diferentes -->
 <button class="btn btn-primary mx-auto mb-2 col-2"><a href="{{ route('google.ordenar') }} " class="link-light text-decoration-none">Ordenar Direcciones google</a></button>
