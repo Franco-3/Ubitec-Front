@@ -10,18 +10,32 @@ const map = L.map('map').setView([-33.38151239916761,-60.216151025578654], 13);
 try {
   const coordenadas =   window.responseData.data.coordinates //coordenadas que se agregaran como puntos en el mapa
   const polylinea = window.responseData.polyline; //polylnea que unira los puntos
-  let contador = 1;
 
-  coordenadas.forEach(element => {
+  
+  let contador = 1;
+  coordenadas.forEach((element, index) => {
     const marker = L.marker(element).addTo(map);
-    marker.bindTooltip(`Punto ${contador}`, { permanent: true, className: 'custom-tooltip' }).openTooltip();
-    contador++;
+  
+    // Determinar el nombre del punto según la posición
+    let nombrePunto;
+    if (index === 0) {
+      nombrePunto = 'Punto inicio';
+    } else if (index === coordenadas.length - 1) {
+      nombrePunto = 'Punto final';
+    } else {
+      nombrePunto = `Punto ${contador}`;
+      contador++;
+    }
+  
+    marker.bindTooltip(nombrePunto, { permanent: true, className: 'custom-tooltip' }).openTooltip();
   });
 
   var polyline = L.polyline(polylinea).addTo(map);
   map.fitBounds(polyline.getBounds());
+
+
 } catch (error) {
-  
+
 }
 
 

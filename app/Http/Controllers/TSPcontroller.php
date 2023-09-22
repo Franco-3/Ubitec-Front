@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Session;
 use stdClass;
 use App\Models\Direcciones;
 use App\Models\Ruta;
+use Error;
 
 class TSPcontroller extends Controller
 {
@@ -42,12 +43,13 @@ class TSPcontroller extends Controller
             // Decodificar la respuesta JSON
             $data = $response->json();
 
-            $coords = $data['routes'][0]['overview_polyline']['points'];
-            $temp = Polyline::decode($coords);
-            $polyline = Polyline::pair($temp); // Suponiendo que `decodePolylineToArray` es una función definida en otro archivo.
-
-                    // Procesar la respuesta
+            // Procesar la respuesta
             if ($data['status'] == 'OK') {
+                $coords = $data['routes'][0]['overview_polyline']['points'];
+                $temp = Polyline::decode($coords);
+                $polyline = Polyline::pair($temp); // Suponiendo que `decodePolylineToArray` es una función definida en otro archivo.
+
+
                 // Obtener las ciudades en orden
                 $legs = $data['routes'][0]['legs'];
                 $cities = [];
@@ -101,11 +103,12 @@ class TSPcontroller extends Controller
                 }
 
                 // Retornar las ciudades y sus coordenadas
-                return view('backend.rutas.index', compact('responseData', 'direcciones'));
+                return redirect()->route('rutas.index');
 
             } else {
-                $error = 'Error al obtener las direcciones: ' . $data['status'];
-                return redirect()->route('rutas.index', compact('error'));
+                // echo('Error al obtener las direcciones: ' . $data['status']);
+                $error  = $data['status'];
+                return redirect()->route('rutas.index')->with('error', $error);
             }
 
         }else return redirect()->route('rutas.index'); //agregar la respuesta que el error sucedede porque no estan definidos el inicio y el final
@@ -139,19 +142,7 @@ class TSPcontroller extends Controller
                         'lng' => $waypoint['longitude']
                     ];
 
-                    $objeto = new stdClass(); // Creamos un objeto vacío
-                    $objeto->direccion = $waypoint['direccion']; // Agregamos la propiedad "direccion"
-                    $direcciones[] = $objeto; // Agregamos el objeto al nuevo array
                 }
-                $responseData = [
-                    'status' => 'OK',
-                    'data' => [
-                        'cities' => [],
-                        'coordinates' => $coordinates
-                    ],
-                    'polyline' => $polyline
-                ];
-
 
             }
             elseif(sizeof($waypoints) <= 25 )
@@ -171,25 +162,14 @@ class TSPcontroller extends Controller
                         'lng' => $waypoint['longitude']
                     ];
 
-                    $objeto = new stdClass(); // Creamos un objeto vacío
-                    $objeto->direccion = $waypoint['direccion']; // Agregamos la propiedad "direccion"
-                    $objeto->idDireccion = $waypoint['id'];
-                    $direcciones[] = $objeto; // Agregamos el objeto al nuevo array
                 }
 
+                //guardar el recorrido
                 $citiesPolyline = Polyline::encode($coordinates);
                 $this->updatePolylines(session('idRuta'), $response[1], $citiesPolyline);
-                $responseData = [
-                    'status' => 'OK',
-                    'data' => [
-                        'cities' => [],
-                        'coordinates' => $coordinates
-                    ],
-                    'polyline' => $polyline
-                ];
 
             }
-            return view('backend.rutas.index', compact('direcciones', 'responseData'));
+            return redirect()->route('rutas.index');
         }else return redirect()->route('rutas.index'); //agregar la respuesta que el error sucedede porque no estan definidos el inicio y el final
 
 
