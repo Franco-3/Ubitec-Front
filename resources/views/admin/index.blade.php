@@ -25,7 +25,15 @@
                     <td>{{$vUsuario->nombre}}</td>
                     <td>{{$vUsuario->patente}}</td>
                     <td>{{$vUsuario->name}}</td>
-                    <td></td>
+                    @if (!empty($vUsuario->idVehiculo))
+                        <td>
+                            <form action="{{ route('dashboard.show', $vUsuario->idVehiculo) }}" method="POST">
+                                @csrf
+                                @method('GET')
+                                <button type="submit" class="btn btn-danger btn-sm">asignar direcciones</button>
+                            </form>
+                        </td>
+                    @endif
 {{--                     @if (!empty($direccion->idDireccion))
                         <td>
                             <form action="{{ route('direcciones.destroy', $direccion->idDireccion) }}" method="POST">
@@ -44,4 +52,7 @@
     </div>
 
 @endsection
+
+
+
 

@@ -46,7 +46,7 @@ class AdminController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('admin.show');
     }
 
     /**
