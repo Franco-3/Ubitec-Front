@@ -45,42 +45,44 @@
 
 	<!-- mostrar direcciones de inicio y final  ToDo: hay que agregar los botones para modificarlas -->
 	<div class="container">
-		<div class="row mt-2">
-			<div class="col">
-				<div class="card p-3">
-					<div class="card-title mx-auto fw-bold">Direccion inicio:</div>
-					@if (Session::has('inicio'))
-						<div> {{ session('inicio')->direccion }}</div>
-						<form action="" method="POST">
-							@csrf
-							<button class="btn btn-primary">Cambiar</button>
-						</form>
-					@endif
+		<div class="row">
+			<div class="col-sm-12 col-md-6 col-lg-6 mt-2">
+				<div class="card">
+					<h5 class="card-header text-center">Direccion de Inicio</h5>
+					<div class="card-body">
+						@if (Session::has('inicio'))
+							<div><p class="card-text">{{ session('inicio')->direccion }}</p></div>	
+							<form action="" method="POST">
+								@csrf
+								<button class="btn btn-primary mt-2 col-12">Cambiar</button>
+							</form>
+						@endif
+					</div>
 				</div>
 			</div>
-			<div class="col">
-				<div class="card p-3">
-					<div class="card-title mx-auto fw-bold">Direccion final:</div>
-					@if (Session::has('final'))
-						<div> {{ session('final')->direccion }}</div>
-						<form action="" method="POST">
-							@csrf
-							<button class="btn btn-primary">Cambiar</button>
-						</form>
-					@endif
+			<div class="col-sm-12 col-md-6 col-lg-6 mt-2">
+				<div class="card">
+					<h5 class="card-header text-center">Direccion Final</h5>
+					<div class="card-body">
+						@if (Session::has('final'))
+							<div><p class="card-text">{{ session('final')->direccion }}</p></div>
+							<form action="" method="POST">
+								@csrf
+								<button class="btn btn-primary mt-2 col-12">Cambiar</button>
+							</form>
+						@endif
+					</div>
 				</div>
 			</div>
-		</div>
-		
-		
+		</div>	
 	</div>
 
             <!-- Mapa desplegable -->
             <div class="container mt-2">
-                <div class="row">
-                    <div class="col-md-12 d-flex justify-content-end">
-                        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Abrir Mapa <i class="bi bi-globe-americas"></i></button>
-                    </div>
+                <div class="row d-flex justify-content-center gap-2">
+					<button class="btn btn-primary col-sm-12 col-md-3 col-lg-3 col-xl-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Abrir Mapa <i class="bi bi-globe-americas"></i></button>
+					<a class="btn btn-primary col-sm-12 col-md-3 col-lg-3 col-xl-3" href="{{ route('rutas.create') }}" role="button">Nueva ruta</a>
+					<a class="btn btn-primary col-sm-12 col-md-3 col-lg-3 col-xl-3" href="{{ route('google.ordenar') }}" role="button">Ordenar Direcciones G</a>
                 </div>
             </div>
 
@@ -115,51 +117,45 @@
 
 </div>
 
-
-<div class="container">
-	<table class="table table-striped table-dark">
-	<thead>
-		<tr>
-		<th scope="col">#</th>
-		<th scope="col">Dirección</th>
-		<th scope="col">N° de Paquete</th>
-		<th scope="col">Estado</th>
-		<th scope="col">Acciones</th>
-		</tr>
-	</thead>
-	<tbody>
-		<?php $indice = 0 ?>
-		@foreach ($direcciones as  $direccion)
-			<?php $indice++ ?>
-			<tr>
-				<th scope="row">{{$indice}}</th>
-				<td>{{$direccion->direccion}}</td>
-				<td>sin definir</td>
-				<td>
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-						<label class="form-check-label" for="flexCheckDefault"></label>
-					</div>
-				</td>
-				@if (!empty($direccion->idDireccion))
-					<td>
-						<form action="{{ route('direcciones.destroy', $direccion->idDireccion) }}" method="POST">
-							@csrf
-							@method('DELETE')
-							<button type="submit" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can" style="color: #ffffff;"></i></button>
-						</form>
-					</td>
-				@endif
-			</tr>
-		@endforeach
-
-
-	</tbody>
-	</table>
+<div class="container mt-2">
+	<div class="row">
+		<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+			<table class="table table-striped table-dark">
+			<thead>
+				<tr>
+					<th class="text-center">#</th>
+					<th>Dirección</th>
+					<th>N° de Paquete</th>
+					<th>Estado</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php $indice = 0 ?>
+				@foreach ($direcciones as  $direccion)
+					<?php $indice++ ?>
+					<tr>
+						<th class="text-center">{{$indice}}</th>
+						<td>{{$direccion->direccion}}</td>
+						<td>sin definir</td>
+						<td class="">
+							<label><input type='checkbox'><div class='check'></div></label>
+						</td>
+						@if (!empty($direccion->idDireccion))
+							<td>
+								<form action="{{ route('direcciones.destroy', $direccion->idDireccion) }}" method="POST">
+									@csrf
+									@method('DELETE')
+									<button type="submit" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can" style="color: #ffffff;"></i></button>
+								</form>
+							</td>
+						@endif
+					</tr>
+				@endforeach
+			</tbody>
+			</table>
+		</div>
+	</div>
 </div>
-
-
-<button class="btn btn-primary mx-auto mb-2 col-2"><a href="{{ route('rutas.create') }}" class="link-light text-decoration-none">Nueva ruta</a></button>
-<button class="btn btn-primary mx-auto mb-2 col-2"><a href="{{ route('tsp.ordenar') }}" class="link-light text-decoration-none">Ordenar Direcciones</a></button> <!-- faltan modificaciones de los datos que se muestran en la vista porque luego de la consulta a la API los datos a mostrar son diferentes -->
-<button class="btn btn-primary mx-auto mb-2 col-2"><a href="{{ route('google.ordenar') }} " class="link-light text-decoration-none">Ordenar Direcciones google</a></button>
+<!-- <button class="btn btn-primary mx-auto mb-2 col-2"><a href="{{ route('tsp.ordenar') }}" class="link-light text-decoration-none">Ordenar Direcciones</a></button> faltan modificaciones de los datos que se muestran en la vista porque luego de la consulta a la API los datos a mostrar son diferentes -->
 @endsection

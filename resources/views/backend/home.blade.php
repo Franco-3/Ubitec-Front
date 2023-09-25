@@ -30,8 +30,6 @@
         <div class="card-sm-2 text-center">
             <div class="card-body">
                 <h3 class="card-title m-3" style="text-shadow: #080404;">Soluciones de logistica</h3>
-                <a href="/login" class="btn btn-success m-2">Entrar</a>
-                <a href="/register" class="btn btn-success m-2">Registarse</a>
             </div>
         </div>
     </div>

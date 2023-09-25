@@ -1,0 +1,48 @@
+table label input {
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+	height: 0;
+	width: 0;
+}
+table label {
+	display: block;
+	position: relative;
+	cursor: pointer;
+	font-size: 20px;
+	user-select: none;
+}
+.check {
+	position: relative;
+	left: 10%;
+	box-sizing: border-box;
+	height: 1.5em;
+	width: 1.5em;
+	background-color: #ccc;
+	border: 2px solid red;
+	border-radius: 25px;
+	transition: 0.15s;
+}
+table label input:checked ~ .check {
+	background-color: limegreen;
+	border: none;
+	border-radius: 25px;
+	transition: 0.15s;
+}
+.check:after {
+	content: "";
+	position: absolute;
+	display: none;
+}
+table label .check:after {
+	left: 0.50em;
+	top: 0.30em;
+	width: 0.45em;
+	height: 0.7em;
+	border: solid white;
+	border-width: 0 0.15em 0.15em 0;
+	transform: rotate(45deg);
+}
+table label input:checked ~ .check:after {
+	display: block;
+}
