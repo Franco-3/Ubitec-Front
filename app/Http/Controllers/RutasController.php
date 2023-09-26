@@ -64,7 +64,7 @@ class RutasController extends Controller
         $newRuta = $this->store();
         session(['idRuta' => $newRuta]);
 
-        return redirect()->route('rutas.index');
+        return back();
     }
 
     /**
@@ -84,7 +84,6 @@ class RutasController extends Controller
         $userRuta->idUsuario = session('idUser');
         $userRuta->idVehiculo = null;
         $userRuta->save();
-
         return $ruta->getKey();
     }
 

@@ -117,7 +117,7 @@ class DireccionesController extends Controller
         // Aquí puedes realizar cualquier lógica que necesites antes de eliminar la dirección
         $direccion->delete();
 
-        return redirect()->route('rutas.index')->with('success', 'Dirección eliminada correctamente.');
+        return back()->with('success', 'Dirección eliminada correctamente.');
     }
 
 

@@ -27,7 +27,7 @@
                     <td>{{$vUsuario->name}}</td>
                     @if (!empty($vUsuario->idVehiculo))
                         <td>
-                            <form action="{{ route('dashboard.show', $vUsuario->idVehiculo) }}" method="POST">
+                            <form action="{{ route('dashboard.show', $vUsuario->id) }}" method="POST">
                                 @csrf
                                 @method('GET')
                                 <button type="submit" class="btn btn-danger btn-sm">asignar direcciones</button>
@@ -50,6 +50,9 @@
         </tbody>
         </table>
     </div>
+
+
+    
 
 @endsection
 
