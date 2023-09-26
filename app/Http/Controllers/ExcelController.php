@@ -7,7 +7,8 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Illuminate\Support\Facades\Http;
-
+use App\Http\Controllers\DireccionesController;
+use App\Models\Direcciones;
 
 class ExcelController extends Controller
 {
@@ -35,7 +36,7 @@ class ExcelController extends Controller
             }
             $this->geocodeData($direcciones);
 
-            return $direcciones;
+            return back();
         }
 
         return "No se ha proporcionado ningún archivo Excel.";
@@ -44,19 +45,41 @@ class ExcelController extends Controller
 
     public function geocodeData(array $addresses)
     {
-        $url = "https://maps.googleapis.com/maps/api/geocode/json?address=";
+
 
         foreach($addresses as $address)
         {
+            $url = "https://maps.googleapis.com/maps/api/geocode/json?address=";
             $url .= urlencode($address);
+            $url .= "&key=AIzaSyDGc0UBAR_Y30fX31EvaU65KATMx0c0ItI";
+            $response = Http::get($url);
+            $data = $response->json();
+            if($data['status'] == 'OK')
+            {
+                $this->storeAddress($data);
+            }
         }
 
-        $url .= "&key=AIzaSyDGc0UBAR_Y30fX31EvaU65KATMx0c0ItI";
-        $response = Http::get($url);
-        $data = $response->json();
-        dd($data);
+
     }
 
+
+    private function storeAddress(array $data)
+    {
+
+        $direccion = new Direcciones();
+        $direccion->idRuta = session('idRuta');
+        $direccion->direccion = $data['results'][0]['formatted_address'];
+        $direccion->latitud = $data['results'][0]['geometry']['location']['lat'];
+        $direccion->longitud = $data['results'][0]['geometry']['location']['lng'];
+        $direccion->tipo = 'normal';
+        $direccion->orden = null;
+
+        $direccion->save();
+
+
+        return $direccion;
+    }
 
     public function generarExcel()
     {

@@ -61,8 +61,8 @@ class DireccionesController extends Controller
             $this->store($request);
         }
         // $request->session()->flash('status', 'Se guardó correctamente la categoria ' . $categoria->name);
-        //return $direccion;
-        return redirect()->route('direcciones.index')->with('success', 'Dirección creada correctamente.');
+        return $direccion;
+        // return redirect()->route('direcciones.index')->with('success', 'Dirección creada correctamente.');
     }
 
     /**

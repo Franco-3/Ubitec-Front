@@ -79,6 +79,15 @@
 			</div>	
 		</div>
 
+		@if(!is_null(session('final')))
+			<h3>Cargar Archivo Excel</h3>
+			<form action="{{ route('cargar.excel') }}" method="POST" enctype="multipart/form-data">
+				@csrf
+				<input type="file" name="archivo_excel" accept=".xlsx, .xls">
+				<button type="submit">Cargar Excel</button>
+			</form>
+		@endif
+
             <!-- Mapa desplegable -->
             <div class="offcanvas offcanvas-bottom offcanvas-size-xl" style="height: 80vh;" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
                 <div class="offcanvas-header">
