@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Direcciones;
+use App\Models\Paquete;
 use Symfony\Component\Console\Input\Input;
 
 use function PHPUnit\Framework\isNull;
@@ -120,6 +121,18 @@ class DireccionesController extends Controller
         return back()->with('success', 'Dirección eliminada correctamente.');
     }
 
+
+    public function storePackages(Request $request)
+    {
+        $direccion = $this->store($request);
+        $paquete = new Paquete();
+        $paquete->idVehiculo = $request->input('idVehiculo');
+        $paquete->idDireccion = $request->input('idDireccion');
+        $paquete->descripcion = $request->input('descripcion');
+        $paquete->pesoUnitario = $request->input('peso_unitario');
+
+        $paquete->save();
+    }
 
 
 }
