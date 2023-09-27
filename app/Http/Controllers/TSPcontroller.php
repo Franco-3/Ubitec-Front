@@ -39,10 +39,8 @@ class TSPcontroller extends Controller
 
             // Realizar la solicitud HTTP
             $response = Http::get($url);
-            
             // Decodificar la respuesta JSON
             $data = $response->json();
-
             // Procesar la respuesta
             if ($data['status'] == 'OK') {
                 $coords = $data['routes'][0]['overview_polyline']['points'];
@@ -71,16 +69,6 @@ class TSPcontroller extends Controller
                     'lng' => end($legs)['end_location']['lng']
                 ];
 
-
-                $responseData = [
-                    'status' => 'OK',
-                    'data' => [
-                        'cities' => $cities,
-                        'coordinates' => $coordinates
-                    ],
-                    'polyline' => $polyline
-                ];
-
                 //devolver las direcciones que se muetran en la tabla
 
                 $points =[];
@@ -95,14 +83,10 @@ class TSPcontroller extends Controller
                     $this->updateOrden($point->idDireccion, $index_waypoint);//actualizar la bd
                 }
 
-                $direcciones = [];
-                foreach ($cities as $city) {
-                    $objeto = new stdClass(); // Creamos un objeto vacío
-                    $objeto->direccion = $city; // Agregamos la propiedad "direccion"
-                    $direcciones[] = $objeto; // Agregamos el objeto al nuevo array
-                }
 
-                // Retornar las ciudades y sus coordenadas
+                $citiesPolyline = Polyline::encode($coordinates);
+                $this->updatePolylines(session('idRuta'), $coords, $citiesPolyline);
+
                 return redirect()->route('rutas.index');
 
             } else {

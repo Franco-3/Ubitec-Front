@@ -157,5 +157,5 @@
 		</div>
 	</div>
 </div>
-<!-- <button class="btn btn-primary mx-auto mb-2 col-2"><a href="{{ route('tsp.ordenar') }}" class="link-light text-decoration-none">Ordenar Direcciones</a></button> faltan modificaciones de los datos que se muestran en la vista porque luego de la consulta a la API los datos a mostrar son diferentes -->
+ <button class="btn btn-primary mx-auto mb-2 col-2"><a href="{{ route('tsp.ordenar') }}" class="link-light text-decoration-none">Ordenar Direcciones</a></button>
 @endsection
