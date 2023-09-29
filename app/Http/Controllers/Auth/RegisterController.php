@@ -53,6 +53,8 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'tipo' => ['string', 'in:final'],
+            'empresa' => ['string', 'in:final'],
             // 'tipo' => ['string', 'in:final'], // Agregar cualquier otra regla de validación necesaria
         ]);
     }
