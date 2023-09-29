@@ -15,26 +15,8 @@ class ExcelController extends Controller
     public function cargarExcel(Request $request)
     {
         if ($request->hasFile('archivo_excel')) {
-            $archivo = $request->file('archivo_excel');
-            $spreadsheet = IOFactory::load($archivo->getPathname());
-            $worksheet = $spreadsheet->getActiveSheet();
-
-            $direcciones = [];
-
-            foreach ($worksheet->getRowIterator() as $fila) {
-                $celdas = $fila->getCellIterator();
-                $direccion = [];
-
-                foreach ($celdas as $celda) {
-                    $direccion[] = $celda->getValue();
-                }
-
-                // Saltear fila con encabezados
-                if ($direccion[0] !== "Calle") {
-                    $direcciones[] = implode(' ', $direccion);
-                }
-            }
-            $this->geocodeData($direcciones);
+            $direcciones = $this->ExcelToArray($request);
+            $this->geocodeData($direcciones, true);
 
             return back();
         }
@@ -42,25 +24,79 @@ class ExcelController extends Controller
         return "No se ha proporcionado ningún archivo Excel.";
     }
 
-
-    public function geocodeData(array $addresses)
+    public function dividirExcelEntreVehiculos(Request $request)
     {
+        if ($request->hasFile('archivo_excel')) {
+            $direcciones = $this->ExcelToArray($request);
+            $data = $this->geocodeData($direcciones, false);
+            session(['dataExcel' => $data]);
+            return redirect()->route('excel.admin');
+        }
+        return "No se ha proporcionado ningún archivo Excel.";
+    }
 
 
+
+
+    public function geocodeData(array $addresses, bool $store)
+    {
+        $arrayAddresses = [];
         foreach($addresses as $address)
         {
-            $url = "https://maps.googleapis.com/maps/api/geocode/json?address=";
-            $url .= urlencode($address);
-            $url .= "&key=AIzaSyDGc0UBAR_Y30fX31EvaU65KATMx0c0ItI";
-            $response = Http::get($url);
-            $data = $response->json();
-            if($data['status'] == 'OK')
+            $data = $this->geocode($address);
+
+            if($data['status'] == 'OK' && $store)
             {
                 $this->storeAddress($data);
             }
+            elseif($data['status'] == 'OK' && !$store)
+            {
+                $arrayAddress['address'] = $data['results'][0]['formatted_address'];
+                $arrayAddress['lat'] = $data['results'][0]['geometry']['location']['lat'];
+                $arrayAddress['lng'] = $data['results'][0]['geometry']['location']['lng'];
+
+                $arrayAddresses[] = $arrayAddress;
+            }
         }
 
+        return $arrayAddresses;
 
+    }
+
+    private function ExcelToArray(Request $request)
+    {
+        $archivo = $request->file('archivo_excel');
+        $spreadsheet = IOFactory::load($archivo->getPathname());
+        $worksheet = $spreadsheet->getActiveSheet();
+
+        $direcciones = [];
+
+        foreach ($worksheet->getRowIterator() as $fila) {
+            $celdas = $fila->getCellIterator();
+            $direccion = [];
+
+            foreach ($celdas as $celda) {
+                $direccion[] = $celda->getValue();
+            }
+
+            // Saltear fila con encabezados
+            if ($direccion[0] !== "Calle") {
+                $direcciones[] = implode(' ', $direccion);
+            }
+        }
+
+        return $direcciones;
+    }
+
+    private function geocode($address)
+    {
+        $url = "https://maps.googleapis.com/maps/api/geocode/json?address=";
+        $url .= urlencode($address);
+        $url .= "&key=AIzaSyDGc0UBAR_Y30fX31EvaU65KATMx0c0ItI";
+        $response = Http::get($url);
+        $data = $response->json();
+
+        return $data;
     }
 
 

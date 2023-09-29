@@ -65,6 +65,8 @@ Route::get('/cargarExcel', function () {
 });
 
 Route::post('/cargar-excel', [ExcelController::class, 'cargarExcel'])->name('cargar.excel');
+Route::post('/dividir-excel', [ExcelController::class, 'dividirExcelEntreVehiculos'])->name('dividir.excel');
+Route::get('/tspAdmin', [TSPcontroller::class, 'dividirDirecciones'])->name('excel.admin');
 Route::get('/generar-excel', [ExcelController::class, 'generarExcel'])->name('generar.excel');
 
 

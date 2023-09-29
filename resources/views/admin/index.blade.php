@@ -5,6 +5,16 @@
     <a href="" class="btn-btn primary">Agrgar vehiculo</a>
     <a href="" class="btn-btn primary">Agrgar Usuario</a>
 
+
+
+    <h3>Cargar Archivo Excel</h3>
+    <form action="{{ route('dividir.excel') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <input type="file" name="archivo_excel" accept=".xlsx, .xls">
+        <button type="submit">Cargar Excel</button>
+    </form>
+
+
     <div class="container">
         <table class="table table-striped table-dark">
         <thead>

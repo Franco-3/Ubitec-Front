@@ -119,7 +119,11 @@ class TSPcontroller extends Controller
                 $direcciones = [];
                 $response = $this->connectOSRM($waypoints);
                 $coordinates = [];
-                $polyline = $this->decodePolylineToArray($response[1]);
+                $poly = Polyline::decode($response[1]);
+                $polyline = Polyline::pair($poly);
+
+
+
                 foreach($response[0] as $waypoint)
                 {
                     $coordinates[] = [
@@ -128,6 +132,10 @@ class TSPcontroller extends Controller
                     ];
 
                 }
+
+                //guardar el recorrido
+                $citiesPolyline = Polyline::encode($coordinates);
+                $this->updatePolylines(session('idRuta'), $response[1], $citiesPolyline);
 
             }
             elseif(sizeof($waypoints) <= 25 )
@@ -221,6 +229,51 @@ class TSPcontroller extends Controller
 
     }
 
+    public function dividirDirecciones()
+    {
+        if (session::has('dataExcel')) {
+            $addresses = session('dataExcel');
+            $coordinates = [];
+
+            $empresa = Auth()->user()->empresa;
+            $vehiculosUsuario = DB::table('users')
+            ->join('vehiculos', 'users.id', '=', 'vehiculos.idUsuario')
+            ->select('*')
+            ->where('users.empresa', '=', $empresa)
+            ->get();
+
+            foreach($addresses as $address)
+            {
+                $coordinates[] = [
+                    'latitude' => $address['lat'],
+                    'longitude' => $address['lng']
+                ];
+
+            }
+
+            $distanceMatrix = $this->generateDistanceMatrix($coordinates);
+            $numVehicles = count($vehiculosUsuario);
+
+            $responseOrtools = $this->connectPython($distanceMatrix, $numVehicles);
+
+
+            foreach($responseOrtools as &$responseArray) {
+                foreach($responseArray as &$elementoIndice) {
+                    $indice = $elementoIndice;
+                    if (isset($addresses[$indice])) {
+                        $elementoIndice = $addresses[$indice];
+                    } else {
+                        // Manejar el caso donde el índice no existe en $addresses, si es necesario.
+                        // Puedes asignar un valor predeterminado o dejarlo como está.
+                    }
+                }
+            }
+
+            dd($responseOrtools);
+
+        }
+    }
+
     private function updatePolylines(string $id, string $polyline, string $citiesPolyline)
     {
         $ruta = Ruta::findOrFail($id);
@@ -256,6 +309,55 @@ class TSPcontroller extends Controller
 
     }
 
+    public function generateDistanceMatrix(array $coords)
+    {
+        $osrm_api_url = 'http://127.0.0.1:5000/table/v1/driving/';
+
+
+        // Crear una cadena con las coordenadas de las ubicaciones para la URL
+        $coordinates = '';
+        foreach ($coords as $waypoint) {
+            $coordinates .= $waypoint['longitude'] . ',' . $waypoint['latitude'] . ';';
+        }
+        $coordinates = rtrim($coordinates, ';'); // Eliminar el punto y coma final
+
+
+
+        // Agregar las coordenadas a la URL
+        $osrm_api_url .= $coordinates;
+
+        // Agregar parámetros adicionales a la URL
+        $osrm_api_url .= '?annotations=distance'; //?roundtrip=false&source=first&destination=last&steps=false&geometries=geojson&overview=false&annotations=false
+
+        // Configurar la solicitud curl
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $osrm_api_url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+        // Realizar la solicitud a la API de OSRM
+        $response = curl_exec($curl);
+        curl_close($curl);
+        // Decodificar la respuesta JSON
+        $response_data = json_decode($response, true);
+
+        $distanceMatrix = $response_data['distances'];
+
+        return $distanceMatrix;
+
+    }
+
+    private function connectPython($matrix, $numVehicles)
+    {
+        $response = Http::post('127.0.0.1:8002', [
+            'matrix' => $matrix,
+            'numVehicles' => $numVehicles,
+        ]);
+
+        // Puedes acceder al contenido de la respuesta de la siguiente manera:
+        $responseData = $response->json(); // Si se espera una respuesta JSON
+
+        return $responseData;
+    }
 
 }
 
