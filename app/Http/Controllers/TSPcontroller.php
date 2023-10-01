@@ -11,6 +11,7 @@ use App\Models\Direcciones;
 use App\Models\Ruta;
 use Error;
 use App\Models\Polyline;
+use App\Models\User_ruta;
 
 class TSPcontroller extends Controller
 {
@@ -253,7 +254,6 @@ class TSPcontroller extends Controller
 
             $distanceMatrix = $this->generateDistanceMatrix($coordinates);
             $numVehicles = count($vehiculosUsuario);
-
             $responseOrtools = $this->connectPython($distanceMatrix, $numVehicles);
 
 
@@ -269,9 +269,16 @@ class TSPcontroller extends Controller
                 }
             }
 
-            dd($responseOrtools);
+            foreach($responseOrtools as $indice => $direccionesArray)
+            {
+
+                $idUser = $vehiculosUsuario[$indice]->idUsuario;
+                $this->newRuta($idUser, $direccionesArray);
+            }
 
         }
+
+        return back();
     }
 
     private function updatePolylines(string $id, string $polyline, string $citiesPolyline)
@@ -357,6 +364,53 @@ class TSPcontroller extends Controller
         $responseData = $response->json(); // Si se espera una respuesta JSON
 
         return $responseData;
+    }
+
+    private function newRuta(int $id, array $direcciones)
+    {
+        // generar nueva ruta
+        $ruta = new Ruta();
+        $ruta->estado = 'P';
+        $ruta->kmTotal = null;
+        $ruta->save();
+
+        $idRuta = $ruta->getKey();
+        //enlazar la ruta y el usuario en la tabla usuarios_ruta
+        $userRuta = new User_ruta();
+        $userRuta->idRuta = $idRuta;
+        $userRuta->idUsuario = $id;
+        $userRuta->idVehiculo = null;
+        $userRuta->save();
+
+
+        $lenght = count($direcciones);
+        for ($i=0; $i < $lenght - 1; $i++) {
+            $direccion = $direcciones[$i]['address'];
+            $latitude = $direcciones[$i]['lat'];
+            $longitude = $direcciones[$i]['lng'];
+            if($i == 0)
+            {
+                $this->storeDirecciones($idRuta, $direccion, $latitude, $longitude, 'inicio');
+                $this->storeDirecciones($idRuta, $direccion, $latitude, $longitude, 'final');
+                
+            }
+            else
+            {
+                $this->storeDirecciones($idRuta, $direccion, $latitude, $longitude, 'normal');
+            }
+        }
+    }
+
+    private function storeDirecciones(int $idRuta, string $address, $latitud, $longitud, $tipo)
+    {
+        $direccion = new Direcciones();
+        $direccion->idRuta = $idRuta;
+        $direccion->direccion = $address;//nombre en ingles para evitar errores con la instancia del modelo
+        $direccion->latitud = $latitud;
+        $direccion->longitud = $longitud;
+        $direccion->tipo = $tipo;
+        $direccion->orden = null;
+        $direccion->save();
     }
 
 }
