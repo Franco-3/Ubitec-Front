@@ -3,9 +3,12 @@
     "FirstName": "Nombre",
     "LastName": "Apellido",
     "Phone": "Telefono",
+    "Login": "Iniciar Sesion",
     "Password": "Contraseña",
+    "RememberMe": "Recuerdáme",
+    "ForgotYourPassword?": "Recuerdás tu contraseña?",
     "ConfirmPassword": "Confirmar contraseña",
-    "EmailAddress": "Correo Electronico",
+    "EmailAddress": "Correo Electrónico",
     "Type": "Tipo",
     "Fleet": "Flota",
     "Company": "Empresa"

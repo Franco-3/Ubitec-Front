@@ -3,35 +3,9 @@
 
 @section('content')
 
-<style>
-    .main-bg{
-        width:100%;
-        filter: brightness(40%);
-    }
-
-.img1 .container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  color: white;
-  font-size: 16px;
-  padding: 12px 24px;
-  border: none;
-  text-align: center;
-  background-color: rgba(255, 255, 255, 0);
-}
-</style>
-
-<div class="img1">
-    <img src="img/home_bg.png" class="img-fluid main-bg" alt="image">
-    <div class="container">
-        <div class="card-sm-2 text-center">
-            <div class="card-body">
-                <h3 class="card-title m-3" style="text-shadow: #080404;">Soluciones de logistica</h3>
-            </div>
-        </div>
+<div class="imagen">
+    <div class="titulo">
+        <h1 style="text-shadow: 4px 4px 4px #000;">Soluciones de Lógistica</h1>
     </div>
 </div>
 
