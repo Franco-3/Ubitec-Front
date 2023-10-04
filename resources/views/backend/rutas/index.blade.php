@@ -79,10 +79,15 @@
 
             <!-- Mapa desplegable -->
             <div class="container mt-2">
-                <div class="row d-flex justify-content-center gap-2">
-					<button class="btn btn-primary col-sm-12 col-md-3 col-lg-3 col-xl-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Abrir Mapa <i class="bi bi-globe-americas"></i></button>
-					<a class="btn btn-primary col-sm-12 col-md-3 col-lg-3 col-xl-3" href="{{ route('rutas.create') }}" role="button">Nueva ruta</a>
-					<a class="btn btn-primary col-sm-12 col-md-3 col-lg-3 col-xl-3" href="{{ route('google.ordenar') }}" role="button">Ordenar Direcciones G</a>
+                <div class="row">
+					<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+						<div class="btn-group col-12" role="group" aria-label="Basic Example">
+							<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Abrir Mapa <i class="bi bi-globe-americas"></i></button>
+							<a class="btn btn-primary" href="{{ route('rutas.create') }}" role="button">Nueva ruta</a>
+							<!-- <a class="btn btn-primary" href="{{ route('google.ordenar') }}" role="button">Ordenar Direcciones G</a> -->
+							<a href="{{ route('tsp.ordenar') }}" class="btn btn-primary">Ordenar Direcciones</a>
+						</div>
+					</div>
                 </div>
             </div>
 
@@ -98,8 +103,7 @@
                 </div>
             </div>
             <!-- Mapa desplegable -->
-			<div class="map-table" name="map"> </div>
-
+			<div class="map-table mapa" name="map"></div>
 
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 			{{-- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyDGc0UBAR_Y30fX31EvaU65KATMx0c0ItI&callback=initMap&v=weekly" async defer></script> --}}
@@ -120,7 +124,7 @@
 <div class="container mt-2">
 	<div class="row">
 		<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-			<table id="index" class="table table-striped dt-responsive nowrap border border-dark" style="width: 100%">
+			<table id="index" class="table table-striped dt-responsive nowrap border border-dark w-100">
 			<thead>
 				<tr>
 					<th class="text-center">#</th>
@@ -138,7 +142,7 @@
 						<th class="text-center">{{$indice}}</th>
 						<td>{{$direccion->direccion}}</td>
 						<td>sin definir</td>
-						<td class="">
+						<td>
 							<label><input type='checkbox'><div class='check'></div></label>
 						</td>
 						@if (!empty($direccion->idDireccion))
@@ -157,7 +161,6 @@
 		</div>
 	</div>
 </div>
- <button class="btn btn-primary mx-auto mb-2 col-2"><a href="{{ route('tsp.ordenar') }}" class="link-light text-decoration-none">Ordenar Direcciones</a></button>
 
  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>

@@ -65,6 +65,6 @@ table label input:checked ~ .check:after {
 @media screen and (max-width:500px) and (orientation:portrait) {
 	.imagen {
 		background-image: url("/img/home.png");
-		height: 540px;
+		height: 500px;
 	}
 }
