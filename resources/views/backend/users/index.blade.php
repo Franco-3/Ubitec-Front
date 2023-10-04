@@ -1,47 +1,49 @@
 @extends('backend.layouts.main')
 @section('title', 'Usuarios')
 @section('content')
-    <h3 class="text-dark">Lista de usuarios</h3>
+    <h3 class="text-dark">Lista de Usuarios</h3>
     @forelse($users as $user)
         @if ($loop->first)
-            <table class="table table-dark">
-                <tr>
-                    <td>Id</td>
-                    <td>Nombre</td>
-                    <td>Email</td>
-                    <td>
-                        <a class="btn btn-success" href="{{ route('users.create') }}">
-                            <img src="{{ asset('svg/new.svg') }}" width="20" height="20" alt="Crear" title="Crear">
-                        </a>
-                    </td>
-                </tr>
+        <div class="container">
+            <table id="index" class="table table-striped dt-responsive nowrap border border-dark" style="width: 100%">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <td>
+                            <a class="btn btn-success" href="{{ route('users.create') }}">
+                                <i class="bi bi-person-fill-add"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </thead>
         @endif
-        <tr>
-            <td>{{ $user->id }}</td>
-            <td> {{ $user->name }}</a></td>
-            <td>{{ $user->email }}</td>
-            <td>
-                {{ Form::model($user, ['method' => 'delete', 'route' => ['users.destroy', $user->id]]) }}
-                @csrf
-                <a href="{{ route('users.show', ['user' => $user->id]) }}" class="btn btn-info"><img
-                        src="{{ asset('svg/show.svg') }}" width="20" height="20" alt="Mostrar" title="Mostrar"></a>
-                <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="btn btn-primary"><img
-                        src="{{ asset('svg/edit.svg') }}" width="20" height="20" alt="Editar" title="Editar"></a>
-                <button type="submit" class="btn btn-danger"
-                    onclick="if (!confirm('Está seguro de borrar el usuario?')) return false;"><img
-                        src="{{ asset('svg/delete.svg') }}" width="20" height="20" alt="Borrar"
-                        title="Borrar"></button>
-                {!! Form::close() !!}
-            </td>
-        </tr>
+        <tbody>
+            <tr>
+                <td>{{ $user->id }}</td>
+                <td> {{ $user->name }}</a></td>
+                <td>{{ $user->email }}</td>
+                <td>
+                    {{ Form::model($user, ['method' => 'delete', 'route' => ['users.destroy', $user->id]]) }}
+                    @csrf
+                    <a href="{{ route('users.show', ['user' => $user->id]) }}" class="btn btn-info"><i class="bi bi-eye" style="color: white"></i></a>
+                    <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
+                    <button type="submit" class="btn btn-danger"
+                        onclick="if (!confirm('Está seguro de borrar el usuario?')) return false;"><i class="bi bi-trash3"></i></button>
+                    {!! Form::close() !!}
+                </td>
+            </tr>
+        </tbody>
         @if ($loop->last)
             </table>
         @endif
+        </div>
     @empty
         <p class="text-capitalize"> No hay usuarios.</p>
     @endforelse
     </div>
-    <hr>
+    {{-- <hr>
     <!-- Paginación -->
     <div class="d-flex justify-content-center">
         <!--
@@ -49,5 +51,22 @@
           use Illuminate\Pagination\Paginator;
               public function boot() { Paginator::useBootstrap(); } -->
         {!! $users->links() !!}
-    </div>
+    </div> --}}
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.3.0/js/responsive.bootstrap5.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#index').DataTable({
+            "language":{
+                "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json",
+                "lengthMenu": "Mostrar de a _MENU_ registros",
+            }
+        });
+    });
+</script>
+
 @endsection

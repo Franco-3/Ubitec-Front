@@ -3,7 +3,8 @@
 @section('title', 'Nuevo Vehiculo')
 
 @section('content')
-    <h1>Nueva Vehiculo</h1>
+<div class="container mt-5 mb-5 p-4 border border-black rounded">
+    <h1 class="h1 text-center border-bottom mb-4">Nuevo Vehiculo</h1>
     <div>
         @if (Session::has('status'))
             <div class="alert alert-success">{{ Session('status') }}</div>
@@ -21,14 +22,20 @@
         </div>
         <div class="form-group">
             {{ Form::label('patente', 'Patente', ['class' => 'control-label']) }}
-            {{ Form::text('patente', old('patente'), ['class' => 'form-control', 'placeholder' => 'Ingrese la patente', 'maxLength' => '7']) }}
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-car-front-fill"></i></span>
+                {{ Form::text('patente', old('patente'), ['class' => 'form-control', 'placeholder' => 'Ingrese la patente', 'maxLength' => '7']) }}
+            </div>
             @error('patente')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
         <div class="form-group">
             {{ Form::label('usuario', 'Usuario', ['class' => 'control-label']) }}
-            {{ Form::select('usuario', $users->pluck('email', 'id'), null, ['class' => 'form-control']) }}
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-person-fill"></i></i></i></span>
+                {{ Form::select('usuario', $users->pluck('email', 'id'), null, ['class' => 'form-control']) }}
+            </div>
             @error('usuario')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -37,4 +44,5 @@
     </div>
     </br><button type="submit" style="width: 100%;" class="btn btn-primary">Guardar</button></div>
     {!! Form::close() !!}
+</div>
 @endsection

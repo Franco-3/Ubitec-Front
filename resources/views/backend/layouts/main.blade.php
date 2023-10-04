@@ -13,8 +13,17 @@
     <script src="https://kit.fontawesome.com/3f6f78b811.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="img/logogps.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="css/app.css"/>
+    {{-- Tabla --}}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script> --}}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.bootstrap5.min.css" rel="stylesheet">
+    {{-- Icons --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
-<body class="bg-secondary-subtle d-flex flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100">
 
     <nav class="navbar navbar-expand navbar-dark bg-dark">
         <div class="container-fluid">
@@ -33,11 +42,11 @@
                     <li class="nav-item"><a href="{{ url('/rutas') }}" class="nav-link">Rutas</a></li>
                     <li class="nav-item"><a href="{{ url('/historial') }}" class="nav-link" aria-expanded="false">Historial</a></li>
                     @if(Auth::user()->tipo === '0')
-                    <li class="nav-item><a class="nav-link" href="{{ route('users.index') }}" aria-expanded="false">Usuarios</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('users.index') }}" aria-expanded="false">Usuarios</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('vehiculos.index') }}" aria-expanded="false">Vehiculos</a></li>
                     @endif
-                    @endguest 
-                    
+                    @endguest
+
                     @show
                 </ul>
 
@@ -78,7 +87,6 @@
         </div>
     </nav>
 
-
     @yield('content')
     @include('backend.layouts.footer')
 
@@ -86,4 +94,5 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
         <script type="text/javascript" src="{{ URL::asset('js/app.js') }}"></script>
 </body>
+
 </html>
