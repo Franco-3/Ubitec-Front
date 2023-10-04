@@ -79,14 +79,31 @@
 			</div>	
 		</div>
 
-		@if(!is_null(session('final')))
-			<h3>Cargar Archivo Excel</h3>
-			<form action="{{ route('cargar.excel') }}" method="POST" enctype="multipart/form-data">
-				@csrf
-				<input type="file" name="archivo_excel" accept=".xlsx, .xls">
-				<button type="submit">Cargar Excel</button>
-			</form>
-		@endif
+
+<br>
+
+
+    <button class="btn btn-primary col-sm-12 col-md-3 col-lg-3 col-xl-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Cargar Excel</button>
+
+    <div class="offcanvas offcanvas-bottom offcanvas-size-xl" style="height: 80vh;" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasBottomLabel">Cargar Excel</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="container">
+					<h3>Cargar Archivo Excel</h3>
+					<form action="{{ route('cargar.excel') }}" method="POST" enctype="multipart/form-data">
+						@csrf
+						<input type="file" class="form-control"  name="archivo_excel" accept=".xlsx, .xls">
+						<br>
+						<button type="submit" class="btn btn-primary" >Cargar Excel</button>
+					</form>
+            </div>
+        </div>
+    </div>
+
+<br>
 
             <!-- Mapa desplegable -->
             <div class="offcanvas offcanvas-bottom offcanvas-size-xl" style="height: 80vh;" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">

@@ -209,7 +209,6 @@ class TSPcontroller extends Controller
         $response_data = json_decode($response, true);
 
 
-
         $orderedCoordinates = [];
         if(isset($response_data['waypoints']))
         {
