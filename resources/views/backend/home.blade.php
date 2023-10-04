@@ -33,6 +33,8 @@
 </div>
 
 
+@include('backend.layouts.footer')
+
 @endsection
 
 

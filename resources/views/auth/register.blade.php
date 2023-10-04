@@ -93,9 +93,11 @@
                             <label for="tipo" class="col-md-4 col-form-label text-md-end">{{ __('Type') }}</label>
 
                             <div class="col-md-6">
-                                {{ Form::select('tipo', 
-                                    [0 => 'Particular', 1 => 'Empresa'], null, ['class' => 'form-control']) 
-                                }}
+                                
+                                <select name="tipo" id="tipo" class="form-control @error('tipo') is-invalid @enderror">
+                                    <option value="particular">Particular</option>
+                                    <option value="empresa">Empresa</option>
+                                </select>
 
                                 @error('tipo')
                                     <span class="invalid-feedback" role="alert">
@@ -109,7 +111,7 @@
                             <label for="empresa" class="col-md-4 col-form-label text-md-end">{{ __('Company') }}</label>
 
                             <div class="col-md-6">
-                                <input id="empresa" type="text" class="form-control @error('empresa') is-invalid @enderror" name="empresa" required autocomplete="empresa">
+                                <input id="empresa" type="text" class="form-control @error('empresa') is-invalid @enderror" value="{{ old('empresa') }}" name="empresa" autocomplete="empresa">
 
                                 @error('empresa')
                                     <span class="invalid-feedback" role="alert">
@@ -125,7 +127,7 @@
                             <div class="col-md-6">
                                 {{ Form::select('flota', 
                                     [0 => 'No tengo vehículo', 1 => 'De 15 a 50 vehículos', 2 => 'De 51 a 100 vehículos', 3 => 'Más de 100 vehículos']
-                                    , null, ['class' => 'form-control']) 
+                                    , 0, ['class' => 'form-control']) 
                                 }}
 
                                 @error('flota')
