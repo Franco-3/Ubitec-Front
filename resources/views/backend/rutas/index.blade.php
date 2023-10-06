@@ -52,8 +52,9 @@
 					<div class="card-body">
 						@if (Session::has('inicio'))
 							<div><p class="card-text">{{ session('inicio')->direccion }}</p></div>
-							<form action="" method="POST">
+							<form action="{{ route('direcciones.destroy', session('inicio')->idDireccion) }}" method="POST">
 								@csrf
+								@method('DELETE')
 								<button class="btn btn-primary mt-2 col-12">Cambiar</button>
 							</form>
 						@endif
@@ -66,8 +67,9 @@
 					<div class="card-body">
 						@if (Session::has('final'))
 							<div><p class="card-text">{{ session('final')->direccion }}</p></div>
-							<form action="" method="POST">
+							<form action="{{ route('direcciones.destroy', session('final')->idDireccion) }}" method="POST">
 								@csrf
+								@method('DELETE')
 								<button class="btn btn-primary mt-2 col-12">Cambiar</button>
 							</form>
 						@endif
@@ -84,7 +86,7 @@
 						<div class="btn-group col-12" role="group" aria-label="Basic Example">
 							<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Abrir Mapa <i class="bi bi-globe-americas"></i></button>
 							<a class="btn btn-primary" href="{{ route('rutas.create') }}" role="button">Nueva ruta</a>
-							<!-- <a class="btn btn-primary" href="{{ route('google.ordenar') }}" role="button">Ordenar Direcciones G</a> -->
+							<a class="btn btn-primary" href="{{ route('google.ordenar') }}" role="button">Ordenar Direcciones G</a>
 							<a href="{{ route('tsp.ordenar') }}" class="btn btn-primary">Ordenar Direcciones</a>
 						</div>
 					</div>

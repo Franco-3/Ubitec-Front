@@ -25,7 +25,7 @@ class TSPcontroller extends Controller
 
             // Obtener las direcciones usando la función searchDirections
             $waypointsData = $this->searchDirections(session('idRuta'), true);
-
+    
             // Obtener el array de direcciones desde la respuesta de la función searchDirections
             $waypoints = $waypointsData->map(function ($direccion) {
                 return $direccion->direccion;
@@ -81,7 +81,6 @@ class TSPcontroller extends Controller
                 foreach ($waypointsOriginals as $indice => $point) {
                     $index_waypoint = $waypointsIndexes[$indice];//conseguir el indice de el punto acutal
                     $points[$index_waypoint] = $point; // asignar los datos al array en la posicion indicada en la rta
-
                     $this->updateOrden($point->idDireccion, $index_waypoint);//actualizar la bd
                 }
 
@@ -107,13 +106,7 @@ class TSPcontroller extends Controller
         if (session::has('inicio') && session::has('final')) {
 
             // Obtener las direcciones usando la función searchDirections
-            $waypointsData = $this->searchDirections(session('idRuta'), false);
-
-            // Obtener el array de direcciones desde la respuesta de la función searchDirections
-            $waypoints = $waypointsData->map(function ($direccion) {
-                return ['direccion' => $direccion->direccion, 'latitude' => $direccion->latitud, 'longitude' => $direccion->longitud, 'id' => $direccion->idDireccion];
-            })->toArray();
-
+            $waypoints = $this->searchDirections(session('idRuta'), false);
 
             if(sizeof($waypoints) > 25)
             {
@@ -152,8 +145,8 @@ class TSPcontroller extends Controller
                 foreach($response[0] as $waypoint)
                 {
                     $coordinates[] = [
-                        'lat' => $waypoint['latitude'],
-                        'lng' => $waypoint['longitude']
+                        'lat' => $waypoint->latitud,
+                        'lng' => $waypoint->longitud
                     ];
 
                 }
@@ -174,18 +167,11 @@ class TSPcontroller extends Controller
 
         $osrm_api_url = 'http://127.0.0.1:5000/trip/v1/driving/';
 
-        $lenght = count($waypoints) - 1;
-
-        //cambiar las posiciones, porque el final esta en el 1 y debe estar en el ultimo
-        $var1 = $waypoints[1];
-
-        $waypoints[1] = $waypoints[$lenght];
-        $waypoints[$lenght] = $var1;
 
         // Crear una cadena con las coordenadas de las ubicaciones para la URL
         $coordinates = '';
         foreach ($waypoints as $waypoint) {
-            $coordinates .= $waypoint['longitude'] . ',' . $waypoint['latitude'] . ';';
+            $coordinates .= $waypoint->longitud . ',' . $waypoint->latitud . ';';
         }
         $coordinates = rtrim($coordinates, ';'); // Eliminar el punto y coma final
 
@@ -216,7 +202,7 @@ class TSPcontroller extends Controller
                 $position = $waypointResponse['waypoint_index'];
                 $orderedCoordinates[$position] = $waypoints[$index];
 
-                $this->updateOrden($waypoints[$index]['id'], $position);
+                $this->updateOrden($waypoints[$index]->idDireccion, $position);
             }
         }
         ksort($orderedCoordinates);
@@ -296,19 +282,30 @@ class TSPcontroller extends Controller
 
     private function searchDirections(string $idRuta, bool $filter)
     {
-        $direccionesUsuario = DB::table('rutas')
-                            ->join('direcciones', 'rutas.idRuta', '=', 'direcciones.idRuta')
-                            ->where('rutas.idRuta', $idRuta)
-                            ->select('idDireccion','direccion', 'latitud', 'longitud', 'tipo')
-                            ->get();
-
 
         // Filtrar las direcciones para eliminar "inicio" y "final"
         if($filter)
         {
+            $direccionesUsuario = DB::table('rutas')
+            ->join('direcciones', 'rutas.idRuta', '=', 'direcciones.idRuta')
+            ->where('rutas.idRuta', $idRuta)
+            ->select('idDireccion','direccion', 'latitud', 'longitud', 'tipo')
+            ->get();
+
             $direccionesUsuario = $direccionesUsuario->filter(function ($direccion) {
                 return $direccion->tipo !== 'inicio' && $direccion->tipo !== 'final';
             });
+        }else
+        {
+            $direccionesUsuario = DB::select("SELECT idDireccion, direccion, latitud, longitud, tipo FROM rutas
+            JOIN direcciones on rutas.idRuta = direcciones.idRuta
+            WHERE rutas.idRuta = $idRuta
+            ORDER BY CASE
+                WHEN tipo = 'inicio' THEN 1
+                WHEN tipo = 'normal' THEN 2
+                WHEN tipo = 'final' THEN 3
+                ELSE 4
+            END;");
         }
 
         return $direccionesUsuario;
