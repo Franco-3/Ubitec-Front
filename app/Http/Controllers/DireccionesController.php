@@ -41,6 +41,8 @@ class DireccionesController extends Controller
         $validatedData = $request->validate(
             [
                 'direccion' => 'required',
+                'latitud' => 'required',
+                'longitud' => 'required',
                 'tipo' => 'required',
             ]
         );

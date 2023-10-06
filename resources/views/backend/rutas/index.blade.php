@@ -15,7 +15,7 @@
                     @csrf
 						@if (is_null(session('inicio')))
 							<div style="display: flex; justify-content: center;">
-								<div style="flex: 1; margin-right: 10px;">
+								<div style="flex: 1; margin-right: 10px;" id="contenedorDirecccion">
 									<input class="form-control" type="text" id="search_input" name="direccion" placeholder="Ingrese dirección de comienzo">
 									<input id="tipo" type="hidden" value="inicio" name="tipo">
 								</div>
@@ -23,7 +23,7 @@
 							</div>
 						@elseif(is_null(session('final')))
 							<div style="display: flex; justify-content: center;">
-								<div style="flex: 1; margin-right: 10px;">
+								<div style="flex: 1; margin-right: 10px;" id="contenedorDirecccion">
 									<input class="form-control" type="text" id="search_input" name="direccion" placeholder="Ingrese dirección de final">
 									<input id="tipo" type="hidden" value="final" name="tipo">
 								</div>
@@ -31,7 +31,7 @@
 							</div>
 						@else
 							<div style="display: flex; justify-content: center;">
-								<div style="flex: 1; margin-right: 10px;">
+								<div style="flex: 1; margin-right: 10px;" id="contenedorDirecccion">
 									<input class="form-control" type="text" id="search_input" name="direccion" placeholder="Ingrese la direccion a agregar">
 									<input id="tipo" type="hidden" value="normal" name="tipo">
 								</div>
