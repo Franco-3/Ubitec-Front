@@ -12,6 +12,7 @@ use App\Models\Ruta;
 use Error;
 use App\Models\Polyline;
 use App\Models\User_ruta;
+use Ramsey\Uuid\Type\Decimal;
 
 class TSPcontroller extends Controller
 {
@@ -135,7 +136,7 @@ class TSPcontroller extends Controller
             elseif(sizeof($waypoints) <= 25 )
             {
                 $direcciones = [];
-                $response = $this->connectOSRM($waypoints);
+                $response = $this->connectOSRM($waypoints); //esto devuelve un array [coordenadas de los puntos ordenadas, polylinea, kmTotal]
                 $coordinates = [];
                 $poly = Polyline::decode($response[1]);
                 $polyline = Polyline::pair($poly);
@@ -154,6 +155,7 @@ class TSPcontroller extends Controller
                 //guardar el recorrido
                 $citiesPolyline = Polyline::encode($coordinates);
                 $this->updatePolylines(session('idRuta'), $response[1], $citiesPolyline);
+                $this->updateKmTotal(session('idRuta'), $response[2]);
 
             }
             return redirect()->route('rutas.index');
@@ -209,7 +211,9 @@ class TSPcontroller extends Controller
 
         $polyline = $response_data['trips'][0]['geometry'];
 
-        return [$orderedCoordinates, $polyline];
+        $kmTotal =  $response_data['trips'][0]['distance'] / 1000;
+
+        return [$orderedCoordinates, $polyline, $kmTotal];
 
 
 
@@ -253,11 +257,11 @@ class TSPcontroller extends Controller
                     }
                 }
             }
-
+            //responseOrTools ahora tiene la respuesta de la division de los vehiculos con sus respectivas direcciones, hay que enviarle al usuario para que acepte si quiere ese orden
             foreach($responseOrtools as $indice => $direccionesArray)
             {
 
-                $idUser = $vehiculosUsuario[$indice]->idUsuario;
+                $idUser = $vehiculosUsuario[$indice]->idUsuario; //$responseOrTools tiene la misma cantidad de elementos(vehiculos) que de usuarios existan
                 $this->newRuta($idUser, $direccionesArray);
             }
 
@@ -280,6 +284,12 @@ class TSPcontroller extends Controller
         $direccion->update(['orden' => $orden]);
     }
 
+    private function updateKmTotal(int $id, float $kmTotal)
+    {
+        $ruta = Ruta::findOrFail($id);
+
+        $ruta->update(['kmTotal' => $kmTotal]);
+    }
     private function searchDirections(string $idRuta, bool $filter)
     {
 
