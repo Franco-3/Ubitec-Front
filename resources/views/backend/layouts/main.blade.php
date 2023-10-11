@@ -27,14 +27,14 @@
 
     <nav class="navbar navbar-expand navbar-dark bg-dark">
         <div class="container-fluid">
-            <button type="button" data-target="#navbarsExample02" aria-controls="navbarsExample02" data-toggle="collapse" class="navbar-toggler" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon" ></span>
-            </button>
             <a class="navbar-brand" href="/">
-                <img src="img/logogps.png" alt="Logo ubitec" width="34" height="34" class="d-inline-block align-text-top">
+                <img src="img/logogps.png" alt="" width="34" height="34" class="d-inline-block">
                 UBITEC
             </a>
-            <div class="collapse navbar-collapse" id="navbarsExample02">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     @section('menu')
                     @guest
@@ -51,23 +51,24 @@
                     @show
                 </ul>
 
-                <ul class="navbar-nav ms-auto me-5">
+                <ul class="navbar-nav ms-auto">
                 <!-- Authentication Links -->
                 @guest
                     @if (Route::has('login'))
-                    <li class="nav-item text-light d-flex">
+                    <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">Iniciar Sesión</a>
                         </li>
                     @endif
                     @if (Route::has('register'))
-                        <li class="nav-item text-light">
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('register') }}">Registrarse</a>
                         </li>
                     @endif
                 @else
                     <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ Auth::user()->name }} </a>
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ Auth::user()->name }} 
+                            </a>
                             <ul class="dropdown-menu dropdown-menu-dark">
                                 <li><a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
@@ -80,7 +81,7 @@
                             </ul>
                     </li>
                 @endguest
-            @show
+                @show
             </ul>
 
             </div>

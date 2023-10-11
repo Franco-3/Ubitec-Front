@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html  >
 <head>
-
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="generator" content="Mobirise v5.8.9, mobirise.com">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-  <link rel="shortcut icon" href="assets/images/logo.png" type="image/x-icon">
+  <link rel="shortcut icon" href="img/logogps.png" type="image/x-icon">
   <meta name="description" content="">
-  
-  
   <title>Home</title>
   <link rel="stylesheet" href="assets/web/assets/mobirise-icons2/mobirise2.css">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
@@ -34,11 +31,8 @@
     
 
     <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
-        <div class="container">
-            <div class="navbar-brand">
-                
-                <span class="navbar-caption-wrap"><a class="navbar-caption text-black display-7" href="./">UBITEC+</a></span>
-            </div>
+        <div class="container-fluid">
+            <a class="navbar-brand link-dark fw-bold" href="./"><img src="img/logogps.png" alt="" width="34" height="34" class="d-inline-block">UBITEC</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbarSupportedContent" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <div class="hamburger">
                     <span></span>
@@ -71,7 +65,7 @@
     <div class="container">
         <div class="row justify-content-end">
             <div class="col-12 col-lg-7">
-                <h1 class="mbr-section-title mbr-fonts-style mbr-white mb-3 display-1"><strong>UBITEC+</strong></h1>
+                <h1 class="mbr-section-title mbr-fonts-style mbr-white mb-3 display-1"><strong>UBITEC</strong></h1>
                 
                 <p class="mbr-text mbr-fonts-style mbr-white display-7">EL planificador de rutas que necesitas</p>
                 <div class="mbr-section-btn mt-3"><a class="btn btn-success display-7" href="#servicios">Comienza gratis ahora!</a>
