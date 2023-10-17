@@ -41,6 +41,8 @@ Route::middleware('auth')->group(function () {
     Route::get('tsp/ordenar', [TSPcontroller::class, 'osrmOrder'])->name('tsp.ordenar');
     Route::get('google/ordenar', [TSPcontroller::class, 'postDirections'])->name('google.ordenar');
 
+
+    Route::get('cuenta', [UserController::class, 'miCuenta'])->name('miCuenta');
 });
 
 

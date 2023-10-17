@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User; //Referencia al Modelo User
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash; //Clase utilizada para encriptar la contraseña
 use Illuminate\Support\Facades\DB;
 
@@ -80,20 +81,23 @@ class UserController extends Controller
             [
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users,id,' . $id],
-                'password' => ['required', 'string', 'min:8', 'confirmed'],
-                'tipo' => ['required', 'string'],
-                'empresa' => ['string']
+                'telefono' => ['required', 'integer'],
+                // 'password' => ['required', 'string', 'min:8', 'confirmed'],
+                // 'tipo' => ['required', 'string'],
+                // 'empresa' => ['string']
             ]
         );
 
         $user->name = $request->input('name');
         $user->email = $request->input('email');
-        $user->password = Hash::make($request->input('password'));
-        $user->tipo = $request->input('tipo');
-        $user->empresa = $request->input('empresa');
+        $user->email = $request->input('integer');
+        // $user->password = Hash::make($request->input('password'));
+        // $user->tipo = $request->input('tipo');
+        // $user->empresa = $request->input('empresa');
         $user->save();
+
         $request->session()->flash('status', 'Se modificó correctamente el usuario ' . $user->name);
-        return redirect()->route('users.show', $user->id);
+        return redirect()->back();
     }
 
     /**
@@ -104,5 +108,13 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
         return redirect()->route('users.index');
+    }
+
+
+    public function miCuenta()
+    {
+        $user = Auth()->user();
+
+        return view('backend.users.miCuenta', compact('user'));
     }
 }
