@@ -46,8 +46,8 @@
 	<!-- mostrar direcciones de inicio y final  ToDo: hay que agregar los botones para modificarlas -->
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-12 col-md-6 col-lg-6 mt-2">
-				<div class="card">
+			<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mt-2 px-1">
+				<div class="card text-bg-dark">
 					<h5 class="card-header text-center">Direccion de Inicio</h5>
 					<div class="card-body">
 						@if (Session::has('inicio'))
@@ -61,8 +61,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-12 col-md-6 col-lg-6 mt-2">
-				<div class="card">
+			<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mt-2 px-1">
+				<div class="card text-bg-dark">
 					<h5 class="card-header text-center">Direccion Final</h5>
 					<div class="card-body">
 						@if (Session::has('final'))
@@ -82,7 +82,7 @@
             <!-- Mapa desplegable -->
             <div class="container mt-2">
                 <div class="row">
-					<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+					<div class="btn-toolbar px-0" role="toolbar" aria-label="Toolbar with button groups">
 						<div class="btn-group col-12" role="group" aria-label="Basic Example">
 							<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Abrir Mapa <i class="bi bi-globe-americas"></i></button>
 							<a class="btn btn-primary" href="{{ route('rutas.create') }}" role="button">Nueva ruta</a>
@@ -100,12 +100,12 @@
                 </div>
                 <div class="offcanvas-body">
                     <div class="container">
-                        <div style="height: 600px; width:600px;" id="map" class="specific"></div>
+                        <div style="height: 540px; width:100%;" id="map" class="specific"></div>
                     </div>
                 </div>
             </div>
             <!-- Mapa desplegable -->
-			<div class="map-table mapa" name="map"></div>
+			<div class="map-table" name="map"></div>
 
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 			{{-- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyDGc0UBAR_Y30fX31EvaU65KATMx0c0ItI&callback=initMap&v=weekly" async defer></script> --}}
@@ -126,7 +126,7 @@
 <div class="container mt-2">
 	<div class="row">
 		<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-			<table id="index" class="table table-striped dt-responsive nowrap border border-dark w-100">
+			<table id="index" class="table table-striped table-dark dt-responsive nowrap border border-dark w-100">
 			<thead>
 				<tr>
 					<th class="text-center">#</th>

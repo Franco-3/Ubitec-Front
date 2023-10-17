@@ -24,18 +24,17 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
 <body class="d-flex flex-column min-vh-100">
-
-    <nav class="navbar navbar-expand navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">
-                <img src="img/logogps.png" alt="" width="34" height="34" class="d-inline-block">
+                <img src="img/logogps.png" alt="" width="32" height="32" class="d-inline-block">
                 UBITEC
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav ms-auto">
                     @section('menu')
                     @guest
                     @else
@@ -49,11 +48,8 @@
                     @endguest
 
                     @show
-                </ul>
-
-                <ul class="navbar-nav ms-auto">
-                <!-- Authentication Links -->
-                @guest
+                         <!-- Authentication Links -->
+                    @guest
                     @if (Route::has('login'))
                     <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">Iniciar Sesión</a>
@@ -64,7 +60,7 @@
                             <a class="nav-link" href="{{ route('register') }}">Registrarse</a>
                         </li>
                     @endif
-                @else
+                    @else
                     <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 {{ Auth::user()->name }} 
@@ -80,10 +76,9 @@
                                 </li>
                             </ul>
                     </li>
-                @endguest
-                @show
-            </ul>
-
+                    @endguest
+                    @show
+                </ul>
             </div>
         </div>
     </nav>

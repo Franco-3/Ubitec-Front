@@ -32,7 +32,7 @@
 
     <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
         <div class="container-fluid">
-            <a class="navbar-brand link-dark fw-bold" href="./"><img src="img/logogps.png" alt="" width="34" height="34" class="d-inline-block">UBITEC</a>
+            <a class="navbar-brand link-dark fw-bold" href="./"><img src="img/logogps.png" style="width: 32px;" height="30" class="d-inline-block">UBITEC</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbarSupportedContent" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <div class="hamburger">
                     <span></span>
@@ -63,13 +63,15 @@
     <div class="mbr-overlay" style="opacity: 0.8; background-color: rgb(0, 0, 0);"></div>
 
     <div class="container">
-        <div class="row justify-content-end">
-            <div class="col-12 col-lg-7">
+        <div class="row justify-content-center">
+            <div class="col-sm-12 col-md-7 col-lg-6 col-xl-5 col-xxl-4">
                 <h1 class="mbr-section-title mbr-fonts-style mbr-white mb-3 display-1"><strong>UBITEC</strong></h1>
                 
                 <p class="mbr-text mbr-fonts-style mbr-white display-7">EL planificador de rutas que necesitas</p>
-                <div class="mbr-section-btn mt-3"><a class="btn btn-success display-7" href="#servicios">Comienza gratis ahora!</a>
-                    <a class="btn btn-success-outline display-7" href="#info">Leer mas</a></div>
+                <div class="mbr-section-btn mt-3">
+                    <a class="btn btn-success display-7" href="#servicios">Comienza gratis ahora!</a>
+                    <a class="btn btn-success-outline display-7 ms-0" href="#info">Leer mas</a>
+                </div>
             </div>
         </div>
     </div>
