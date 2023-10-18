@@ -77,7 +77,7 @@ class UserController extends Controller
     public function update(Request $request, string $id)
     {
         $user = User::findOrFail($id);
-        $validatedData = $request->validate(
+/*         $validatedData = $request->validate(
             [
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users,id,' . $id],
@@ -90,12 +90,18 @@ class UserController extends Controller
 
         $user->name = $request->input('name');
         $user->email = $request->input('email');
-        $user->email = $request->input('integer');
-        // $user->password = Hash::make($request->input('password'));
-        // $user->tipo = $request->input('tipo');
-        // $user->empresa = $request->input('empresa');
-        $user->save();
+        $user->telefono = $request->input('telefono');
+        $user->password = Hash::make($request->input('password'));
+        $user->tipo = $request->input('tipo');
+        $user->empresa = $request->input('empresa');
+        $user->save(); */
 
+        $user->update([
+            'name' => $request->input('nombre'),
+            'lastName' => $request->input('apellido'),
+            'email' => $request->input('email'),
+            'telefono' => $request->input('telefono')
+        ]);
         $request->session()->flash('status', 'Se modificó correctamente el usuario ' . $user->name);
         return redirect()->back();
     }

@@ -4,10 +4,11 @@
 
 <form action="{{route('users.update', $user->id)}}" method="POST">
     @csrf
+    @method('PUT')
     <label for="nombre" >Nombre:</label>
     <input name="nombre" type="input" value="{{$user->name}}" class="form-control">
 
-    <label for="apelldio" >Apellido:</label>
+    <label for="apellido" >Apellido:</label>
     <input name="apellido" type="input" value="{{$user->lastName}}" class="form-control">
 
     <label for="telefono" >telefono:</label>
@@ -20,6 +21,10 @@
     <input name="empresa" type="input" value="{{$user->empresa}}" disabled class="form-control">
     <br>
     <input class="btn btn-primary" type="submit" value="Guardar">
+</form>
+<br>
+<form action="">
+    <input class="btn btn-danger" type="button" value="Cambiar contraseña">
 </form>
 
 @endsection

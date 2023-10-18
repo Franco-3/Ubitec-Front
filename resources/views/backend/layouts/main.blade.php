@@ -70,6 +70,7 @@
                                     onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
                                     Cerrar Sesión</a>
+                                    <a class="dropdown-item" href="{{route('miCuenta')}}">Mi cuenta</a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
                                     </form>
