@@ -42,17 +42,17 @@ class RutasController extends Controller
 
 
         $direcciones = $this->searchDirections(session('idRuta'));
-
+        $kmTotal = $this->searchKmTotal($idRuta);
         $responseData = [];
         //para revisar el siguiente codigo -ToDo: hay que corregir errores
-        $ruta = $this->getPolylines(session('idRuta')); //obtener la ruta y las polylineas
-        if(!empty($ruta->polyline))
+        $puntosPolylinea = $this->getPolylines(session('idRuta')); //obtener la ruta y las polylineas
+        if(!empty($puntosPolylinea->polyline))
         {
-            $responseData = $this->giveFormat($ruta); //darle el formato para enviar al front
+            $responseData = $this->giveFormat($puntosPolylinea); //darle el formato para enviar al front
+
         }
 
-
-        return view('backend.rutas.index', compact('idUsuario', 'direcciones', 'responseData'));
+        return view('backend.rutas.index', compact('idUsuario', 'direcciones', 'responseData', 'kmTotal'));
     }
 
 
@@ -205,6 +205,21 @@ class RutasController extends Controller
 
         return $direccionesUsuario;
     }
+
+    private function searchKmTotal(string $idRuta)
+    {
+        $ruta = Ruta::find($idRuta);
+        if($ruta)
+        {
+            $kmTotal = $ruta->kmTotal;
+        }
+        else{
+            $kmTotal = null;
+        }
+
+        return $kmTotal;
+    }
+
 
 
 
