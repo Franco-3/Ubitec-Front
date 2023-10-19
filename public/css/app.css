@@ -63,5 +63,191 @@ table label input:checked ~ .check:after {
 	text-transform: uppercase;
 }
 @media screen and (max-width:500px) and (orientation:portrait) {
-	
+
 }
+
+.button-container {
+    text-align: left;
+    margin-left: 2rem;
+}
+
+.button {
+    border: none;
+    padding: 0.5rem 1rem;
+    background-color:#488aec;
+    color: #ffffff;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 0.5rem;
+    user-select: none;
+    box-shadow: 0 4px 6px -1px #488aec31, 0 2px 4px -1px #488aec17;
+    transition: all .6s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.button:hover {
+    box-shadow: 0 10px 15px -3px #488aec4f, 0 4px 6px -2px #488aec17;
+}
+
+.button:focus,
+.button:active {
+    opacity: 0.85;
+    box-shadow: none;
+}
+
+.button svg {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+table,
+.control-label,
+label
+{
+    font-family: 'Jost', sans-serif;
+}
+
+.button2 {
+  display: inline-block;
+  text-decoration: none;
+  border: 2px solid #488aec;
+  background-color: #488aec;
+  color: #ffffff;
+  border-radius: 0.5em;
+  padding: 0.5em 1em;
+  transition: all ease-in-out 0.2s;
+  font-size: 12px;
+}
+
+.button2 span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-weight: 600;
+}
+
+.button2:hover {
+  background-color: #0071e2;
+}
+
+.button3 {
+    position: relative;
+     outline: 0;
+     border: 1px solid transparent;
+     background-color: #488aec;
+     color: #ffffff;
+     font-size: 0.75rem;
+     line-height: 1rem;
+     font-weight: 700;
+     text-transform: uppercase;
+     padding: 0.75rem 1.5rem;
+     border-radius: 0.5rem;
+     cursor: pointer;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     vertical-align: middle;
+     margin-left: auto;
+     overflow: hidden;
+     box-shadow: 0 4px 6px -1px #488aec31, 0 2px 4px -1px #488aec17;
+   }
+
+   .button3 span {
+     height: 100%;
+     width: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     gap: 0.75rem;
+     transition: all .4s ease;
+   }
+
+   .button3 svg {
+    width: 1.25rem;
+    height: 1.25rem;
+   }
+   .button3:hover {
+    box-shadow: 0 10px 15px -3px #488aec4f, 0 4px 6px -2px #488aec17;
+   }
+
+   .button3:focus,
+   .button3:active {
+    opacity: 0.85;
+    box-shadow: none;
+   }
+
+   .form__group {
+    position: relative;
+    padding: 20px 0 0;
+    width: 100%;
+    max-width: 180px;
+  }
+
+  .form__field {
+    font-family: inherit;
+    /* width: 100%; */
+    border: none;
+    border-bottom: 2px solid #9b9b9b;
+    outline: 0;
+    font-size: 20px;
+    color: black;
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+  }
+
+  .form__field::placeholder {
+    color: transparent;
+  }
+
+  .form__field:placeholder-shown ~ .form__label {
+    font-size: 17px;
+    cursor: text;
+    top: 20px;
+  }
+
+  .form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 17px;
+    color: #9b9b9b;
+    pointer-events: none;
+  }
+
+  .form__field:focus {
+    padding-bottom: 6px;
+    font-weight: 700;
+    border-width: 3px;
+    border-image: linear-gradient(to right, #116399, #38caef);
+    border-image-slice: 1;
+  }
+
+  .form__field:focus ~ .form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 17px;
+    color: #38caef;
+    font-weight: 700;
+  }
+
+  /* reset input */
+  .form__field:required, .form__field:invalid {
+    box-shadow: none;
+  }

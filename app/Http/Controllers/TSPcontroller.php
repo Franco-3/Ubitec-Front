@@ -26,7 +26,7 @@ class TSPcontroller extends Controller
 
             // Obtener las direcciones usando la función searchDirections
             $waypointsData = $this->searchDirections(session('idRuta'), true);
-    
+
             // Obtener el array de direcciones desde la respuesta de la función searchDirections
             $waypoints = $waypointsData->map(function ($direccion) {
                 return $direccion->direccion;
@@ -44,6 +44,7 @@ class TSPcontroller extends Controller
             $response = Http::get($url);
             // Decodificar la respuesta JSON
             $data = $response->json();
+            // dd($data);
             // Procesar la respuesta
             if ($data['status'] == 'OK') {
                 $coords = $data['routes'][0]['overview_polyline']['points'];
@@ -85,6 +86,13 @@ class TSPcontroller extends Controller
                     $this->updateOrden($point->idDireccion, $index_waypoint);//actualizar la bd
                 }
 
+                $legs = $data['routes'][0]['legs'];
+                $distance = 0;
+                foreach($legs as $punto)
+                {
+                    $distance += $punto['distance']['value'] / 1000;
+                }
+                $this->updateKmTotal(session('idRuta'), $distance);
 
                 $citiesPolyline = Polyline::encode($coordinates);
                 $this->updatePolylines(session('idRuta'), $coords, $citiesPolyline);
@@ -398,7 +406,7 @@ class TSPcontroller extends Controller
             {
                 $this->storeDirecciones($idRuta, $direccion, $latitude, $longitude, 'inicio');
                 $this->storeDirecciones($idRuta, $direccion, $latitude, $longitude, 'final');
-                
+
             }
             else
             {
@@ -420,5 +428,3 @@ class TSPcontroller extends Controller
     }
 
 }
-
-

@@ -13,6 +13,7 @@
     <script src="https://kit.fontawesome.com/3f6f78b811.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="img/logogps.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="css/app.css"/>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     {{-- Tabla --}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" rel="stylesheet">
@@ -63,7 +64,7 @@
                     @else
                     <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ Auth::user()->name }} 
+                                {{ Auth::user()->name }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark">
                                 <li><a class="dropdown-item" href="{{ route('logout') }}"

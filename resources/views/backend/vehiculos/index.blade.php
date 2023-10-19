@@ -2,9 +2,13 @@
 @section('title', __('categorias.index'))
 @section('content')
 <div class="container text-center mt-2 mb-2">
-    <a class="btn btn-outline-primary border border-primary border-3" href="{{ route('vehiculos.create') }}"> <b class="text-dark">Registrar vehiculo nuevo</b>
-                            <img src="{{ asset('svg/new.svg') }}" width="20" height="20" alt="Crear" title="Crear">
-                        </a>
+    <a class="button2" href="{{ route('vehiculos.create') }}">
+        <span>
+            <svg class="css-i6dzq1" stroke-linejoin="round" stroke-linecap="round" fill="none" stroke-width="2" stroke="#FFFFFF" height="24" width="24" viewBox="0 0 24 24">
+                <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+            </svg> Registrar vehiculo nuevo
+        </span>
+    </a>
 </div>
 
 @forelse($vehiculos as $vehiculo)
