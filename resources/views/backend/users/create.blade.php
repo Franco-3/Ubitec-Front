@@ -45,6 +45,26 @@
                         @enderror
                     </div>
                     <div class="form-group mb-3">
+                        {{ Form::label('lastName', 'Apellido', ['class' => 'control-label']) }}
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                            {{ Form::text('lastName', old('lastName'), ['class' => 'form-control', 'placeholder' => 'Ingrese el Apellido']) }}
+                        </div>
+                        @error('lastName')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group mb-3">
+                        {{ Form::label('telefono', 'telefono', ['class' => 'control-label']) }}
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                            {{ Form::text('telefono', old('telefono'), ['class' => 'form-control', 'placeholder' => 'Ingrese el telefono']) }}
+                        </div>
+                        @error('telefono')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group mb-3">
                         {{ Form::label('password', 'Password', ['class' => 'control-label']) }}
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>

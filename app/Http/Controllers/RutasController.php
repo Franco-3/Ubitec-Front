@@ -35,8 +35,8 @@ class RutasController extends Controller
 
         if(is_null($idRuta))
         {
-            $newRuta = $this->store();
-            session(['idRuta' => $newRuta]); //configrar para crear una nueva ruta en caso de que no exista ninguna
+            $idRuta = $this->store();
+            session(['idRuta' => $idRuta]); //configrar para crear una nueva ruta en caso de que no exista ninguna
         }
 
 
