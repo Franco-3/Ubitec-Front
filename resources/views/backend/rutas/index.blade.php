@@ -55,7 +55,7 @@
 							<form action="{{ route('direcciones.destroy', session('inicio')->idDireccion) }}" method="POST">
 								@csrf
 								@method('DELETE')
-								<button class="btn btn-primary mt-2 col-12">Cambiar</button>
+								<button class="btn btn-primary bg-gradient mt-2 col-12">Cambiar</button>
 							</form>
 						@endif
 					</div>
@@ -70,7 +70,7 @@
 							<form action="{{ route('direcciones.destroy', session('final')->idDireccion) }}" method="POST">
 								@csrf
 								@method('DELETE')
-								<button class="btn btn-primary mt-2 col-12">Cambiar</button>
+								<button class="btn btn-primary bg-gradient mt-2 col-12">Cambiar</button>
 							</form>
 						@endif
 					</div>
@@ -82,22 +82,22 @@
                 <div class="row">
 					<div class="btn-toolbar px-0" role="toolbar" aria-label="Toolbar with button groups">
 						<div class="btn-group col-12" role="group" aria-label="Basic Example">
-							<button class="btn btn-primary bg-gradient" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Abrir Mapa <i class="bi bi-globe-americas"></i></button>
-							<a class="btn btn-primary" href="{{ route('rutas.create') }}" role="button">Nueva ruta</a>
-							<a class="btn btn-primary" href="{{ route('google.ordenar') }}" role="button">Ordenar Direcciones</a>
+							<button class="btn btn-primary bg-gradient border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Abrir Mapa <i class="bi bi-globe-americas"></i></button>
+							<a class="btn btn-primary bg-gradient border-0" href="{{ route('rutas.create') }}" role="button">Nueva ruta</a>
+							<a class="btn btn-primary bg-gradient border-0" href="{{ route('google.ordenar') }}" role="button">Ordenar Direcciones</a>
 							<!--<a href="{{ route('tsp.ordenar') }}" class="btn btn-primary">Ordenar Direcciones</a>-->
 						</div>
 					</div>
                 </div>
             </div>
             <div class="offcanvas offcanvas-bottom offcanvas-size-xl" style="height: 80vh;" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasBottomLabel">Mapa</h5>
+                <div class="offcanvas-header bg-light bg-gradient">
+                    <h5 class="offcanvas-title fw-bold text-decoration-underline" id="offcanvasBottomLabel">Mapa</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
-                <div class="offcanvas-body">
+                <div class="offcanvas-body bg-dark-subtle">
                     <div class="container">
-                        <div style="height: 522px; width:100%;" id="map" class="specific border border-3 border-info rounded"></div>
+                        <div id="map" class="specific border border-3 border-secondary rounded"></div>
                     </div>
                 </div>
             </div>
@@ -171,15 +171,16 @@
 <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.3.0/js/responsive.bootstrap5.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#index').DataTable({
-            "language":{
-                "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json",
-                "lengthMenu": "Mostrar de a _MENU_ registros",
-            }
-        });
-    });
-</script>
-
+<div class="mb-2">
+	<script>
+		$(document).ready(function () {
+			$('#index').DataTable({
+				"language":{
+					"url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json",
+					"lengthMenu": "Mostrar de a _MENU_ registros",
+				}
+			});
+		});
+	</script>
+</div>
  @endsection
