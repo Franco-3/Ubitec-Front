@@ -3,8 +3,8 @@
 @section('content')
 <div class="container mt-5">
     <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="p-4 border border-primary rounded">
+        <div class="col-md-9 col-lg-8 col-xxl-6">
+            <div class="p-4 border border-primary rounded bg-light">
                 <form action="{{ route('users.update', $user->id) }}" method="POST">
                     @csrf
                     @method('PUT')
@@ -33,22 +33,22 @@
                         <label for="nombre" class="form__label">Empresa:</label>
                     </div>
                     <br>
-
-                    <input class="button3" type="submit" value="Guardar">
+                    <div class="text-center">
+                      <input class="button3" type="submit" value="Guardar">
+                      <form action="">
+                        <input class="btn btn-danger p-2 fw-medium text-uppercase" type="button" value="Cambiar contraseña">
+                      </form>
+                    </div>
                 </form>
 
                 <br>
-
-                <form action="">
-                    <input class="btn btn-danger" type="button" value="Cambiar contraseña">
-                </form>
             </div>
         </div>
     </div>
 </div>
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<button type="button" class="btn btn-primary col-sm-8 col-xxl-4 mx-auto mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Launch demo modal
   </button>
 

@@ -20,19 +20,12 @@
   <link rel="preload" href="https://fonts.googleapis.com/css?family=Jost:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jost:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap"></noscript>
   <link rel="preload" as="style" href="assets/mobirise/css/mbr-additional.css"><link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
-
-  
-  
-  
 </head>
 <body>
-  
   <section data-bs-version="5.1" class="menu menu1 cid-tRPaqL6swe" once="menu" id="menu1-0">
-    
-
     <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
         <div class="container-fluid">
-            <a class="navbar-brand link-dark fw-bold" href="./"><img src="img/logogps.png" style="width: 32px;" height="30" class="d-inline-block">UBITEC</a>
+            <a class="navbar-brand link-dark fw-bold" href="./"><img src="img/logogps.png" style="width: 32px;" height="32" class="d-inline-block">UBITEC</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbarSupportedContent" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <div class="hamburger">
                     <span></span>
@@ -56,9 +49,6 @@
 </section>
 
 <section data-bs-version="5.1" class="header5 cid-tRPbj7ZxCb mbr-fullscreen mbr-parallax-background" id="header5-1">
-
-    
-
     
     <div class="mbr-overlay" style="opacity: 0.8; background-color: rgb(0, 0, 0);"></div>
 
@@ -78,11 +68,7 @@
 </section>
 
 <section data-bs-version="5.1" class="features12 cid-tRPc5i5FIq" id="features13-3">
-
-    
-
-    
-    
+ 
     <div class="container" id="info">
         <div class="row justify-content-center">
             <div class="col-12 col-lg-6">

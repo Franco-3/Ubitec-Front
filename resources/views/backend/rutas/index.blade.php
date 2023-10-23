@@ -47,7 +47,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mt-2 px-1">
-				<div class="card text-bg-dark">
+				<div class="card text-bg-dark bg-gradient">
 					<h5 class="card-header text-center">Direccion de Inicio</h5>
 					<div class="card-body">
 						@if (Session::has('inicio'))
@@ -62,7 +62,7 @@
 				</div>
 			</div>
 			<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mt-2 px-1">
-				<div class="card text-bg-dark">
+				<div class="card text-bg-dark bg-gradient">
 					<h5 class="card-header text-center">Direccion Final</h5>
 					<div class="card-body">
 						@if (Session::has('final'))
@@ -78,21 +78,18 @@
 			</div>
 		</div>
 	</div>
-
-            <!-- Mapa desplegable -->
             <div class="container mt-2">
                 <div class="row">
 					<div class="btn-toolbar px-0" role="toolbar" aria-label="Toolbar with button groups">
 						<div class="btn-group col-12" role="group" aria-label="Basic Example">
-							<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Abrir Mapa <i class="bi bi-globe-americas"></i></button>
+							<button class="btn btn-primary bg-gradient" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Abrir Mapa <i class="bi bi-globe-americas"></i></button>
 							<a class="btn btn-primary" href="{{ route('rutas.create') }}" role="button">Nueva ruta</a>
-							<a class="btn btn-primary" href="{{ route('google.ordenar') }}" role="button">Ordenar Direcciones G</a>
-							<a href="{{ route('tsp.ordenar') }}" class="btn btn-primary">Ordenar Direcciones</a>
+							<a class="btn btn-primary" href="{{ route('google.ordenar') }}" role="button">Ordenar Direcciones</a>
+							<!--<a href="{{ route('tsp.ordenar') }}" class="btn btn-primary">Ordenar Direcciones</a>-->
 						</div>
 					</div>
                 </div>
             </div>
-
             <div class="offcanvas offcanvas-bottom offcanvas-size-xl" style="height: 80vh;" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title" id="offcanvasBottomLabel">Mapa</h5>
@@ -100,7 +97,7 @@
                 </div>
                 <div class="offcanvas-body">
                     <div class="container">
-                        <div style="height: 540px; width:100%;" id="map" class="specific"></div>
+                        <div style="height: 522px; width:100%;" id="map" class="specific border border-3 border-info rounded"></div>
                     </div>
                 </div>
             </div>
@@ -120,7 +117,6 @@
 					window.responseData = @json($responseData);
 				</script>
 			@endif
-
 </div>
 
 @if ($kmTotal)
@@ -132,7 +128,7 @@
 <div class="container mt-2">
 	<div class="row">
 		<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-			<table id="index" class="table table-striped table-dark dt-responsive nowrap border border-dark w-100">
+			<table id="index" class="table table-striped table-dark dt-responsive nowrap border border-dark">
 			<thead>
 				<tr>
 					<th class="text-center">#</th>
@@ -158,7 +154,7 @@
 								<form action="{{ route('direcciones.destroy', $direccion->idDireccion) }}" method="POST">
 									@csrf
 									@method('DELETE')
-									<button type="submit" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can" style="color: #ffffff;"></i></button>
+									<button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash3-fill"></i></button>
 								</form>
 							</td>
 						@endif
@@ -169,7 +165,6 @@
 		</div>
 	</div>
 </div>
-
 
  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>

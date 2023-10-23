@@ -51,6 +51,5 @@
   use Illuminate\Pagination\Paginator;
       public function boot() { Paginator::useBootstrap(); } -->
 
-
 </div>
 @endsection
