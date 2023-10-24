@@ -14,9 +14,14 @@ class VehiculoController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
+    {    
+        $empresa = session('empresa');
+        $usersEmpresa = User::where('empresa', $empresa)->pluck('name', 'id');
+        $users = $usersEmpresa;
         $vehiculos = Vehiculo::all();
-        return view('backend.vehiculos.index', compact('vehiculos'));
+        $vehiculos2 = Vehiculo::pluck('nombre', 'idVehiculo');
+       
+        return view('backend.vehiculos.index', compact('vehiculos', 'vehiculos2', 'users'));
     }
 
     /**
@@ -39,7 +44,6 @@ class VehiculoController extends Controller
             [
                 'name' => 'required',
                 'patente' => 'required',
-                'usuario' => 'required',
             ]
         );
 
@@ -47,7 +51,7 @@ class VehiculoController extends Controller
         $vehiculo->nombre = $request->input('name');
         $vehiculo->patente = $request->input('patente');
         $vehiculo->idUsuario = $request->input('usuario');
-
+        
         $vehiculo->update($validatedData);
         $vehiculo->save();
 
@@ -70,8 +74,6 @@ class VehiculoController extends Controller
     public function edit(string $id)
     {
         $vehiculo = Vehiculo::findOrFail($id);
-        //$users = User::pluck('name', 'id');
-        //return view('backend.Vehiculos.edit', compact('noticia', 'users'));
         return view('backend.vehiculos.edit', compact('vehiculo'));
     }
 
@@ -81,17 +83,20 @@ class VehiculoController extends Controller
     public function update(Request $request, string $id)
     {
         $vehiculo = Vehiculo::findOrFail($id);
-        $validatedData = $request->validate(
+        /* $validatedData = $request->validate(
             [
-                'name' => 'required',
-                'description' => 'required',
+                'nombre' => 'required',
+                'patente' => 'required',
             ]
         );
         
         
-        $vehiculo->update($validatedData);
-        $vehiculo->name = $request->input('name');
-        $vehiculo->description = $request->input('description');
+        $vehiculo->update($validatedData); */
+
+        $vehiculo->nombre = $request->input('nombre');
+        $vehiculo->patente = $request->input('patente');
+        $vehiculo->idUsuario = $request->input('usuario');
+        
         $vehiculo->save();
 
         $request->session()->flash('status', 'Se guardó correctamente el vehiculo ' . $vehiculo->titulo);

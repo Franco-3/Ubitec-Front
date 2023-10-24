@@ -1,3 +1,7 @@
+* {
+  font-family: 'Jost', sans-serif;
+}
+
 table label input {
 	position: absolute;
 	opacity: 0;
@@ -68,12 +72,11 @@ table label input:checked ~ .check:after {
 }
 @media screen and (min-width:576px) and (max-width:1920px) {
   .usuario {
-    background-color: #191919;
     border-radius: 5px;
     padding: 0px 25px;
   }
   .usuario:hover {
-    background-color: #1f1f1f;
+    background-color: #488aec; 
   }
 }
 .button-container {

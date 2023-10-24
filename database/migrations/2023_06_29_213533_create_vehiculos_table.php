@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('vehiculos', function (Blueprint $table) {
             $table->increments('idVehiculo');
-            $table->unsignedBigInteger('idUsuario');
+            $table->unsignedBigInteger('idUsuario')->nullable();
             $table->foreign('idUsuario')
                     ->references('id')
                     ->on('users')

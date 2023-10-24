@@ -1,5 +1,5 @@
 @extends('backend.layouts.main')
-@section('title', 'Usuarios')
+@section('title', 'Mi cuenta')
 @section('content')
 <div class="container mt-5">
     <div class="row justify-content-center">

@@ -1,5 +1,5 @@
 @extends('backend.layouts.main')
-
+@section('title', __('Ubitec - Direcciones'))
 @section('content')
 <div class="container">
     <br>

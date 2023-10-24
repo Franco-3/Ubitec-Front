@@ -1,7 +1,6 @@
 @extends('backend.layouts.main')
-@section('title', 'Usuarios')
+@section('title', 'Ubitec - Usuarios') 
 @section('content')
-    <h3 class="text-dark">Lista de Usuarios</h3>
     @forelse($users as $user)
         @if ($loop->first)
         <div class="container">
@@ -27,9 +26,9 @@
                 <td>
                     {{ Form::model($user, ['method' => 'delete', 'route' => ['users.destroy', $user->id]]) }}
                     @csrf
-                    <a href="{{ route('users.show', ['user' => $user->id]) }}" class="btn btn-info"><i class="bi bi-eye" style="color: white"></i></a>
-                    <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
-                    <button type="submit" class="btn btn-danger"
+                    <a href="{{ route('users.show', ['user' => $user->id]) }}" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Visualizar"><i class="bi bi-eye" style="color: white"></i></a>
+                    <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Editar"><i class="bi bi-pencil-square"></i></a>
+                    <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Borrar"
                         onclick="if (!confirm('Está seguro de borrar el usuario?')) return false;"><i class="bi bi-trash3"></i></button>
                     {!! Form::close() !!}
                 </td>
