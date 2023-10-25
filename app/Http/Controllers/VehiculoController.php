@@ -113,4 +113,23 @@ class VehiculoController extends Controller
         return redirect()->route('vehiculos.index');
     }
     
+    // Update record
+    public function updateVehiculos(Request $request){
+        dd('levanta el controller');
+        $nombre = $request->input('nombre');
+        $patente = $request->input('patente');
+        $editid = $request->input('id');
+        dd($request);
+        if($nombre !='' && $patente != ''){
+        $data = array('name'=>$nombre,"email"=>$patente);
+
+        // Call updateData() method of Page Model
+        Page::updateData($editid, $data);
+        echo 'Update successfully.';
+        }else{
+        echo 'Fill all fields.';
+        }
+
+        exit; 
+    }
 }

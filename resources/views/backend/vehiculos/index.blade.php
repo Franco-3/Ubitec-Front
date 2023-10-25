@@ -44,8 +44,12 @@
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
+        
+        <div class="form-group">
+            {{ Form::input('id', '', null, ['class' => 'invisible', 'readonly', 'id' => 'id']) }}
+        </div>
 
-        </br><button type="submit"  id="editForm" style="width: 100%;" class="btn btn-primary">Guardar</button>
+        </br><button type="submit"  id="editForm" style="width: 100%;" class="btn btn-primary update">Guardar</button>
 
         {!! Form::close() !!}
 
@@ -125,26 +129,53 @@
 <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.3.0/js/responsive.bootstrap5.min.js"></script>
+
 <script>
     $(document).ready(function () {
 
-        $.ajaxSetup({
+        /* $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
-        });
+        }); */
+        
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
         $(document).on('click', '.edit', function(event){
-                event.preventDefault();
                 var id = $(this).data('id');
                 var patente = $(this).data('patente');
                 var nombre = $(this).data('nombre');
                 $('#patente').val(patente);
                 $('#nombre').val(nombre);
                 $('#id').val(id);
-                var formulario = $('#form');
-                //formulario.attr('route', id);
-                //'route' => ['users.update', $vehiculo->idVehiculo]
+                //var formulario = $('#form');
+        });
+
+        $(document).on("click", ".update" , function() {
+            event.preventDefault();
+             
+            //var edit_id = $(this).data('id');
+            //var nombre = $('#nombre'+edit_id).val();
+            //var patente = $('#patente_'+edit_id).val();
+            var id = $('#id').val();
+            var nombre = $('#nombre').val();
+            var patente = $('#patente').val();
+            var usuario = $('#usuario').val();
+            
+            if(nombre != '' && patente != ''){
+                $.ajax({
+                url: 'vehiculos/updateVehiculos',
+                type: 'post',
+                data: {_token: CSRF_TOKEN,idVehiculo: id,idUsuario: usuario, nombre: nombre,patente: patente},
+                success: function(response){
+                    alert(response);
+                }
+                });
+            }else{
+                alert('Fill all fields');
+            }
+            
+            
         });
 
     });
