@@ -11,7 +11,7 @@
 <div class="container mt-2">
     <div class="card">
         <div class="card-body">
-            <form action="{{route('direcciones.store')}}" method="post" >
+            <form action="{{route('direcciones.store')}}" method="post" id="formDirecciones">
                     @csrf
 						@if (is_null(session('inicio')))
 							<div style="display: flex; justify-content: center;">
