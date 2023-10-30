@@ -84,19 +84,17 @@ class VehiculoController extends Controller
     public function update(Request $request, string $id)
     {
         $vehiculo = Vehiculo::findOrFail($id);
+        
+        
         $validatedData = $request->validate(
             [
-                'nombre' => 'required',
-                'patente' => 'required',
+                'usuario' => 'required',
             ]
         );
         
-        
         $vehiculo->update($validatedData);
-
-        $vehiculo->nombre = $request->input('nombre');
-        $vehiculo->patente = $request->input('patente');
-        $vehiculo->idUsuario = $request->input('idUsuario');
+        
+        $vehiculo->idUsuario = $request->input('usuario');
         
         $vehiculo->save();
 
@@ -113,27 +111,10 @@ class VehiculoController extends Controller
         $vehiculo->delete();
         return redirect()->route('vehiculos.index');
     }
-    
-    // Update record
-    public function updateVehiculos(Request $request){
-        dd('levanta el controller');
-        $nombre = $request->input('nombre');
-        $patente = $request->input('patente');
-        $editid = $request->input('id');
-        dd($request);
-        if($nombre !='' && $patente != ''){
-        $data = array('name'=>$nombre,"email"=>$patente);
 
-        // Call updateData() method of Page Model
-        Page::updateData($editid, $data);
-        echo 'Update successfully.';
-        }else{
-        echo 'Fill all fields.';
-        }
-
-        exit; 
-    }
-
+    /**
+     * Para listar nombre de usuarios en <select>
+     */
     public function nombreUsuario($idUsuario)
     {
         $user = User::where('idUsuario', $idUsuario)->with('asignadoA');

@@ -19,45 +19,46 @@
           <h1 class="modal-title fs-5" id="exampleModalLabel">Asignar vehiculo a usuario</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+
         <div class="modal-body">
-          
-        {{ Form::model(['method' => 'put', 'id' => 'form']) }}
-        @csrf
-        <div class="form-group">
-            {{ Form::label('patente', 'Patente', ['class' => 'control-label']) }}<br>
-            {{ Form::input('patente', '', null, ['class' => 'form-control', 'readonly', 'id' => 'patente']) }}
-            @error('patente')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-        </div>
-        <div class="form-group">
-            {{ Form::label('nombre', 'Vehiculo', ['class' => 'control-label']) }}<br>
-            {{ Form::input('nombre', '', null, ['class' => 'form-control', 'readonly', 'id' => 'nombre']) }}
-            @error('nombre')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-        </div>
-        <div class="form-group">
-            {{ Form::label('usuario', 'Usuario Asignado', ['class' => 'control-label']) }}
-            {{ Form::select('usuario', $users, null, ['class' => 'form-control']) }}
-            @error('usuario')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
+            <form id="form" action="" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="form-group">
+                    {{ Form::label('patente', 'Patente', ['class' => 'control-label']) }}<br>
+                    {{ Form::input('patente', '', null, ['class' => 'form-control', 'readonly', 'id' => 'patente']) }}
+                    @error('patente')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    {{ Form::label('nombre', 'Vehiculo', ['class' => 'control-label']) }}<br>
+                    {{ Form::input('nombre', '', null, ['class' => 'form-control', 'readonly', 'id' => 'nombre']) }}
+                    @error('nombre')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    {{ Form::label('usuario', 'Usuario Asignado', ['class' => 'control-label']) }}
+                    {{ Form::select('usuario', $users, null, ['class' => 'form-control', 'id' => 'usuario', 'placeholder' => 'Selecciona un usuario']) }}
+                    @error('usuario')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                
+                <div class="form-group">
+                    {{ Form::input('id', '', null, ['class' => 'invisible', 'readonly', 'id' => 'id']) }}
+                </div>
+                
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+
+                <!-- </br><button type="submit"  id="editForm" style="width: 100%;" class="btn btn-primary update">Guardar</button> -->
+            </form>
         </div>
         
-        <div class="form-group">
-            {{ Form::input('id', '', null, ['class' => 'invisible', 'readonly', 'id' => 'id']) }}
-        </div>
-
-        </br><button type="submit"  id="editForm" style="width: 100%;" class="btn btn-primary update">Guardar</button>
-
-        {!! Form::close() !!}
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <!--<button type="button" class="btn btn-primary">Guardar</button>-->
-        </div>
       </div>
      </div>
   </div>
@@ -100,7 +101,6 @@
                 <td>
                     {{ Form::model($vehiculo, ['method' => 'delete', 'route' => ['users.destroy', $vehiculo->idVehiculo]]) }}
                     @csrf
-                    <a href="{{ route('vehiculos.show', ['vehiculo' => $vehiculo->idVehiculo]) }}" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Visualizar"><i class="bi bi-eye" style="color: white"></i></a>
                     <a href="{{ route('vehiculos.edit', ['vehiculo' => $vehiculo->idVehiculo]) }}" class="btn btn-primary" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Editar"><i class="bi bi-pencil-square"></i></a>
                     <button type="submit" class="btn btn-danger" onclick="if (!confirm('Está seguro de borrar el usuario?')) return false;" data-toggle="tooltip" data-placement="top" title="Borrar">
                         <i class="bi bi-trash3"></i>
@@ -143,6 +143,7 @@
                 }
         }); */
         
+        
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
         $(document).on('click', '.edit', function(event){
@@ -152,34 +153,9 @@
                 $('#patente').val(patente);
                 $('#nombre').val(nombre);
                 $('#id').val(id);
-                //var formulario = $('#form');
-        });
-
-        $(document).on("click", ".update" , function() {
-            event.preventDefault();
-             
-            //var edit_id = $(this).data('id');
-            //var nombre = $('#nombre'+edit_id).val();
-            //var patente = $('#patente_'+edit_id).val();
-            var id = $('#id').val();
-            var nombre = $('#nombre').val();
-            var patente = $('#patente').val();
-            var usuario = $('#usuario').val();
-            
-            if(nombre != '' && patente != ''){
-                $.ajax({
-                url: 'vehiculos/updateVehiculos',
-                type: 'post',
-                data: {_token: CSRF_TOKEN,idVehiculo: id,idUsuario: usuario, nombre: nombre,patente: patente},
-                success: function(response){
-                    alert(response);
-                }
-                });
-            }else{
-                alert('Fill all fields');
-            }
-            
-            
+                var action = 'http://ubitec-front.test/vehiculos/' + id;
+                var formulario = $('#form');
+                formulario.attr('action', action);
         });
 
     });
