@@ -35,6 +35,8 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ms-auto">
                     @section('menu')
+                    @guest
+                    @else
                     @if(Auth::user()->tipo === '0')
                     <li class="nav-item pe-2"><a class="nav-link link display-4" href="{{ route('users.index') }}" aria-expanded="false">Usuarios</a></li>
                     <li class="nav-item pe-2"><a class="nav-link link display-4" href="{{ route('vehiculos.index') }}" aria-expanded="false">Vehiculos</a></li>
@@ -43,6 +45,7 @@
                     <li class="nav-item hoverable"><a href="{{ url('/rutas') }}" class="nav-link link display-4">Rutas</a></li>
                     <li class="nav-item pe-2"><a href="{{ url('/historial') }}" class="nav-link link display-4" aria-expanded="false">Historial</a></li>
                     @endif
+                    @endguest
 
                     @show
                          <!-- Authentication Links -->
