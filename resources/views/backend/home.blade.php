@@ -7,6 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
   <link rel="shortcut icon" href="img/logogps.png" type="image/x-icon">
   <meta name="description" content="">
+  <!-- provide the csrf token -->
+  <meta name="csrf-token" content="{{ csrf_token() }}" />
+
   <title>Home</title>
   <link rel="stylesheet" href="assets/web/assets/mobirise-icons2/mobirise2.css">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">

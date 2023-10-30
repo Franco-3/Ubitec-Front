@@ -64,8 +64,9 @@ class VehiculoController extends Controller
      */
     public function show(string $id)
     {
+        $users = User::all()->pluck('name', 'id');
         $vehiculo = Vehiculo::findOrFail($id);
-        return view('backend.vehiculos.show', compact('vehiculo'));
+        return view('backend.vehiculos.show', compact('vehiculo', 'users'));
     }
 
     /**
@@ -83,24 +84,22 @@ class VehiculoController extends Controller
     public function update(Request $request, string $id)
     {
         $vehiculo = Vehiculo::findOrFail($id);
-        /* $validatedData = $request->validate(
+        
+        
+        $validatedData = $request->validate(
             [
-                'nombre' => 'required',
-                'patente' => 'required',
+                'usuario' => 'required',
             ]
         );
         
+        $vehiculo->update($validatedData);
         
-        $vehiculo->update($validatedData); */
-
-        $vehiculo->nombre = $request->input('nombre');
-        $vehiculo->patente = $request->input('patente');
         $vehiculo->idUsuario = $request->input('usuario');
         
         $vehiculo->save();
 
-        $request->session()->flash('status', 'Se guardó correctamente el vehiculo ' . $vehiculo->titulo);
-        return redirect()->route('vehiculos.index', $vehiculo->id);
+        $request->session()->flash('status', 'Se guardó correctamente el cambio ' . $vehiculo->titulo);
+        return redirect()->route('vehiculos.index');
     }
 
     /**
@@ -112,5 +111,13 @@ class VehiculoController extends Controller
         $vehiculo->delete();
         return redirect()->route('vehiculos.index');
     }
-    
+
+    /**
+     * Para listar nombre de usuarios en <select>
+     */
+    public function nombreUsuario($idUsuario)
+    {
+        $user = User::where('idUsuario', $idUsuario)->with('asignadoA');
+        return $user;
+    }
 }
