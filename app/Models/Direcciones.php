@@ -11,7 +11,7 @@ class Direcciones extends Model
     protected $table = 'direcciones';
     protected $primaryKey = 'idDireccion';
     protected $fillable = [
-        'idRuta', 'direccion', 'latitud', 'longitud', 'tipo', 'orden'
+        'idRuta', 'direccion', 'latitud', 'longitud', 'tipo', 'orden', 'estado'
     ];
 
     // Si no deseas utilizar los timestamps 'created_at' y 'updated_at', establece el siguiente atributo a false

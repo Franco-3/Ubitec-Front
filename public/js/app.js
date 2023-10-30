@@ -59,6 +59,14 @@ try {
     var longitude;
 
   $(document).ready(function () {
+
+    //evitar que la direccion se envie al precionar enter
+    $('#formDirecciones input').on('keydown', function (e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            // Puedes hacer una solicitud AJAX aquí para enviar los datos al controlador de Laravel si es necesario
+        }
+    });
       var autocomplete;
       autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), options);
 
@@ -69,18 +77,6 @@ try {
 
         latitude = places.geometry.location.lat();
         longitude = places.geometry.location.lng();
-        //se crean lo siguientes elementos para que al presionar enter el formulario tenga los elementos lat y long
-        const newElementNombre = document.createElement("input");
-        newElementNombre.type = 'hidden';
-        newElementNombre.name = 'latitud';
-        newElementNombre.defaultValue = latitude;
-        document.querySelector("#contenedorDirecccion").appendChild(newElementNombre);
-
-        const newElementlongitud = document.createElement("input");
-        newElementlongitud.type = 'hidden';
-        newElementlongitud.name = 'longitud';
-        newElementlongitud.defaultValue = longitude;
-        document.querySelector("#contenedorDirecccion").appendChild(newElementlongitud);
 
         console.log(latitude, longitude)
         guardarDireccion(latitude, longitude);
@@ -110,6 +106,25 @@ try {
             console.log(xhr.responseText);
         }
     });
-}
+  }
 
+  //llama a la funcion del controlador que cambia el estado de la direccion
+  function cambiarEstado(id, estado) {
+    $.ajax({
+        url: 'cambiarEstado/' + id,
+        type: 'PUT',
+        headers: {
+            'X-CSRF-TOKEN': window.csrfToken
+        },
+        data: {
+            'estado': estado
+        },
+        success: function(data) {
+            // Manejar la respuesta si es necesario
+        },
+        error: function(xhr, status, error) {
+            // Manejar errores si es necesario
+        }
+    });
+  }
 

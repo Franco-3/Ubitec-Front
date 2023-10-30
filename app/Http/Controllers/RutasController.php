@@ -20,7 +20,7 @@ class RutasController extends Controller
     {
         session_start();
         ob_start();
-
+        
         $idUsuario = Auth::id();
         session(['idUser' => $idUsuario]);
 
@@ -38,7 +38,6 @@ class RutasController extends Controller
             $idRuta = $this->store();
             session(['idRuta' => $idRuta]); //configrar para crear una nueva ruta en caso de que no exista ninguna
         }
-
 
 
         $direcciones = $this->searchDirections(session('idRuta'));
@@ -139,7 +138,7 @@ class RutasController extends Controller
 
     private function getPolylines(string $idRuta)
     {
-        $ruta = Ruta::findOrFail($idRuta);
+        $ruta = Ruta::find($idRuta);
         return $ruta;
     }
 
@@ -177,7 +176,7 @@ class RutasController extends Controller
         $direccionesUsuario = DB::table('rutas')
                             ->join('direcciones', 'rutas.idRuta', '=', 'direcciones.idRuta')
                             ->where('rutas.idRuta', $idRuta)
-                            ->select('idDireccion','direccion', 'latitud', 'longitud', 'tipo')
+                            ->select('idDireccion','direccion', 'latitud', 'longitud', 'tipo', 'direcciones.estado')
                             ->orderBy('orden', 'asc')
                             ->get();
 

@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('direcciones/rutas/{direccion}', [DireccionesController::class, 'destroy'])->name('direcciones.destroy');
     Route::get('tsp/ordenar', [TSPcontroller::class, 'osrmOrder'])->name('tsp.ordenar');
     Route::get('google/ordenar', [TSPcontroller::class, 'postDirections'])->name('google.ordenar');
+    Route::put('cambiarEstado/{id}', [DireccionesController::class, 'actualizarEstado'])->name('cambiarEstado');
 
 
     Route::get('cuenta', [UserController::class, 'miCuenta'])->name('miCuenta');

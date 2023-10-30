@@ -11,7 +11,7 @@
 <div class="container mt-2">
     <div class="card">
         <div class="card-body">
-            <form action="{{route('direcciones.store')}}" method="post" >
+            <form action="{{route('direcciones.store')}}" method="post" id="formDirecciones">
                     @csrf
 						@if (is_null(session('inicio')))
 							<div style="display: flex; justify-content: center;">
@@ -147,7 +147,12 @@
 						<td>{{$direccion->direccion}}</td>
 						<td>sin definir</td>
 						<td>
-							<label><input type='checkbox'><div class='check'></div></label>
+							<label>
+								<form>
+									<input name='estado' type='checkbox' onchange="cambiarEstado({{ $direccion->idDireccion }}, this.checked)" {{ $direccion->estado ? 'checked' : '' }}>
+									<div class='check'></div>
+								</form>
+							</label>
 						</td>
 						@if (!empty($direccion->idDireccion))
 							<td>

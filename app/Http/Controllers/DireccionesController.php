@@ -136,5 +136,17 @@ class DireccionesController extends Controller
         $paquete->save();
     }
 
+    public function actualizarEstado(Request $request, $id)
+    {
+        $direccion = Direcciones::find($id);
+        // Verifica si el valor 'estado' está presente en la solicitud
+        if ($request->has('estado')) {
+            $direccion->estado = !$direccion->estado;
+        }
+    
+        $direccion->save();
+    }
+    
+
 
 }
