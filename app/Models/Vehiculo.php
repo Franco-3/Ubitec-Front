@@ -23,4 +23,9 @@ class Vehiculo extends Model
     ];
 
     public $timestapms = true;
+
+    public function asignadoA()
+    {
+        return $this->belongsTo(User::class, 'idUsuario');
+    }
 }

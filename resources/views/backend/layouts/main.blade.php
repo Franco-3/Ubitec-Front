@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,9 +17,6 @@
     {{-- Tabla --}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" rel="stylesheet">
-    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script> --}}
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.bootstrap5.min.css" rel="stylesheet">
     {{-- Icons --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
@@ -28,10 +25,10 @@
     <link rel="preload" as="style" href="assets/mobirise/css/mbr-additional.css"><link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
 
 </head>
-<body class="d-flex flex-column min-vh-100 bg-light">
-    <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg cid-tRPaqL6swe shadow-sm p-3 mb-5 bg-white">
+<body class="d-flex flex-column min-vh-100" data-bs-theme="light">
+    <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg cid-tRPaqL6swe shadow-sm p-3 mb-5">
         <div class="container-fluid">
-            <a class="navbar-brand link-dark fw-bold" href="./"><img src="img/logogps.png" style="width: 32px;" height="32" class="d-inline-block">UBITEC</a>
+            <a class="navbar-brand fw-bold" href="./"><img src="img/logogps.png" style="width: 32px;" height="32" class="d-inline-block">UBITEC</a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -41,12 +38,12 @@
                     @section('menu')
                     @guest
                     @else
-                    <li class="nav-item hoverable"><a href="{{ url('/rutas') }}" class="nav-link link text-black display-4">Rutas</a></li>
-                    <li class="nav-item pe-2"><a href="{{ url('/historial') }}" class="nav-link link text-black display-4" aria-expanded="false">Historial</a></li>
+                    <li class="nav-item hoverable"><a href="{{ url('/rutas') }}" class="nav-link link display-4">Rutas</a></li>
+                    <li class="nav-item pe-2"><a href="{{ url('/historial') }}" class="nav-link link display-4" aria-expanded="false">Historial</a></li>
                     @if(Auth::user()->tipo === '0')
-                    <li class="nav-item pe-2"><a class="nav-link link text-black display-4" href="{{ route('users.index') }}" aria-expanded="false">Usuarios</a></li>
-                    <li class="nav-item pe-2"><a class="nav-link link text-black display-4" href="{{ route('vehiculos.index') }}" aria-expanded="false">Vehiculos</a></li>
-                    <li class="nav-item pe-2"><a class="nav-link link text-black display-4" href="{{ route('direcciones.index') }}" aria-expanded="false">Direcciones</a></li>
+                    <li class="nav-item pe-2"><a class="nav-link link display-4" href="{{ route('users.index') }}" aria-expanded="false">Usuarios</a></li>
+                    <li class="nav-item pe-2"><a class="nav-link link display-4" href="{{ route('vehiculos.index') }}" aria-expanded="false">Vehiculos</a></li>
+                    <li class="nav-item pe-2"><a class="nav-link link display-4" href="{{ route('direcciones.index') }}" aria-expanded="false">Direcciones</a></li>
                     @endif
                     @endguest
 
@@ -54,18 +51,18 @@
                          <!-- Authentication Links -->
                     @guest
                     @if (Route::has('login'))
-                    <li class="nav-item">
-                            <a class="nav-link link text-black display-4" href="{{ route('login') }}">Iniciar Sesión</a>
+                        <li class="nav-item">
+                            <a class="nav-link link display-4" href="{{ route('login') }}">Iniciar Sesión</a>
                         </li>
                     @endif
                     @if (Route::has('register'))
                         <li class="nav-item">
-                            <a class="nav-link link text-black display-4" href="{{ route('register') }}">Registrarse</a>
+                            <a class="nav-link link display-4" href="{{ route('register') }}">Registrarse</a>
                         </li>
                     @endif
                     @else
                     <li class="nav-item dropdown usuario">
-                        <a class="nav-link link text-black display-4 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link link display-4 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {{ Auth::user()->name }} 
                         </a>
                         <ul class="dropdown-menu">
@@ -82,6 +79,9 @@
                             </li>
                         </ul>
                     </li>
+                    <li>
+                        <button id="btnSwitch" class="btn btn-secondary" type="button"></button>
+                    </li>
                     @endguest
                     @show
                 </ul>
@@ -90,14 +90,24 @@
     </nav>
 
     @yield('content')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-        <script type="text/javascript" src="{{ URL::asset('js/app.js') }}"></script>
+     <script type="text/javascript" src="{{ URL::asset('js/app.js') }}"></script>
 
     <script>
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
             });
+
+        //modo oscuro bootstrap
+document.getElementById('btnSwitch').addEventListener('click',()=>{
+  if (document.documentElement.getAttribute('data-bs-theme') == 'dark') {
+      document.getElementsByTagName('body')[0].setAttribute('data-bs-theme','light');
+      document.documentElement.setAttribute('data-bs-theme','light');
+  }
+  else {
+      document.documentElement.setAttribute('data-bs-theme','dark')
+      document.getElementsByTagName('body')[0].setAttribute('data-bs-theme','dark');
+  }
+});
     </script>
 </body>
 </html>

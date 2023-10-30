@@ -75,6 +75,8 @@
                         <th class="text-center">Usuario Asignado</th>
                         <td> 
                         </td>
+                        <td> 
+                        </td>
                     </tr>
                 </thead>
         @endif
@@ -83,7 +85,9 @@
                 <td>{{ $vehiculo->patente }}</td>
                 <td> {{ $vehiculo->nombre }}</a></td>
                 <td class="text-center">
-                    {{ $vehiculo->idUsuario }}
+                    {{ $vehiculo->asignadoA->name . ' ' . $vehiculo->asignadoA->lastName }}
+                </td>
+                <td>
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-info edit" data-id='{{ $vehiculo->idVehiculo }}' data-patente='{{ $vehiculo->patente }}' data-nombre='{{ $vehiculo->nombre }}' data-bs-toggle="modal" data-bs-target="#exampleModal" data-toggle="tooltip" data-placement="top" title="Cambiar">
                         <span>

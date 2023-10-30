@@ -14,9 +14,9 @@
         {{ Form::model($vehiculo, ['method' => 'put', 'route' => ['vehiculos.update', $vehiculo->idVehiculo]]) }}
         @csrf
         <div class="form-group @if ($errors->has('titulo')) has-error has-feedback @endif">
-            {{ Form::label('name', 'Título', ['class' => 'control-label']) }}
-            {{ Form::text('name', $vehiculo->nombre, ['class' => 'form-control', 'placeholder' => 'Ingrese el nombre']) }}
-            @error('name')
+            {{ Form::label('nombre', 'Nombre', ['class' => 'control-label']) }}
+            {{ Form::text('nombre', $vehiculo->nombre, ['class' => 'form-control', 'placeholder' => 'Ingrese el nombre']) }}
+            @error('nombre')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
@@ -31,12 +31,12 @@
             @enderror
         </div>
         <div class="form-group">
-            {{ Form::label('usuario', 'Usuario asignado', ['class' => 'control-label']) }}
+            {{ Form::label('idUsuario', 'Usuario asignado', ['class' => 'control-label']) }}
             <div class="input-group">
                 <span class="input-group-text"><i class="bi bi-person-fill"></i></i></i></span>
-                {{ Form::text('usuario', '-', ['class' => 'form-control', 'readonly']) }}
+                {{ Form::text('idUsuario', '-', ['class' => 'form-control', 'readonly']) }}
             </div>
-            @error('usuario')
+            @error('idUsuario')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
