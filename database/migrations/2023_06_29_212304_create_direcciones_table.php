@@ -24,6 +24,7 @@ return new class extends Migration
             $table->double('longitud');
             $table->char('tipo');
             $table->integer('orden')->nullable();
+            $table->boolean('estado')->default(0);
             $table->timestamps();
         });
     }

@@ -147,7 +147,12 @@
 						<td>{{$direccion->direccion}}</td>
 						<td>sin definir</td>
 						<td>
-							<label><input type='checkbox'><div class='check'></div></label>
+							<label>
+								<form>
+									<input name='estado' type='checkbox' onchange="cambiarEstado({{ $direccion->idDireccion }}, this.checked)" {{ $direccion->estado ? 'checked' : '' }}>
+									<div class='check'></div>
+								</form>
+							</label>
 						</td>
 						@if (!empty($direccion->idDireccion))
 							<td>

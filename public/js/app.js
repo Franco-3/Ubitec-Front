@@ -59,6 +59,8 @@ try {
     var longitude;
 
   $(document).ready(function () {
+
+    //evitar que la direccion se envie al precionar enter
     $('#formDirecciones input').on('keydown', function (e) {
         if (e.key === 'Enter') {
             e.preventDefault();
@@ -104,4 +106,24 @@ try {
             console.log(xhr.responseText);
         }
     });
-}
+  }
+
+  //llama a la funcion del controlador que cambia el estado de la direccion
+  function cambiarEstado(id, estado) {
+    $.ajax({
+        url: 'cambiarEstado/' + id,
+        type: 'PUT',
+        headers: {
+            'X-CSRF-TOKEN': window.csrfToken
+        },
+        data: {
+            'estado': estado
+        },
+        success: function(data) {
+            // Manejar la respuesta si es necesario
+        },
+        error: function(xhr, status, error) {
+            // Manejar errores si es necesario
+        }
+    });
+  }
