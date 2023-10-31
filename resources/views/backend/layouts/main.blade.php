@@ -12,7 +12,6 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGc0UBAR_Y30fX31EvaU65KATMx0c0ItI&libraries=places"></script>
     <script src="https://kit.fontawesome.com/3f6f78b811.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="img/logogps.png" type="image/x-icon">
-    <!-- <link rel="stylesheet" type="text/css" href="css/app.css"/> -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     {{-- Tabla --}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css" rel="stylesheet">
@@ -25,7 +24,7 @@
 
 </head>
 <body class="d-flex flex-column min-vh-100" data-bs-theme="light">
-    <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg cid-tRPaqL6swe shadow-sm p-3 mb-5">
+    <nav class="navbar navbar-dropdown navbar-expand-sm shadow-sm p-3">
         <div class="container-fluid">
             <a class="navbar-brand fw-bold" href="./"><img src="img/logogps.png" style="width: 32px;" height="32" class="d-inline-block">UBITEC</a>
             
@@ -42,7 +41,7 @@
                     <li class="nav-item pe-2"><a class="nav-link link display-4" href="{{ route('vehiculos.index') }}" aria-expanded="false">Vehiculos</a></li>
                     <li class="nav-item pe-2"><a class="nav-link link display-4" href="{{ route('direcciones.index') }}" aria-expanded="false">Direcciones</a></li>
                     @else
-                    <li class="nav-item hoverable"><a href="{{ url('/rutas') }}" class="nav-link link display-4">Rutas</a></li>
+                    <li class="nav-item"><a href="{{ url('/rutas') }}" class="nav-link link display-4">Rutas</a></li>
                     <li class="nav-item pe-2"><a href="{{ url('/historial') }}" class="nav-link link display-4" aria-expanded="false">Historial</a></li>
                     @endif
                     @endguest
@@ -51,7 +50,7 @@
                          <!-- Authentication Links -->
                     @guest
                     @if (Route::has('login'))
-                        <li class="nav-item">
+                    <li class="nav-item">
                             <a class="nav-link link display-4" href="{{ route('login') }}">Iniciar Sesión</a>
                         </li>
                     @endif
@@ -99,8 +98,7 @@
     <script>
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
-        });
-
+            });
         //modo oscuro bootstrap
         var sol = 'M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z';
         var luna = 'M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z';

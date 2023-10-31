@@ -9,38 +9,35 @@
                     @csrf
                     @method('PUT')
                     <div class="form__group field mb-2">
-                        <input name="nombre" type="input" value="{{ $user->name }}" class="form__field">
-                        <label for="nombre" class="form__label">Nombre:</label>
+                      <input name="nombre" type="input" value="{{ $user->name }}" class="form__field">
+                      <label for="nombre" class="form__label">Nombre:</label>
                     </div>
 
                     <div class="form__group field mb-2">
-                        <input name="apellido" type="input" value="{{ $user->lastName }}" class="form__field">
-                        <label for="apellido" class="form__label">Apellido:</label>
+                      <input name="apellido" type="input" value="{{ $user->lastName }}" class="form__field">
+                      <label for="apellido" class="form__label">Apellido:</label>
                     </div>
 
                     <div class="form__group field mb-2">
-                        <input name="telefono" type="input" value="{{ $user->telefono }}" class="form__field">
-                        <label for="telefono" class="form__label">Teléfono:</label>
+                      <input name="telefono" type="input" value="{{ $user->telefono }}" class="form__field">
+                      <label for="telefono" class="form__label">Teléfono:</label>
                     </div>
 
                     <div class="form__group field mb-2">
-                        <input name="email" type="input" value="{{ $user->email }}" class="form__field">
-                        <label for="email" class="form__label">Email:</label>
+                      <input name="email" type="input" value="{{ $user->email }}" class="form__field">
+                      <label for="email" class="form__label">Email:</label>
                     </div>
 
                     <div class="form__group field mb-2">
-                        <input name="empresa" type="input" value="{{ $user->empresa }}" disabled class="form__field">
-                        <label for="nombre" class="form__label">Empresa:</label>
+                      <input name="empresa" type="input" value="{{ $user->empresa }}" disabled class="form__field">
+                      <label for="nombre" class="form__label">Empresa:</label>
                     </div>
                     <br>
-                    <div class="text-center">
-                      <input class="button3" type="submit" value="Guardar">
-                      <form action="">
-                        <input class="btn btn-danger p-2 fw-medium text-uppercase" type="button" value="Cambiar contraseña">
-                      </form>
-                    </div>
+                    <input class="button3" type="submit" value="Guardar">
+                    <form action="">
+                      <input class="btn btn-danger p-2 fw-semibold text-uppercase float-end rounded" type="button" value="Cambiar contraseña">
+                    </form>
                 </form>
-
                 <br>
             </div>
         </div>
@@ -48,7 +45,7 @@
 </div>
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary col-sm-8 col-xxl-4 mx-auto mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<button type="button" class="btn btn-primary col-10 col-sm-7 col-xxl-4 mx-auto mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Launch demo modal
   </button>
 

@@ -9,7 +9,7 @@
 @endif
 
 <div class="container mt-2">
-    <div class="card">
+    <div class="card shadow">
         <div class="card-body">
             <form action="{{route('direcciones.store')}}" method="post" id="formDirecciones">
                     @csrf
@@ -19,7 +19,6 @@
 									<input class="form-control" type="text" id="search_input" name="direccion" placeholder="Ingrese dirección de comienzo">
 									<input id="tipo" type="hidden" value="inicio" name="tipo">
 								</div>
-
 							</div>
 						@elseif(is_null(session('final')))
 							<div style="display: flex; justify-content: center;">
@@ -55,7 +54,7 @@
 							<form action="{{ route('direcciones.destroy', session('inicio')->idDireccion) }}" method="POST">
 								@csrf
 								@method('DELETE')
-								<button class="btn btn-primary bg-gradient mt-2 col-12">Cambiar</button>
+								<button class="btn btn-success mt-2 col-12">Cambiar</button>
 							</form>
 						@endif
 					</div>
@@ -70,7 +69,7 @@
 							<form action="{{ route('direcciones.destroy', session('final')->idDireccion) }}" method="POST">
 								@csrf
 								@method('DELETE')
-								<button class="btn btn-primary bg-gradient mt-2 col-12">Cambiar</button>
+								<button class="btn btn-success mt-2 col-12">Cambiar</button>
 							</form>
 						@endif
 					</div>
@@ -81,10 +80,10 @@
             <div class="container mt-2">
                 <div class="row">
 					<div class="btn-toolbar px-0" role="toolbar" aria-label="Toolbar with button groups">
-						<div class="btn-group col-12" role="group" aria-label="Basic Example">
-							<button class="btn btn-primary bg-gradient border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Abrir Mapa <i class="bi bi-globe-americas"></i></button>
-							<a class="btn btn-primary bg-gradient border-0" href="{{ route('rutas.create') }}" role="button">Nueva ruta</a>
-							<a class="btn btn-primary bg-gradient border-0" href="{{ route('google.ordenar') }}" role="button">Ordenar Direcciones</a>
+						<div class="btn-group col-12 shadow" role="group" aria-label="Basic Example">
+							<button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Abrir Mapa <i class="bi bi-globe-americas"></i></button>
+							<a class="btn btn-success" href="{{ route('rutas.create') }}" role="button">Nueva ruta</a>
+							<a class="btn btn-success href="{{ route('google.ordenar') }}" role="button">Ordenar Direcciones</a>
 							<!--<a href="{{ route('tsp.ordenar') }}" class="btn btn-primary">Ordenar Direcciones</a>-->
 						</div>
 					</div>
@@ -147,20 +146,20 @@
 						<td>{{$direccion->direccion}}</td>
 						<td>
 							<!-- Button trigger modal -->
-							<button type="button" class="btn btn-primary col-sm-8 col-xxl-4 mx-auto mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
-								editar
+							<button type="button" class="btn btn-success col-9 p-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+								Editar
 							</button>
 						</td>
 						<td>
 							<label>
 								<form>
 									<input name='estado' type='checkbox' onchange="cambiarEstado({{ $direccion->idDireccion }}, this.checked)" {{ $direccion->estado ? 'checked' : '' }}>
-									<div class='check'></div>
+									<div class='check mx-auto'></div>
 								</form>
 							</label>
 						</td>
 						@if (!empty($direccion->idDireccion))
-							<td>
+							<td class="text-center">
 								<form action="{{ route('direcciones.destroy', $direccion->idDireccion) }}" method="POST">
 									@csrf
 									@method('DELETE')
@@ -176,30 +175,28 @@
 	</div>
 </div>
 
-
-  <!-- Modal para agregar descripcion e imagen-->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form action="">
-			<input type="file" name="imagen" accept="image/png, image/jpeg, image/jpg, image/bmp, image/ tif">
-			<textarea name="descripcion" cols="30" rows="7"></textarea>
-		  </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
- <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<!-- Modal para agregar descripcion e imagen-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+	<div class="modal-content">
+	<div class="modal-header">
+		<h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	</div>
+	<div class="modal-body">
+		<form action="">
+		<input type="file" name="imagen" accept="image/png, image/jpeg, image/jpg, image/bmp, image/ tif">
+		<textarea name="descripcion" cols="30" rows="7"></textarea>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+		<button type="button" class="btn btn-primary">Save changes</button>
+	</div>
+	</div>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>

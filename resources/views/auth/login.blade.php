@@ -56,9 +56,8 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-sm-12 col-md-8">
+                                <div class="col-12 d-flex justify-content-between">
                                     <button type="submit" class="btn btn-primary">Entrar</button>
-
                                     @if (Route::has('password.request'))
                                         <a class="btn btn-link" href="{{ route('password.request') }}">
                                             {{ __('ForgotYourPassword?') }}
