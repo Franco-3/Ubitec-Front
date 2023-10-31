@@ -173,7 +173,10 @@
                         
                         <p class="mbr-text mbr-fonts-style mt-3 display-7">Puedes usar gratis nuestro servicio de enrutamiento.</p>
                     </div>
-                    <div class="mbr-section-btn item-footer mt-2"><a href="{{route('register')}}" class="btn btn-primary item-btn display-7" target="_blank">Comienza ahora &gt;</a></div>
+                    {{-- <div class="mbr-section-btn item-footer mt-2"><a href="{{route('register')}}" class="btn btn-primary item-btn display-7" target="_blank">Comienza ahora &gt;</a></div> --}}
+                    <div class="mbr-section-btn text-center">
+                        <a href="#pricing2-c" class="btn btn-primary display-4" id="show-container-user">comienza ahora</a>
+                    </div>
                 </div>
             </div><div class="item features-image сol-12 col-md-6 col-lg-6 active">
                 <div class="item-wrapper">
@@ -185,7 +188,10 @@
                         
                         <p class="mbr-text mbr-fonts-style mt-3 display-7">Tenemos los mejores precios para las empresas.</p>
                     </div>
-                    <div class="mbr-section-btn item-footer mt-2"><a href="{{route('register')}}" class="btn btn-primary item-btn display-7" target="_blank">Ver precios &gt;</a></div>
+                    {{-- <div class="mbr-section-btn item-footer mt-2"><a href="{{route('register')}}" class="btn btn-primary item-btn display-7" target="_blank">Ver precios &gt;</a></div> --}}
+                    <div class="mbr-section-btn text-center">
+                        <a href="#pricing2-6" class="btn btn-primary display-4" id="show-container-empresa">comienza ahora</a>
+                    </div>
                 </div>
             </div>
             
@@ -193,84 +199,14 @@
     </div>
 </section>
 
-<section data-bs-version="5.1" class="people5 mbr-embla cid-tRPh0Sz9uO" id="people5-a">
 
+
+<section data-bs-version="5.1" class="pricing2 cid-tRPniiGICV" id="pricing2-c" >
     
 
     
     
-
-    <div class="position-relative text-center">
-        <h3 class="mb-4 mbr-fonts-style display-2"><strong>Opiniones de nuestros usuarios</strong></h3>
-
-        <div class="embla" data-skip-snaps="true" data-align="center" data-auto-play-interval="5" data-draggable="true">
-            <div class="embla__viewport container-fluid">
-                <div class="embla__container">
-                    
-                    
-                    <div class="embla__slide slider-image item active" style="margin-left: 7rem; margin-right: 7rem;">
-                        <div class="user">
-                            <div class="user_image">
-                                <div class="item-wrapper position-relative">
-                                    <img src="assets/images/descarga-4-600x600.jpg" alt="Mobirise Website Builder" data-slide-to="0" data-bs-slide-to="0">
-                                </div>
-                            </div>
-                            <div class="user_text mb-4">
-                                <p class="mbr-fonts-style display-7">
-                                    Trabajo en una empresa de correo hace 12 años, desde que la empresa implemento Ubitec el tiempo que tardaban los repartidores en completar sus rutas se redujo en un 30%.</p>
-                            </div>
-                            <div class="user_name mbr-fonts-style mb-2 display-7"><strong>Martin</strong></div>
-                            <div class="user_desk mbr-fonts-style display-7">Supervisor</div>
-                        </div>
-                    </div><div class="embla__slide slider-image item" style="margin-left: 7rem; margin-right: 7rem;">
-                        <div class="user">
-                            <div class="user_image">
-                                <div class="item-wrapper position-relative">
-                                    <img src="assets/images/tspdne-600x600.jpg" alt="Mobirise Website Builder" data-slide-to="1" data-bs-slide-to="1">
-                                </div>
-                            </div>
-                            <div class="user_text mb-4">
-                                <p class="mbr-fonts-style display-7">Antes el proceso de creación para las rutas de la empresa era totalmente manual, lo que demandaba hasta 2 horas, ahora hago lo mismo con ubitec en menos de 20 minutos.</p>
-                            </div>
-                            <div class="user_name mbr-fonts-style mb-2 display-7"><strong>Jorgina</strong></div>
-                            <div class="user_desk mbr-fonts-style display-7">Administrativa</div>
-                        </div>
-                    </div><div class="embla__slide slider-image item" style="margin-left: 7rem; margin-right: 7rem;">
-                        <div class="user">
-                            <div class="user_image">
-                                <div class="item-wrapper position-relative">
-                                    <img src="assets/images/descarga-1-600x600.jpg" alt="Mobirise Website Builder" data-slide-to="2" data-bs-slide-to="2">
-                                </div>
-                            </div>
-                            <div class="user_text mb-4">
-                                <p class="mbr-fonts-style display-7">Me mude desde San Nicolas a Rosario, Ubitec me mando a cualquier lado y me robaron todo. No lo recomiendo.</p>
-                            </div>
-                            <div class="user_name mbr-fonts-style mb-2 display-7">
-                                <strong>Linda</strong>
-                            </div>
-                            <div class="user_desk mbr-fonts-style display-7">Gerente</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <button class="embla__button embla__button--prev">
-                <span class="mobi-mbri mobi-mbri-arrow-prev mbr-iconfont" aria-hidden="true"></span>
-                <span class="sr-only visually-hidden visually-hidden">Previous</span>
-            </button>
-            <button class="embla__button embla__button--next">
-                <span class="mobi-mbri mobi-mbri-arrow-next mbr-iconfont" aria-hidden="true"></span>
-                <span class="sr-only visually-hidden visually-hidden">Next</span>
-            </button>
-        </div>
-    </div>
-</section>
-
-<section data-bs-version="5.1" class="pricing2 cid-tRPniiGICV" id="pricing2-c">
-    
-
-    
-    
-    <div class="container">
+    <div class="container" id="hidden-container-user">
         <div class="row justify-content-center">
             <div class="col-12 col-md-6 align-center col-lg-4">
                 <div class="plan">
@@ -331,7 +267,7 @@
                             </ul>
                         </div>
                         <div class="mbr-section-btn text-center">
-                            <a href="https://mobiri.se" class="btn btn-primary display-4">Get started</a>
+                            <a href="" class="btn btn-primary display-4">Get started</a>
                         </div>
                     </div>
                 </div>
@@ -341,12 +277,10 @@
     </div>
 </section>
 
-<section data-bs-version="5.1" class="pricing2 cid-tRPcKlTpnd" id="pricing2-6">
-    
 
-    
-    
-    <div class="container">
+<section data-bs-version="5.1" class="pricing2 cid-tRPcKlTpnd" id="pricing2-6">
+
+    <div class="container" id="hidden-container-empresa">
         <div class="row justify-content-center">
             <div class="col-12 col-md-6 align-center col-lg-3">
                 <div class="plan">
@@ -429,11 +363,83 @@
     </div>
 </section>
 
-<section data-bs-version="5.1" class="slider3 mbr-embla cid-tRPw3iFvyi" id="slider3-d">
+
+
+<section data-bs-version="5.1" class="people5 mbr-embla cid-tRPh0Sz9uO" id="people5-a">
+
     
 
     
     
+
+    <div class="position-relative text-center">
+        <h3 class="mb-4 mbr-fonts-style display-2"><strong>Opiniones de nuestros usuarios</strong></h3>
+
+        <div class="embla" data-skip-snaps="true" data-align="center" data-auto-play-interval="5" data-draggable="true">
+            <div class="embla__viewport container-fluid">
+                <div class="embla__container">
+                    
+                    
+                    <div class="embla__slide slider-image item active" style="margin-left: 7rem; margin-right: 7rem;">
+                        <div class="user">
+                            <div class="user_image">
+                                <div class="item-wrapper position-relative">
+                                    <img src="assets/images/descarga-4-600x600.jpg" alt="Mobirise Website Builder" data-slide-to="0" data-bs-slide-to="0">
+                                </div>
+                            </div>
+                            <div class="user_text mb-4">
+                                <p class="mbr-fonts-style display-7">
+                                    Trabajo en una empresa de correo hace 12 años, desde que la empresa implemento Ubitec el tiempo que tardaban los repartidores en completar sus rutas se redujo en un 30%.</p>
+                            </div>
+                            <div class="user_name mbr-fonts-style mb-2 display-7"><strong>Martin</strong></div>
+                            <div class="user_desk mbr-fonts-style display-7">Supervisor</div>
+                        </div>
+                    </div><div class="embla__slide slider-image item" style="margin-left: 7rem; margin-right: 7rem;">
+                        <div class="user">
+                            <div class="user_image">
+                                <div class="item-wrapper position-relative">
+                                    <img src="assets/images/tspdne-600x600.jpg" alt="Mobirise Website Builder" data-slide-to="1" data-bs-slide-to="1">
+                                </div>
+                            </div>
+                            <div class="user_text mb-4">
+                                <p class="mbr-fonts-style display-7">Antes el proceso de creación para las rutas de la empresa era totalmente manual, lo que demandaba hasta 2 horas, ahora hago lo mismo con ubitec en menos de 20 minutos.</p>
+                            </div>
+                            <div class="user_name mbr-fonts-style mb-2 display-7"><strong>Jorgina</strong></div>
+                            <div class="user_desk mbr-fonts-style display-7">Administrativa</div>
+                        </div>
+                    </div><div class="embla__slide slider-image item" style="margin-left: 7rem; margin-right: 7rem;">
+                        <div class="user">
+                            <div class="user_image">
+                                <div class="item-wrapper position-relative">
+                                    <img src="assets/images/descarga-1-600x600.jpg" alt="Mobirise Website Builder" data-slide-to="2" data-bs-slide-to="2">
+                                </div>
+                            </div>
+                            <div class="user_text mb-4">
+                                <p class="mbr-fonts-style display-7">Me mude desde San Nicolas a Rosario, Ubitec me mando a cualquier lado y me robaron todo. No lo recomiendo.</p>
+                            </div>
+                            <div class="user_name mbr-fonts-style mb-2 display-7">
+                                <strong>Linda</strong>
+                            </div>
+                            <div class="user_desk mbr-fonts-style display-7">Gerente</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="embla__button embla__button--prev">
+                <span class="mobi-mbri mobi-mbri-arrow-prev mbr-iconfont" aria-hidden="true"></span>
+                <span class="sr-only visually-hidden visually-hidden">Previous</span>
+            </button>
+            <button class="embla__button embla__button--next">
+                <span class="mobi-mbri mobi-mbri-arrow-next mbr-iconfont" aria-hidden="true"></span>
+                <span class="sr-only visually-hidden visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</section>
+
+<section data-bs-version="5.1" class="slider3 mbr-embla cid-tRPw3iFvyi" id="slider3-d">
+    
+
     <div class="position-relative text-center" id="nosotros">
         <div class="col-12">
             <h3 class="mbr-section-title mbr-fonts-style align-center mb-4 display-2"><strong>Nuestro equipo</strong></h3>
@@ -763,7 +769,7 @@
 </section>
 
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>  <script src="assets/parallax/jarallax.js"></script>  <script src="assets/smoothscroll/smooth-scroll.js"></script>  <script src="assets/ytplayer/index.js"></script>  <script src="assets/dropdown/js/navbar-dropdown.js"></script>  <script src="assets/embla/embla.min.js"></script>  <script src="assets/embla/script.js"></script>  <script src="assets/theme/js/script.js"></script>  
-
+<script src="assets/extras/precios.js"></script> {{-- extra para desplegar los precios --}}
 
  <div id="scrollToTop" class="scrollToTop mbr-arrow-up"><a style="text-align: center;"><i class="mbr-arrow-up-icon mbr-arrow-up-icon-cm cm-icon cm-icon-smallarrow-up"></i></a></div>
     <input name="animation" type="hidden">
