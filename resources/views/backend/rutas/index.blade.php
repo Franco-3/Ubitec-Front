@@ -133,7 +133,7 @@
 				<tr>
 					<th class="text-center">#</th>
 					<th>Dirección</th>
-					<th>N° de Paquete</th>
+					<th>Agregar</th>
 					<th>Estado</th>
 					<th>Acciones</th>
 				</tr>
@@ -145,7 +145,12 @@
 					<tr>
 						<th class="text-center">{{$indice}}</th>
 						<td>{{$direccion->direccion}}</td>
-						<td>sin definir</td>
+						<td>
+							<!-- Button trigger modal -->
+							<button type="button" class="btn btn-primary col-sm-8 col-xxl-4 mx-auto mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+								editar
+							</button>
+						</td>
 						<td>
 							<label>
 								<form>
@@ -170,6 +175,29 @@
 		</div>
 	</div>
 </div>
+
+
+  <!-- Modal para agregar descripcion e imagen-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="">
+			<input type="file" name="imagen" accept="image/png, image/jpeg, image/jpg, image/bmp, image/ tif">
+			<textarea name="descripcion" cols="30" rows="7"></textarea>
+		  </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
