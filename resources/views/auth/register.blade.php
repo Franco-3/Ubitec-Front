@@ -95,8 +95,9 @@
                             <div class="col-md-6">
                                 
                                 <select name="tipo" id="tipo" class="form-control @error('tipo') is-invalid @enderror">
-                                    <option value="particular">Particular</option>
-                                    <option value="empresa">Empresa</option>
+                                    <option value="1">Particular</option>
+                                    <option value="0">Empresa</option>
+                                    {{-- en BD 0 es admin y 1 usuario final --}}
                                 </select>
 
                                 @error('tipo')
@@ -107,12 +108,10 @@
                             </div>
                         </div>
                         
-                        <div class="row mb-3">
+                        <div class="row mb-3" id="empresaInput" style="display: none;">
                             <label for="empresa" class="col-md-4 col-form-label text-md-end">{{ __('Company') }}</label>
-
                             <div class="col-md-6">
                                 <input id="empresa" type="text" class="form-control @error('empresa') is-invalid @enderror" value="{{ old('empresa') }}" name="empresa" autocomplete="empresa">
-
                                 @error('empresa')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -121,7 +120,7 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
+                        <div class="row mb-3" id="flotaInput" style="display: none;">
                             <label for="flota" class="col-md-4 col-form-label text-md-end">{{ __('Fleet') }}</label>
 
                             <div class="col-md-6">
@@ -151,4 +150,20 @@
         </div>
     </div>
 </div>
+
+
+<script>/*  codigo para desplegar los campos de registro de espresa, ToDo: hay que llevar al archivo js */
+    $(document).ready(function () {
+        $('#tipo').change(function () {
+            if ($(this).val() === '0') {
+                $('#empresaInput').show();
+                $('#flotaInput').show();
+            } else {
+                $('#empresaInput').hide();
+                $('#flotaInput').hide()
+            }
+        });
+    });
+</script>
+
 @endsection

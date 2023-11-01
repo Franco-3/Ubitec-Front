@@ -11,6 +11,7 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGc0UBAR_Y30fX31EvaU65KATMx0c0ItI&libraries=places"></script>
     <script src="https://kit.fontawesome.com/3f6f78b811.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> {{-- necesario para el despliegue del campo empresa en el registro --}}
     <link rel="shortcut icon" href="img/logogps.png" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     {{-- Tabla --}}
