@@ -125,4 +125,40 @@ class UserController extends Controller
 
         return view('backend.users.miCuenta', compact('user'));
     }
+
+    public function updateMiCuenta(Request $request, string $id)
+    {
+        $user = User::findOrFail($id);
+
+        $user->update([
+            'name' => $request->input('nombre'),
+            'lastName' => $request->input('apellido'),
+            'email' => $request->input('email'),
+            'telefono' => $request->input('telefono')
+        ]);
+        $request->session()->flash('status', 'Se modificó correctamente el usuario ' . $user->name);
+        return redirect()->back();
+    }
+
+    public function changePassword(Request $request)
+    {
+
+        $request->validate([
+            'contraseñaActual' => 'required',
+            'contraseñaNueva' => 'required|min:8',
+            'repContraseñaNueva' => 'required|same:contraseñaNueva',
+        ]);
+        $user = Auth::user();
+
+        // Verifica si la contraseña actual es válida
+        if (Hash::check($request->contraseñaActual, $user->password)) {
+            // La contraseña actual es válida, ahora cifra y actualiza la nueva contraseña
+            $user->password = Hash::make($request->contraseñaNueva);
+            $user->save();
+
+            return redirect()->back()->with('success', 'Contraseña cambiada exitosamente');
+        } else {
+            return back()->with('error', 'La contraseña actual es incorrecta');
+        }
+    }
 }

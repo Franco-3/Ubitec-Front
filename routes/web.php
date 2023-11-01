@@ -44,6 +44,8 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('cuenta', [UserController::class, 'miCuenta'])->name('miCuenta');
+    Route::put('cuenta/{id}', [UserController::class, 'updateMiCuenta'])->name('miCuenta.update');
+    Route::patch('cuenta', [UserController::class, 'changePassword'])->name('miCuenta.password');
 });
 
 
