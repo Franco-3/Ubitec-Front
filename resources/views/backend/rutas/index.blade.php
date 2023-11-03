@@ -83,7 +83,7 @@
 						<div class="btn-group col-12 shadow" role="group" aria-label="Basic Example">
 							<button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Abrir Mapa <i class="bi bi-globe-americas"></i></button>
 							<a class="btn btn-success" href="{{ route('rutas.create') }}" role="button">Nueva ruta</a>
-							<a class="btn btn-success href="{{ route('google.ordenar') }}" role="button">Ordenar Direcciones</a>
+							<a class="btn btn-success" href="{{ route('google.ordenar') }}" role="button">Ordenar Direcciones</a>
 							<!--<a href="{{ route('tsp.ordenar') }}" class="btn btn-primary">Ordenar Direcciones</a>-->
 						</div>
 					</div>
@@ -119,7 +119,7 @@
 </div>
 
 @if ($kmTotal)
-	<div class="conteiner">
+	<div class="container">
 		<p>Km Total de la ruta: {{$kmTotal}}</p>
 	</div>
 @endif
@@ -127,7 +127,7 @@
 <div class="container mt-2">
 	<div class="row">
 		<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-			<table id="index" class="table table-striped table-dark dt-responsive nowrap border border-dark">
+			<table id="index" class="table table-striped table-dark dt-responsive table-bordered">
 			<thead>
 				<tr>
 					<th class="text-center">#</th>
@@ -144,9 +144,9 @@
 					<tr>
 						<th class="text-center">{{$indice}}</th>
 						<td>{{$direccion->direccion}}</td>
-						<td>
+						<td class="text-center">
 							<!-- Button trigger modal -->
-							<button type="button" class="btn btn-success col-9 p-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+							<button type="button" class="btn btn-success p-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
 								Editar
 							</button>
 						</td>

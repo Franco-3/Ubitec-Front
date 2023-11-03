@@ -22,10 +22,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     {{-- CSS para Navbar de home --}}
     <link rel="preload" as="style" href="assets/mobirise/css/mbr-additional.css"><link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
-
 </head>
 <body class="d-flex flex-column min-vh-100" data-bs-theme="light">
-    <nav class="navbar navbar-dropdown navbar-expand-sm shadow-sm p-3">
+    <nav class="navbar navbar-expand-md shadow-sm p-3">
         <div class="container-fluid">
             <a class="navbar-brand fw-bold" href="./"><img src="img/logogps.png" style="width: 32px;" height="32" class="d-inline-block">UBITEC</a>
             

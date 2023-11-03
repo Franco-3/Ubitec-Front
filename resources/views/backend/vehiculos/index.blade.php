@@ -68,16 +68,13 @@
 @forelse($vehiculos as $vehiculo)
     @if ($loop->first)
         <div class="container">
-            <table id="index" class="table table-striped dt-responsive nowrap border border-dark" style="width: 100%">
+            <table id="index" class="table table-striped dt-responsive border border-dark">
                 <thead>
                     <tr>
                         <th>Patente</th>
                         <th>Nombre</th>
                         <th class="text-center">Usuario Asignado</th>
-                        <td> 
-                        </td>
-                        <td> 
-                        </td>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
         @endif
@@ -97,11 +94,9 @@
                             </svg> 
                         </span>
                     </button>
-                </td>
-                <td>
                     {{ Form::model($vehiculo, ['method' => 'delete', 'route' => ['users.destroy', $vehiculo->idVehiculo]]) }}
                     @csrf
-                    <a href="{{ route('vehiculos.edit', ['vehiculo' => $vehiculo->idVehiculo]) }}" class="btn btn-primary" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Editar"><i class="bi bi-pencil-square"></i></a>
+                    <a href="{{ route('vehiculos.edit', ['vehiculo' => $vehiculo->idVehiculo]) }}" class="btn btn-primary my-1" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Editar"><i class="bi bi-pencil-square"></i></a>
                     <button type="submit" class="btn btn-danger" onclick="if (!confirm('Está seguro de borrar el usuario?')) return false;" data-toggle="tooltip" data-placement="top" title="Borrar">
                         <i class="bi bi-trash3"></i>
                     </button>

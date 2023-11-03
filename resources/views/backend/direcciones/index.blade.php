@@ -4,7 +4,7 @@
 <div class="container">
     <br>
     <h2>Listado de Direcciones</h2>
-    <table class="table">
+    <table class="table table-striped border border-dark">
         <thead>
             <tr>
                 <th>ID</th>
@@ -13,6 +13,7 @@
                 <th>Longitud</th>
                 <th>Tipo</th>
                 <th>Orden</th>
+                <th>Accion</th>
             </tr>
         </thead>
         <tbody>
@@ -25,11 +26,11 @@
                 <td>{{ $direccion->tipo }}</td>
                 <td>{{ $direccion->orden }}</td>
                 <td>
-                    <a href="{{ route('direcciones.edit', $direccion->idDireccion) }}" class="btn btn-primary">Editar</a><br>
+                    <a href="{{ route('direcciones.edit', $direccion->idDireccion) }}" class="btn btn-primary col-12">Editar</a><br>
                     <form action="{{ route('direcciones.destroy', $direccion->idDireccion) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                        <button type="submit" class="btn btn-danger mt-1">Eliminar</button>
                     </form>
                 </td>
             </tr>

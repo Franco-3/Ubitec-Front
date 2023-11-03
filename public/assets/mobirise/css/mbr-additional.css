@@ -107,9 +107,6 @@ body {
 .bg-warning {
   background-color: #ffe161 !important;
 }
-.bg-danger {
-  background-color: #ff9966 !important;
-}
 .btn-primary,
 .btn-primary:active {
   background-color: #6592e6 !important;
@@ -219,22 +216,6 @@ body {
   color: #614f00 !important;
   background-color: #ffd10a !important;
   border-color: #ffd10a !important;
-}
-.btn-danger,
-.btn-danger:active {
-  background-color: #ff9966 !important;
-  border-color: #ff9966 !important;
-  color: #ffffff !important;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
-}
-.btn-danger:hover,
-.btn-danger:focus,
-.btn-danger.focus,
-.btn-danger.active {
-  color: #ffffff !important;
-  background-color: #ff5f0f !important;
-  border-color: #ff5f0f !important;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
 }
 .btn-danger.disabled,
 .btn-danger:disabled {

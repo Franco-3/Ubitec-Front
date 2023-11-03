@@ -13,8 +13,6 @@
         {{ session('error') }}
     </div>
 @endif
-
-
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-9 col-lg-8 col-xxl-6">
@@ -48,10 +46,9 @@
                     </div>
                     <br>
                     <input class="button3" type="submit" value="Guardar">
-                      {{-- <input class="btn btn-danger p-2 fw-semibold text-uppercase float-end rounded" type="button" value="Cambiar contraseña"> --}}
-                      <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-danger p-2 fw-semibold text-uppercase float-end rounded" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                      cambiar contraseña
+                     <!-- Button trigger modal -->
+                     <button type="button" class="btn btn-danger p-2 fw-semibold text-uppercase float-end rounded" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                      Cambiar contraseña
                     </button>
                 </form>
                 <br>
@@ -59,8 +56,6 @@
         </div>
     </div>
 </div>
-
-
 
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -74,14 +69,14 @@
           <form action="{{route('miCuenta.password', $user->id)}}" method="POST" id="form-pass">
             @csrf
             @method('PATCH')
-            <label for="contraseñaActual">Contraseña Actual</label>
-            <input type="password" name="contraseñaActual">
+            <label for="contraseñaActual">Contraseña Actual:</label>
+            <input type="password" name="contraseñaActual" class="mb-3">
 
-            <label for="contraseñaNueva">Contraseña nueva</label>
-            <input type="password" name="contraseñaNueva">
+            <label for="contraseñaNueva">Contraseña Nueva:</label>
+            <input type="password" name="contraseñaNueva" class="mb-3">
 
-            <label for="repContraseñaNueva">Repetir contraseña nueva</label>
-            <input type="password" name="repContraseñaNueva">
+            <label for="repContraseñaNueva">Repetir Contraseña Nueva:</label>
+            <input type="password" name="repContraseñaNueva" class="mb-3">
 
           </form>
         </div>

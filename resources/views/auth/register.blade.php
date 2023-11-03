@@ -151,7 +151,6 @@
     </div>
 </div>
 
-
 <script>/*  codigo para desplegar los campos de registro de espresa, ToDo: hay que llevar al archivo js */
     $(document).ready(function () {
         $('#tipo').change(function () {
