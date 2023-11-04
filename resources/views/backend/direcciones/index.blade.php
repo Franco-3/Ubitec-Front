@@ -7,13 +7,14 @@
     <table class="table table-striped border border-dark">
         <thead>
             <tr>
-                <th>ID</th>
+                <th >ID</th>
                 <th>Direccion</th>
                 <th>Latitud</th>
                 <th>Longitud</th>
                 <th>Tipo</th>
                 <th>Orden</th>
-                <th>Accion</th>
+                <th>Estado</th>
+                <th>Acción</th>
             </tr>
         </thead>
         <tbody>
@@ -25,13 +26,23 @@
                 <td>{{ $direccion->longitud }}</td>
                 <td>{{ $direccion->tipo }}</td>
                 <td>{{ $direccion->orden }}</td>
-                <td>
-                    <a href="{{ route('direcciones.edit', $direccion->idDireccion) }}" class="btn btn-primary col-12">Editar</a><br>
-                    <form action="{{ route('direcciones.destroy', $direccion->idDireccion) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger mt-1">Eliminar</button>
-                    </form>
+                <td class="text-center">
+					<label>
+						<form>
+							<input name='estado' type='checkbox' disabled {{ $direccion->estado ? 'checked' : '' }}>
+							<div class='check mx-auto'></div>
+						</form>
+					</label>
+				</td>
+                <td class="text-center">
+                    <div style="display: flex; align-items: center; margin: 4px;">
+                        <a href="{{ route('direcciones.edit', $direccion->idDireccion) }}" class="btn btn-primary my-1 mr-1" data-toggle="tooltip" data-placement="top" title="Editar"><i class="bi bi-pencil-square"></i></a>
+                        <form action="{{ route('direcciones.destroy', $direccion->idDireccion) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger ml-1" data-toggle="tooltip" data-placement="top" title="Borrar"><i class="bi bi-trash3"></i></button>
+                        </form>
+                    </div>
                 </td>
             </tr>
             @endforeach
