@@ -15,7 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(10);
+        $empresa = Auth()->user()->empresa;
+        $users = User::where('empresa', $empresa)->get();
         return view('backend.users.index', compact('users'));
     }
 
