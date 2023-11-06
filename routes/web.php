@@ -50,6 +50,8 @@ Route::middleware('auth')->group(function () {
 
     Route::post('cargar-excel', [ExcelController::class, 'cargarExcel'])->name('cargar.excel');
     Route::get('generar-excel', [ExcelController::class, 'generarExcel'])->name('generar.excel');
+
+    Route::post('subir-imagen', [RutasController::class, 'agregarCaptura'])->name('guardar.captura');
 });
 
 

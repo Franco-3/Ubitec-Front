@@ -10,7 +10,7 @@ class Ruta extends Model
     use HasFactory;
     protected $table = 'rutas';
     protected $primaryKey = 'idRuta';
-    protected $fillable = ['estado', 'kmTotal', 'polyline', 'cities_polyline'];
+    protected $fillable = ['estado', 'kmTotal', 'polyline', 'cities_polyline', 'path'];
 
     public $timestapms = true;
 }

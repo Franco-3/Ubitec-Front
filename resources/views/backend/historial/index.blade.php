@@ -15,7 +15,7 @@
         @foreach ($rutas as $ruta)
             <div class="col mb-2">
                 <div class="card" style="width: 18rem;">
-                    <img src="https://phantom-elmundo.unidadeditorial.es/f63778a06bcec91b6ca42723ad6aa9e5/crop/168x72/1032x648/f/jpg/assets/multimedia/imagenes/2021/08/26/16299752237253.jpg" class="card-img-top" alt="...">
+                    <img src="{{ asset($ruta->path) }}" class="card-img-top" alt="Captura de la ruta">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">

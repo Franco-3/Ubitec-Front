@@ -81,7 +81,7 @@
                 <div class="row">
 					<div class="btn-toolbar px-0" role="toolbar" aria-label="Toolbar with button groups">
 						<div class="btn-group col-12 shadow" role="group" aria-label="Basic Example">
-							<button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Abrir Mapa <i class="bi bi-globe-americas"></i></button>
+							<button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom" id="abrirMapaButton">Abrir Mapa <i class="bi bi-globe-americas"></i></button>
 							<a class="btn btn-success" href="{{ route('rutas.create') }}" role="button">Nueva ruta</a>
 							<a class="btn btn-success" href="{{ route('google.ordenar') }}" role="button">Ordenar Direcciones</a>
 							<!--<a href="{{ route('tsp.ordenar') }}" class="btn btn-primary">Ordenar Direcciones</a>-->
@@ -96,7 +96,8 @@
                 </div>
                 <div class="offcanvas-body bg-dark-subtle">
                     <div class="container">
-                        <div id="map" class="specific border border-3 border-secondary rounded"></div>
+						<div id="map"></div>
+						<button id="screenMap">Take and download screen</button>
                     </div>
                 </div>
             </div>
@@ -181,6 +182,23 @@
 
 @if (Session::has('inicio') && Session::has('final'))
 	<button class="btn btn-primary col-sm-12 col-md-3 col-lg-3 col-xl-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#excelbottom" aria-controls="excelbottom">Cargar Excel</button>
+@endif
+
+@if ($imagenRuta)
+    <script>
+		document.addEventListener('DOMContentLoaded', function() {
+			// Agrega un oyente de eventos al botón "Abrir Mapa"
+			const abrirMapaButton = document.getElementById('abrirMapaButton');
+
+			abrirMapaButton.addEventListener('click', function() {
+				// Cuando se hace clic en el botón "Abrir Mapa", se abrirá el modal
+					console.log('hola');
+					// Ahora puedes tomar la captura del mapa
+					capturarImagen();
+					console.log('El modal se ha abierto completamente. Capturando la imagen del mapa.');
+			});
+		});
+    </script>
 @endif
 
 

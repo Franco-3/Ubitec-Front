@@ -10,6 +10,7 @@ use App\Models\User_ruta;
 use App\Models\Ruta;
 use Illuminate\Support\Facades\Session;
 use App\Models\Polyline;
+use Illuminate\Support\Facades\File;
 
 class RutasController extends Controller
 {
@@ -51,7 +52,18 @@ class RutasController extends Controller
 
         }
 
-        return view('backend.rutas.index', compact('idUsuario', 'direcciones', 'responseData', 'kmTotal'));
+        $ruta = Ruta::find(session('idRuta'));
+        $rutaPath = $ruta->path;
+        $imagenRuta = false;
+        if(!empty($puntosPolylinea->polyline) && $rutaPath == 'storage/images_ruta/default.png')
+        {
+            $rutaPath = 'storage/images_ruta/ruta'.session('idRuta').'.png';
+            $ruta->path = $rutaPath;
+            $ruta->save();
+            $imagenRuta = true;
+        }
+
+        return view('backend.rutas.index', compact('idUsuario', 'direcciones', 'responseData', 'kmTotal', 'imagenRuta'));
     }
 
 
@@ -76,6 +88,7 @@ class RutasController extends Controller
         $ruta = new Ruta();
         $ruta->estado = 'P';
         $ruta->kmTotal = null;
+        $ruta->path = 'storage/images_ruta/default.png';
         $ruta->save();
 
         //enlazar la ruta y el usuario en la tabla usuarios_ruta
@@ -121,6 +134,27 @@ class RutasController extends Controller
     {
 
         return redirect()->route('rutas.index');
+    }
+
+    public function agregarCaptura(Request $request)
+    {
+
+        $idRuta = session('idRuta');
+
+        $carpeta = storage_path("public/images_ruta");
+
+        // Verifica si la carpeta ya existe
+        if (!File::exists($carpeta)) {
+            // Si no existe, crea la carpeta
+            File::makeDirectory($carpeta, 0755, true, true);
+        }
+
+        $image = $request->file('capturedImage');
+        $nombreArchivo = 'ruta'.$idRuta.'.png';
+        // Guarda la imagen en una ubicación deseada en tu servidor
+        $image->storeAs('public/images_ruta', $nombreArchivo); // Esto es solo un ejemplo, ajusta la ubicación según tus necesidades
+
+        return response()->json(['message' => 'Imagen guardada exitosamente']);
     }
 
     private function findMaxIdRuta(string $id){

@@ -7,9 +7,14 @@
     <title>@yield('title')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" id="bootstrap-css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    {{-- mapa leaflet --}}
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    {{-- autocomplete de las direcciones --}}
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGc0UBAR_Y30fX31EvaU65KATMx0c0ItI&libraries=places"></script>
+
     <script src="https://kit.fontawesome.com/3f6f78b811.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> {{-- necesario para el despliegue del campo empresa en el registro --}}
     <link rel="shortcut icon" href="img/logogps.png" type="image/x-icon">
@@ -22,6 +27,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     {{-- CSS para Navbar de home --}}
     <link rel="preload" as="style" href="assets/mobirise/css/mbr-additional.css"><link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
+
+    {{-- para tomar una captura del mapa --}}
+    <script src="{{ asset('js/node_modules/leaflet-simple-map-screenshoter/dist/leaflet-simple-map-screenshoter.js') }}"></script>
+    <script src="https://unpkg.com/file-saver/dist/FileSaver.js"></script>
+    <script src="{{ asset('js/capturar_imagen.js')}}"></script>
+
+
 </head>
 <body class="d-flex flex-column min-vh-100" data-bs-theme="light">
     <nav class="navbar navbar-expand-md shadow-sm p-3">

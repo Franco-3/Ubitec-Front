@@ -7,6 +7,11 @@ const map = L.map('map').setView([-33.38151239916761,-60.216151025578654], 13);
 		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 	}).addTo(map);
 
+  // agregar boton para capturar mapa
+  var simpleMapScreenshoter = L.simpleMapScreenshoter({
+    hidden: false, // hide screen btn on map
+  }).addTo(map)
+
 try {
   const coordenadas =   window.responseData.data.coordinates //coordenadas que se agregaran como puntos en el mapa
   const polylinea = window.responseData.polyline; //polylnea que unira los puntos
@@ -155,3 +160,42 @@ try {
         }
     });
   }
+
+
+
+
+
+  document.getElementById('screenMap').addEventListener('click', function () {
+    simpleMapScreenshoter.takeScreen('blob', {
+        caption: function () {
+            return 'Hello world'
+        }
+    }).then(blob => {
+      uploadImageToServer(blob);
+    }).catch(e => {
+        alert(e.toString())
+    })
+  });
+
+  function uploadImageToServer(blob) {
+    // Crear un objeto FormData y adjuntar la imagen
+    var formData = new FormData();
+    formData.append('_token', csrfToken);
+    formData.append('capturedImage', blob, 'foto.png');
+
+    // Realizar una solicitud POST al servidor para subir la imagen
+    fetch('/subir-imagen', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('Imagen cargada exitosamente');
+        } else {
+            alert('Error al cargar la imagen');
+        }
+    })
+    .catch(error => {
+        alert('Error de red: ' + error);
+    });
+}

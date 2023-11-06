@@ -17,6 +17,7 @@ return new class extends Migration
             $table->float('kmTotal')->nullable();
             $table->longText('polyline')->nullable();
             $table->longText('cities_polyline')->nullable();
+            $table->text('path');
             $table->timestamps();
         });
     }

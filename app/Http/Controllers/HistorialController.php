@@ -24,7 +24,7 @@ class HistorialController extends Controller
             $join->on('final.idRuta', '=', 'rutas.idRuta')
                  ->where('final.tipo', 'final');
         })
-        ->select('rutas.idRuta', 'inicio.direccion as direccion_inicio', 'final.direccion as direccion_final', 'rutas.created_at')
+        ->select('rutas.idRuta', 'inicio.direccion as direccion_inicio', 'final.direccion as direccion_final', 'rutas.created_at', 'rutas.path')
         ->where('user_ruta.idUsuario', session('idUser'))
         ->get();
         return view('backend.historial.index', compact('rutas'));
