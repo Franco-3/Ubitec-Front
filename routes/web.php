@@ -46,6 +46,10 @@ Route::middleware('auth')->group(function () {
     Route::get('cuenta', [UserController::class, 'miCuenta'])->name('miCuenta');
     Route::put('cuenta/{id}', [UserController::class, 'updateMiCuenta'])->name('miCuenta.update');
     Route::patch('cuenta', [UserController::class, 'changePassword'])->name('miCuenta.password');
+
+
+    Route::post('cargar-excel', [ExcelController::class, 'cargarExcel'])->name('cargar.excel');
+    Route::get('generar-excel', [ExcelController::class, 'generarExcel'])->name('generar.excel');
 });
 
 
@@ -58,22 +62,16 @@ Route::group(['middleware' => 'admin'], function () {
     //Route::post('vehiculos/updateVehiculos', [DireccionesController::class, 'updateVehiculos'])->name('post');;
     Route::resource('dashboard', AdminController::class);
     Route::get('dashboard/nueva-ruta/{id}', [AdminController::class, 'create'])->name('nueva_ruta');
+
+
+
+
+    Route::post('dividir-excel', [ExcelController::class, 'dividirExcelEntreVehiculos'])->name('dividir.excel');
+    Route::get('tspAdmin', [TSPcontroller::class, 'dividirDirecciones'])->name('excel.admin');
+    
 });
 
 
-
-
-
-
-//rutas para cargar excel
-Route::get('/cargarExcel', function () {
-    return view('backend.excel');
-});
-
-Route::post('/cargar-excel', [ExcelController::class, 'cargarExcel'])->name('cargar.excel');
-Route::post('/dividir-excel', [ExcelController::class, 'dividirExcelEntreVehiculos'])->name('dividir.excel');
-Route::get('/tspAdmin', [TSPcontroller::class, 'dividirDirecciones'])->name('excel.admin');
-Route::get('/generar-excel', [ExcelController::class, 'generarExcel'])->name('generar.excel');
 
 
 

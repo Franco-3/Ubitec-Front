@@ -175,6 +175,9 @@
 	</div>
 </div>
 
+
+<button id="generar_excel" onclick="generarExcel()">Generar excel</button>
+
 <!-- Modal para agregar descripcion e imagen-->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog">

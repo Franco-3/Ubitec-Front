@@ -138,7 +138,6 @@
 				<tr>
 					<th class="text-center">#</th>
 					<th>Dirección</th>
-					<th>N° de Paquete</th>
 					<th>Acciones</th>
 				</tr>
 			</thead>
@@ -149,7 +148,6 @@
 					<tr>
 						<th class="text-center">{{$indice}}</th>
 						<td>{{$direccion->direccion}}</td>
-						<td>sin definir</td>
 						@if (!empty($direccion->idDireccion))
 							<td>
 								<form action="{{ route('direcciones.destroy', $direccion->idDireccion) }}" method="POST">

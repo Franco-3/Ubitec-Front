@@ -9,6 +9,7 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\DireccionesController;
 use App\Models\Direcciones;
+use Illuminate\Support\Facades\DB;
 
 class ExcelController extends Controller
 {
@@ -119,40 +120,63 @@ class ExcelController extends Controller
 
     public function generarExcel()
     {
+        $idRuta = session('idRuta');
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
 
         // Agregar encabezados
         $sheet->setCellValue('A1', 'Calle');
-        $sheet->setCellValue('B1', 'Numero');
-        $sheet->setCellValue('C1', 'Ciudad');
-        $sheet->setCellValue('D1', 'Provincia');
-        $sheet->setCellValue('E1', 'Pais');
+        $sheet->setCellValue('B1', 'Ciudad');
+        $sheet->setCellValue('C1', 'Provincia');
+        $sheet->setCellValue('D1', 'Pais');
 
         // Agregar datos de ejemplo
-        $direcciones = [
-            ['Mitre', '320', 'San Nicolas de los Arroyos', 'Buenos Aires', 'Argentina'],
-            ['Belgrano', '500', 'Buenos Aires', 'Buenos Aires', 'Argentina'],
-            // Agrega más filas de direcciones aquí...
-        ];
+        $direcciones = $this->searchDirections($idRuta);
 
         $row = 2;
         foreach ($direcciones as $direccion) {
-            list($calle, $numero, $ciudad, $provincia, $pais) = $direccion;
+            $parts = explode(', ', $direccion->direccion); // Suponiendo que las partes estén separadas por comas y espacio
+        
+            $calle = $parts[0] ?? 'VALOR INDEFINIDO'; // Si la dirección no contiene la calle, establece un valor predeterminado en blanco
+            $ciudad = $parts[1] ?? 'VALOR INDEFINIDO';
+            $provincia = $parts[2] ?? 'VALOR INDEFINIDO';
+            $pais = $parts[3] ?? 'VALOR INDEFINIDO';
+        
+            // Ahora, puedes agregar estos valores al objeto PHPExcel
             $sheet->setCellValue('A' . $row, $calle);
-            $sheet->setCellValue('B' . $row, $numero);
-            $sheet->setCellValue('C' . $row, $ciudad);
-            $sheet->setCellValue('D' . $row, $provincia);
-            $sheet->setCellValue('E' . $row, $pais);
+            $sheet->setCellValue('B' . $row, $ciudad);
+            $sheet->setCellValue('C' . $row, $provincia);
+            $sheet->setCellValue('D' . $row, $pais);
+        
+            // Incrementa el contador de fila
             $row++;
         }
 
         // Crear el archivo Excel
         $writer = new Xlsx($spreadsheet);
-        $archivoPath = storage_path('app/direcciones.xlsx');
+        $archivoPath = storage_path("app/excel/direcciones".$idRuta.".xlsx");
         $writer->save($archivoPath);
 
         return response()->download($archivoPath, 'direcciones.xlsx');
+    }
+
+
+
+
+    private function searchDirections(string $idRuta)
+    {
+        $direccionesUsuario = DB::select("SELECT direccion FROM rutas
+        JOIN direcciones ON rutas.idRuta = direcciones.idRuta
+        WHERE rutas.idRuta = $idRuta
+        ORDER BY
+        CASE
+            WHEN tipo = 'inicio' THEN 1
+            WHEN tipo = 'final' THEN 3
+            ELSE 2
+        END,
+        orden ASC");
+
+        return $direccionesUsuario;
     }
 
 

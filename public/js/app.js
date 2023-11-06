@@ -127,3 +127,31 @@ try {
         }
     });
   }
+
+  function generarExcel()
+  {
+      $.ajax({
+        url: 'generar-excel',
+        type: 'GET',
+        headers: {
+            'X-CSRF-TOKEN': window.csrfToken
+        },
+        xhrFields: {
+          responseType: 'blob' // Solicitar el tipo de respuesta como un blob (archivo)
+        },
+        success: function(data) {
+
+          var a = document.createElement('a');
+          var url = window.URL.createObjectURL(data);
+          a.href = url;
+          a.download = 'direcciones.xlsx';
+          document.body.appendChild(a);
+          a.click();
+          window.URL.revokeObjectURL(url);
+
+        },
+        error: function(xhr, status, error) {
+          console.log("Error:", error);
+        }
+    });
+  }
