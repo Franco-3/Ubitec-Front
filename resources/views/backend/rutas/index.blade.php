@@ -175,8 +175,33 @@
 	</div>
 </div>
 
+@if ($kmTotal)
+	<button id="generar_excel" onclick="generarExcel()">Generar excel</button>
+@endif
 
-<button id="generar_excel" onclick="generarExcel()">Generar excel</button>
+@if (Session::has('inicio') && Session::has('final'))
+	<button class="btn btn-primary col-sm-12 col-md-3 col-lg-3 col-xl-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#excelbottom" aria-controls="excelbottom">Cargar Excel</button>
+@endif
+
+
+<div class="offcanvas offcanvas-bottom offcanvas-size-xl" style="height: 80vh;" tabindex="-1" id="excelbottom" aria-labelledby="excelbottomLabel">
+	<div class="offcanvas-header">
+		<h5 class="offcanvas-title" id="excelbottomLabel">Cargar Excel</h5>
+		<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+	</div>
+	<div class="offcanvas-body">
+		<div class="container">
+				<h3>Cargar Archivo Excel</h3>
+				<form action="{{ route('cargar.excel') }}" method="POST" enctype="multipart/form-data">
+					@csrf
+					<input type="file" class="form-control"  name="archivo_excel" accept=".xlsx, .xls">
+					<br>
+					<button type="submit" class="btn btn-primary" >Cargar Excel</button>
+				</form>
+		</div>
+	</div>
+</div>
+
 
 <!-- Modal para agregar descripcion e imagen-->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
