@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Factories\VehiculoFactory;
 use App\Models\Vehiculo;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class VehiculoController extends Controller
 {
@@ -55,8 +56,8 @@ class VehiculoController extends Controller
         $vehiculo->update($validatedData);
         $vehiculo->save();
 
-        $request->session()->flash('status', 'Se guardó correctamente el vehiculo ' . $vehiculo->name);
-        return redirect()->route('vehiculos.index', $vehiculo->id);
+        $request->session()->flash('status', 'Se guardó correctamente el vehiculo ');
+        return redirect()->route('vehiculos.index');
     }
 
     /**
@@ -84,21 +85,24 @@ class VehiculoController extends Controller
     public function update(Request $request, string $id)
     {
         $vehiculo = Vehiculo::findOrFail($id);
-        
-        
+
         $validatedData = $request->validate(
             [
-                'usuario' => 'required',
+                'nombre' => 'required',
+                'patente' => 'required',
+                'idUsuario' => 'required',
             ]
         );
         
         $vehiculo->update($validatedData);
         
-        $vehiculo->idUsuario = $request->input('usuario');
+        $vehiculo->nombre = $request->input('nombre');
+        $vehiculo->patente = $request->input('patente');
+        $vehiculo->idUsuario = $request->input('idUsuario');
         
         $vehiculo->save();
 
-        $request->session()->flash('status', 'Se guardó correctamente el cambio ' . $vehiculo->titulo);
+        $request->session()->flash('status', 'Se guardó correctamente el cambio ' . $vehiculo->nombre);
         return redirect()->route('vehiculos.index');
     }
 
@@ -119,5 +123,26 @@ class VehiculoController extends Controller
     {
         $user = User::where('idUsuario', $idUsuario)->with('asignadoA');
         return $user;
+    }
+
+    public function updateUser(Request $request, string $id)
+    {
+        $vehiculo = Vehiculo::findOrFail($id);
+        
+        
+        $validatedData = $request->validate(
+            [
+                'usuario' => 'required',
+            ]
+        );
+        
+        $vehiculo->update($validatedData);
+        
+        $vehiculo->idUsuario = $request->input('usuario');
+        
+        $vehiculo->save();
+
+        $request->session()->flash('status', 'Se guardó correctamente el cambio ' . $vehiculo->titulo);
+        return redirect()->route('vehiculos.index');
     }
 }

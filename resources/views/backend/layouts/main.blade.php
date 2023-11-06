@@ -26,8 +26,11 @@
 <body class="d-flex flex-column min-vh-100" data-bs-theme="light">
     <nav class="navbar navbar-expand-md shadow-sm p-3">
         <div class="container-fluid">
-            <a class="navbar-brand fw-bold" href="./"><img src="img/logogps.png" style="width: 32px;" height="32" class="d-inline-block">UBITEC</a>
-            
+            @if(Route::has('users.edit') || Route::has('vehiculos.edit') || Route::has('direcciones.edit'))
+                <a class="navbar-brand fw-bold" href="./"><img src="../../img/logogps.png" style="width: 32px;" height="32" class="d-inline-block">UBITEC</a>
+            @else
+                <a class="navbar-brand fw-bold" href="./"><img src="img/logogps.png" style="width: 32px;" height="32" class="d-inline-block">UBITEC</a>
+            @endif
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

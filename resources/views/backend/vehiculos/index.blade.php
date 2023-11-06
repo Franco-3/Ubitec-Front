@@ -21,7 +21,7 @@
         </div>
 
         <div class="modal-body">
-            <form id="form" action="" method="POST">
+            <form id="form" action="" method="PUT">
                 @csrf
                 @method('PUT')
                 <div class="form-group">
@@ -86,6 +86,9 @@
                     {{ $vehiculo->asignadoA->name . ' ' . $vehiculo->asignadoA->lastName }}
                 </td>
                 <td>
+                    
+                    {{ Form::model($vehiculo, ['method' => 'delete', 'route' => ['vehiculos.destroy', $vehiculo->idVehiculo]]) }}
+                    @csrf
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-info edit" data-id='{{ $vehiculo->idVehiculo }}' data-patente='{{ $vehiculo->patente }}' data-nombre='{{ $vehiculo->nombre }}' data-bs-toggle="modal" data-bs-target="#exampleModal" data-toggle="tooltip" data-placement="top" title="Cambiar usuario">
                         <span>
@@ -94,8 +97,6 @@
                             </svg> 
                         </span>
                     </button>
-                    {{ Form::model($vehiculo, ['method' => 'delete', 'route' => ['users.destroy', $vehiculo->idVehiculo]]) }}
-                    @csrf
                     <a href="{{ route('vehiculos.edit', ['vehiculo' => $vehiculo->idVehiculo]) }}" class="btn btn-primary my-1" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Editar"><i class="bi bi-pencil-square"></i></a>
                     <button type="submit" class="btn btn-danger" onclick="if (!confirm('Está seguro de borrar el usuario?')) return false;" data-toggle="tooltip" data-placement="top" title="Borrar">
                         <i class="bi bi-trash3"></i>
@@ -109,7 +110,7 @@
         @endif
         </div>
         @empty
-        <p class="text-capitalize"> No hay usuarios.</p>
+        <p class="text-capitalize"> No hay vehiculos.</p>
     @endforelse
     </div>
     {{-- <hr>
@@ -119,7 +120,7 @@
           Agregar en App\Providers\AppServiceProvider:
           use Illuminate\Pagination\Paginator;
               public function boot() { Paginator::useBootstrap(); } -->
-        {!! $users->links() !!}
+        {!! $vehiculos->links() !!}
     </div> --}}
 
 
@@ -132,15 +133,6 @@
 <script>
     $(document).ready(function () {
 
-        /* $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-        }); */
-        
-        
-        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-
         $(document).on('click', '.edit', function(event){
                 var id = $(this).data('id');
                 var patente = $(this).data('patente');
@@ -148,7 +140,7 @@
                 $('#patente').val(patente);
                 $('#nombre').val(nombre);
                 $('#id').val(id);
-                var action = 'http://ubitec-front.test/vehiculos/' + id;
+                var action = 'http://ubitec-front.test/vehiculos/updateUser/' + id;
                 var formulario = $('#form');
                 formulario.attr('action', action);
         });

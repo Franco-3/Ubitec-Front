@@ -25,7 +25,7 @@ class VehiculoFactory extends Factory
         return [
             "nombre" => fake()->unique()->word(),
             "patente" => fake()->shuffle('abcd136'),
-            "idUsuario" => User::all()->random()->id,
+            "idUsuario" => null,
         ];
     }
 }

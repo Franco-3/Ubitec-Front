@@ -10,8 +10,9 @@
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Nombre</th>
+                            <th>Nombre completo</th>
                             <th>Email</th>
+                            <th>Empresa</th>
                             <td>
                                 <a class="btn btn-success" href="{{ route('users.create') }}">
                                     <i class="bi bi-person-fill-add"></i>
@@ -23,12 +24,12 @@
                     <tbody>
                         <tr>
                             <td>{{ $user->id }}</td>
-                            <td> {{ $user->name }}</a></td>
+                            <td> {{ $user->name }} {{ $user->lastName }}</a></td>
                             <td>{{ $user->email }}</td>
+                            <td>{{ $user->empresa }}</td>
                             <td>
                                 {{ Form::model($user, ['method' => 'delete', 'route' => ['users.destroy', $user->id]]) }}
                                 @csrf
-                                <a href="{{ route('users.show', ['user' => $user->id]) }}" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Visualizar"><i class="bi bi-eye" style="color: white"></i></a>
                                 <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="btn btn-primary my-1" data-toggle="tooltip" data-placement="top" title="Editar"><i class="bi bi-pencil-square"></i></a>
                                 <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Borrar"
                                     onclick="if (!confirm('Está seguro de borrar el usuario?')) return false;"><i class="bi bi-trash3"></i></button>

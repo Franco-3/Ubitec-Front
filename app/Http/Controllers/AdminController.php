@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ruta;
+use App\Models\Direcciones;
+use App\Models\Vehiculo;
 use App\Models\User_ruta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,15 +18,18 @@ class AdminController extends Controller
     public function index()
     {
         $empresa = Auth()->user()->empresa;
+        $direcciones = Direcciones::all()->where('estado', 0)->whereNotNull('orden');
+        $vehiculos = Vehiculo::all()->whereNull('idUsuario');
+        //$vehiculos = Vehiculo::all();
         session(['empresa' => $empresa]);
-
+        //dd($vehiculos);
         $vehiculosUsuario = DB::table('users')
                 ->join('vehiculos', 'users.id', '=', 'vehiculos.idUsuario')
                 ->select('*')
                 ->where('users.empresa', '=', $empresa)
                 ->get();
-        // dd($vehiculosUsuario);
-        return view('admin.index', compact('vehiculosUsuario'));
+        
+        return view('admin.index', compact('vehiculosUsuario', 'direcciones', 'vehiculos'));
     }
 
     /**

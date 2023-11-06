@@ -15,7 +15,10 @@
         @csrf
         <div class="form-group @if ($errors->has('titulo')) has-error has-feedback @endif">
             {{ Form::label('nombre', 'Nombre', ['class' => 'control-label']) }}
-            {{ Form::text('nombre', $vehiculo->nombre, ['class' => 'form-control', 'placeholder' => 'Ingrese el nombre']) }}
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-card-text"></i></span>
+                {{ Form::text('nombre', $vehiculo->nombre, ['class' => 'form-control', 'placeholder' => 'Ingrese el nombre' , 'maxlength' => '100']) }}
+            </div>
             @error('nombre')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -24,7 +27,7 @@
             {{ Form::label('patente', 'Patente', ['class' => 'control-label']) }}
             <div class="input-group">
                 <span class="input-group-text"><i class="bi bi-car-front-fill"></i></span>
-                {{ Form::text('patente', $vehiculo->patente, ['class' => 'form-control', 'readonly']) }}
+                {{ Form::text('patente', $vehiculo->patente, ['class' => 'form-control', 'maxlength' => '7']) }}
             </div>
             @error('patente')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -34,7 +37,8 @@
             {{ Form::label('idUsuario', 'Usuario asignado', ['class' => 'control-label']) }}
             <div class="input-group">
                 <span class="input-group-text"><i class="bi bi-person-fill"></i></i></i></span>
-                {{ Form::text('idUsuario', '-', ['class' => 'form-control', 'readonly']) }}
+                {{ Form::text('idUsuario', $vehiculo->usuario , ['class' => 'form-control d-none', 'readonly']) }}
+                {{ Form::text('NombreUsuario', $vehiculo->asignadoA->name , ['class' => 'form-control', 'readonly']) }}
             </div>
             @error('idUsuario')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -42,7 +46,7 @@
         </div>
 
     </div>
-    </br><button type="submit" style="width: 100%;" class="btn btn-primary">Guardar</button>
+    </br><button type="submit" style="width: 100%;" class="btn btn-primary my-1">Guardar</button>
     </div>
     {!! Form::close() !!}
 </div>

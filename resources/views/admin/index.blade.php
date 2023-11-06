@@ -35,6 +35,68 @@
 
 <br>
 
+    <div class="container">
+        <div class="row">
+            <div class="col-sm"> <!-- Tabla para vehiculos sin asignar -->
+            
+                <div class="container">
+                    <table id="index" class="table table-striped dt-responsive border border-dark">
+                        <thead>
+                            <tr>
+                                <th>Patente</th>
+                                <th>Nombre</th>
+                                <th class="text-center">Usuario Asignado</th>
+                            </tr>
+                        </thead>
+                
+                        <tbody>
+                        @foreach($vehiculos as $vehiculo)
+                            <tr>
+                                <td>{{ $vehiculo->patente }}</td>
+                                <td> {{ $vehiculo->nombre }}</a></td>
+                                <td class="text-center">
+                                    Sin asignar
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-sm"> <!-- Tabla de direcciones sin completar -->
+
+                <table id="index" class="table table-striped dt-responsive border border-dark">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Direccion</th>
+                            <th>Tipo</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($direcciones as $direccion)
+                        <tr>
+                            <td>{{ $direccion->idDireccion }}</td>
+                            <td>{{ $direccion->direccion }}</td>
+                            <td>{{ $direccion->tipo }}</td>
+                            <td class="text-center">
+                                <label>
+                                    <form>
+                                        <input name='estado' type='checkbox' disabled {{ $direccion->estado ? 'checked' : '' }}>
+                                        <div class='check mx-auto'></div>
+                                    </form>
+                                </label>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    </div>
 
     <div class="container">
         <table id="index" class="table table-striped dt-responsive nowrap border border-dark" style="width: 100%">
