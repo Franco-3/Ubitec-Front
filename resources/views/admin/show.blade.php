@@ -48,29 +48,31 @@
 		<!-- mostrar direcciones de inicio y final  ToDo: hay que agregar los botones para modificarlas -->
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-12 col-md-6 col-lg-6 mt-2">
-					<div class="card">
+				<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mt-2 px-1">
+					<div class="card text-bg-dark bg-gradient">
 						<h5 class="card-header text-center">Direccion de Inicio</h5>
 						<div class="card-body">
 							@if (Session::has('inicio'))
 								<div><p class="card-text">{{ session('inicio')->direccion }}</p></div>
-								<form action="" method="POST">
+								<form action="{{ route('direcciones.destroy', session('inicio')->idDireccion) }}" method="POST">
 									@csrf
-									<button class="btn btn-primary mt-2 col-12">Cambiar</button>
+									@method('DELETE')
+									<button class="btn btn-success mt-2 col-12">Cambiar</button>
 								</form>
 							@endif
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-12 col-md-6 col-lg-6 mt-2">
-					<div class="card">
+				<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mt-2 px-1">
+					<div class="card text-bg-dark bg-gradient">
 						<h5 class="card-header text-center">Direccion Final</h5>
 						<div class="card-body">
 							@if (Session::has('final'))
 								<div><p class="card-text">{{ session('final')->direccion }}</p></div>
-								<form action="" method="POST">
+								<form action="{{ route('direcciones.destroy', session('final')->idDireccion) }}" method="POST">
 									@csrf
-									<button class="btn btn-primary mt-2 col-12">Cambiar</button>
+									@method('DELETE')
+									<button class="btn btn-success mt-2 col-12">Cambiar</button>
 								</form>
 							@endif
 						</div>
