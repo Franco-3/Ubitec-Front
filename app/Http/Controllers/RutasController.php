@@ -46,22 +46,28 @@ class RutasController extends Controller
         $responseData = [];
         //para revisar el siguiente codigo -ToDo: hay que corregir errores
         $puntosPolylinea = $this->getPolylines(session('idRuta')); //obtener la ruta y las polylineas
+        $imagenRuta = false;
         if(!empty($puntosPolylinea->polyline))
         {
             $responseData = $this->giveFormat($puntosPolylinea); //darle el formato para enviar al front
 
+            $ruta = Ruta::find(session('idRuta'));
+            $rutaPath = $ruta->path;
+            
+            if(!empty($puntosPolylinea->polyline) && $rutaPath == 'storage/images_ruta/default.png')
+            {
+
+                $rutaPath = 'storage/images_ruta/ruta'.session('idRuta').'.png';
+                $ruta->path = $rutaPath;
+                $ruta->save();
+                $imagenRuta = true;
+            }
+
         }
 
-        $ruta = Ruta::find(session('idRuta'));
-        $rutaPath = $ruta->path;
-        $imagenRuta = false;
-        if(!empty($puntosPolylinea->polyline) && $rutaPath == 'storage/images_ruta/default.png')
-        {
-            $rutaPath = 'storage/images_ruta/ruta'.session('idRuta').'.png';
-            $ruta->path = $rutaPath;
-            $ruta->save();
-            $imagenRuta = true;
-        }
+
+        
+
 
         return view('backend.rutas.index', compact('idUsuario', 'direcciones', 'responseData', 'kmTotal', 'imagenRuta'));
     }
