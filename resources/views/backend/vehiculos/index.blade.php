@@ -45,6 +45,12 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
+                <div class="form-check mt-2">
+                <label class="form-check-label" for="flexCheckDefault">
+                    No asignar usuario
+                </label>
+                    <input name="nouser" class="form-check-input" type="checkbox" id="nouser" value="nouser">
+                </div>
                 
                 <div class="form-group">
                     {{ Form::input('id', '', null, ['class' => 'invisible', 'readonly', 'id' => 'id']) }}
@@ -83,7 +89,11 @@
                 <td>{{ $vehiculo->patente }}</td>
                 <td> {{ $vehiculo->nombre }}</a></td>
                 <td class="text-center">
+                    @if($vehiculo->idUsuario != null)
                     {{ $vehiculo->asignadoA->name . ' ' . $vehiculo->asignadoA->lastName }}
+                    @else
+                    Sin asignar
+                    @endif
                 </td>
                 <td>
                     

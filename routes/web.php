@@ -59,7 +59,7 @@ Route::middleware('auth')->group(function () {
 Route::group(['middleware' => 'admin'], function () {
     Route::resource('users', UserController::class);
     Route::resource('vehiculos', VehiculoController::class);
-    Route::put('vehiculos/updateUser/{id}', [VehiculoController::class, 'updateUser']);
+    Route::get('vehiculos/updateUser/{id}', [VehiculoController::class, 'updateUser']);
     Route::resource('dashboard', AdminController::class);
     Route::get('dashboard/nueva-ruta/{id}', [AdminController::class, 'create'])->name('nueva_ruta');
 

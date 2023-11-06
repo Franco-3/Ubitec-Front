@@ -41,6 +41,7 @@
             
                 <div class="container">
                     <table id="index" class="table table-striped dt-responsive border border-dark">
+                        <caption>Usuarios sin asignar</caption>
                         <thead>
                             <tr>
                                 <th>Patente</th>
@@ -66,6 +67,7 @@
             <div class="col-sm"> <!-- Tabla de direcciones sin completar -->
 
                 <table id="index" class="table table-striped dt-responsive border border-dark">
+                    <caption>Direcciones sin completar</caption>
                     <thead>
                         <tr>
                             <th>ID</th>

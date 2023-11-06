@@ -135,10 +135,15 @@ class VehiculoController extends Controller
                 'usuario' => 'required',
             ]
         );
-        
-        $vehiculo->update($validatedData);
-        
-        $vehiculo->idUsuario = $request->input('usuario');
+
+        $sinUser = $request->input('nouser');
+
+        if ($sinUser != null) {
+            $vehiculo->idUsuario = null;
+        }else{
+            $vehiculo->update($validatedData);
+            $vehiculo->idUsuario = $request->input('usuario');
+        }
         
         $vehiculo->save();
 
