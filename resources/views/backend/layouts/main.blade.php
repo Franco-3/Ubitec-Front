@@ -65,7 +65,7 @@
                     @else
                     <li class="nav-item dropdown usuario">
                         <a class="nav-link link display-4 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ Auth::user()->name }} 
+                            {{ Auth::user()->name }}
                         </a>
                         <ul class="dropdown-menu">
                             <li>
@@ -117,6 +117,23 @@
             document.getElementsByTagName('body')[0].setAttribute('data-bs-theme','dark');
             btnModoIcon.setAttribute('d', sol);
         }
+        });
+    </script>
+
+    {{-- Scripts para el funcionamiento dinámico de la tabla --}}
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.3.0/js/responsive.bootstrap5.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#index').DataTable({
+                "language":{
+                    "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json",
+                    "lengthMenu": "Mostrar de a _MENU_ registros",
+                }
+            });
         });
     </script>
 </body>

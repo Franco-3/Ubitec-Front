@@ -16,18 +16,17 @@
 
     <div class="offcanvas offcanvas-bottom offcanvas-size-xl" style="height: 80vh;" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
         <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasBottomLabel">Cargar Excel</h5>
+            <h3 class="offcanvas-title" id="offcanvasBottomLabel">Cargar Archivo Excel</h3>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
             <div class="container">
                 <p>Esta opcion esta en desarrollo, dividira todas las direcciones del archivo entre todos los vehivulos que existan de la forma mas optima posible, generando una ruta para cada vehiculo</p>
-                <h3>Cargar Archivo Excel</h3>
                 <form action="{{ route('dividir.excel') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <input type="file" class="form-control" name="archivo_excel" accept=".xlsx, .xls">
                     <br>
-                    <button type="submit" class="button2" >Cargar Excel</button>
+                    <button type="submit" class="btn btn-primary my-1" >Cargar Excel</button>
                 </form>
             </div>
         </div>
@@ -38,7 +37,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm"> <!-- Tabla para vehiculos sin asignar -->
-            
+
                 <div class="container">
                     <table id="index" class="table table-striped dt-responsive border border-dark">
                         <caption>Usuarios sin asignar</caption>
@@ -49,7 +48,7 @@
                                 <th class="text-center">Usuario Asignado</th>
                             </tr>
                         </thead>
-                
+
                         <tbody>
                         @foreach($vehiculos as $vehiculo)
                             <tr>
@@ -149,22 +148,6 @@
         </tbody>
         </table>
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.3.0/js/responsive.bootstrap5.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#index').DataTable({
-                "language":{
-                    "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json",
-                    "lengthMenu": "Mostrar de a _MENU_ registros",
-                }
-            });
-        });
-    </script>
 
 
 @endsection

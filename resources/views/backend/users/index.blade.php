@@ -1,23 +1,23 @@
 @extends('backend.layouts.main')
-@section('title', 'Ubitec - Usuarios') 
+@section('title', 'Ubitec - Usuarios')
 @section('content')
     @forelse($users as $user)
         @if ($loop->first)
-        <div class="container mt-3">
+        <div class="container mt-5">
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                <table class="table table-striped dt-responsive nowrap border border-dark">
+                <table id="index" class="table table-striped dt-responsive" style="width: 100%">
                     <thead>
                         <tr>
                             <th>Id</th>
                             <th>Nombre completo</th>
                             <th>Email</th>
                             <th>Empresa</th>
-                            <td>
+                            <th>
                                 <a class="btn btn-success" href="{{ route('users.create') }}">
                                     <i class="bi bi-person-fill-add"></i>
                                 </a>
-                            </td>
+                            </th>
                         </tr>
                     </thead>
                     @endif
@@ -57,20 +57,5 @@
         {!! $users->links() !!}
     </div> --}}
 
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.3.0/js/responsive.bootstrap5.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#index').DataTable({
-            "language":{
-                "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json",
-                "lengthMenu": "Mostrar de a _MENU_ registros",
-            }
-        });
-    });
-</script>
 
 @endsection

@@ -4,7 +4,7 @@
 <div class="container">
     <br>
     <h2>Listado de Direcciones</h2>
-    <table class="table table-striped border border-dark">
+    <table id="index" class="table table-striped dt-responsive" style="width: 100%">
         <thead>
             <tr>
                 <th >ID</th>
@@ -34,16 +34,17 @@
 						</form>
 					</label>
 				</td>
-                <td class="text-center">
-                    <div style="display: flex; align-items: center; margin: 4px;">
-                        <a href="{{ route('direcciones.edit', $direccion->idDireccion) }}" class="btn btn-primary my-1 mr-1" data-toggle="tooltip" data-placement="top" title="Editar"><i class="bi bi-pencil-square"></i></a>
+                <td>
+                    <div class="d-flex">
+                        <a href="{{ route('direcciones.edit', $direccion->idDireccion) }}" class="btn btn-primary mr-1" data-toggle="tooltip" data-placement="top" title="Editar"><i class="bi bi-pencil-square"></i></a>
                         <form action="{{ route('direcciones.destroy', $direccion->idDireccion) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger ml-1" data-toggle="tooltip" data-placement="top" title="Borrar"><i class="bi bi-trash3"></i></button>
+                            <button type="submit" class="btn btn-danger" style="margin-left: 5px;" data-toggle="tooltip" data-placement="top" title="Borrar"><i class="bi bi-trash3"></i></button>
                         </form>
                     </div>
                 </td>
+
             </tr>
             @endforeach
         </tbody>
@@ -51,4 +52,5 @@
     <a href="{{ route('direcciones.create') }}" class="btn btn-success">Agregar Producto</a>
     <br><br>
 </div>
+
 @endsection
