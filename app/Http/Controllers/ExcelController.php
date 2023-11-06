@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\DireccionesController;
 use App\Models\Direcciones;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class ExcelController extends Controller
 {
@@ -152,6 +153,8 @@ class ExcelController extends Controller
             $row++;
         }
 
+
+        $this->verificarCarpeta();
         // Crear el archivo Excel
         $writer = new Xlsx($spreadsheet);
         $archivoPath = storage_path("app/excel/direcciones".$idRuta.".xlsx");
@@ -161,6 +164,16 @@ class ExcelController extends Controller
     }
 
 
+    private function verificarCarpeta()
+    {
+        $carpeta = storage_path("app/excel");
+
+        // Verifica si la carpeta ya existe
+        if (!File::exists($carpeta)) {
+            // Si no existe, crea la carpeta
+            File::makeDirectory($carpeta, 0755, true, true);
+        }
+    }
 
 
     private function searchDirections(string $idRuta)
