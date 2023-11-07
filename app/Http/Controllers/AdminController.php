@@ -115,6 +115,7 @@ class AdminController extends Controller
         $ruta = new Ruta();
         $ruta->estado = 'P';
         $ruta->kmTotal = null;
+        $ruta->path = 'storage/images_ruta/default.png';
         $ruta->save();
 
         //enlazar la ruta y el usuario en la tabla usuarios_ruta
