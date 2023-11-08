@@ -26,7 +26,7 @@
     {{-- Icons --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     {{-- CSS para Navbar de home --}}
-    <link rel="preload" as="style" href="assets/mobirise/css/mbr-additional.css"><link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
+    <link rel="preload" as="style" href="{{ asset('assets/mobirise/css/mbr-additional.css') }}"><link rel="stylesheet" href="{{ asset('assets/mobirise/css/mbr-additional.css') }}" type="text/css">
 
     {{-- para tomar una captura del mapa --}}
     <script src="{{ asset('js/node_modules/leaflet-simple-map-screenshoter/dist/leaflet-simple-map-screenshoter.js') }}"></script>
