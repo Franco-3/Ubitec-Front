@@ -1,7 +1,7 @@
 @extends('backend.layouts.main')
 @section('title', __('Ubitec - Vehiculos'))
 @section('content')
-<div class="container text-center mt-2 mb-2">
+<div class="container text-center mt-3 mb-2">
     <a class="button2" href="{{ route('vehiculos.create') }}">
         <span>
             <svg class="css-i6dzq1" stroke-linejoin="round" stroke-linecap="round" fill="none" stroke-width="2" stroke="#FFFFFF" height="24" width="24" viewBox="0 0 24 24">
@@ -73,8 +73,10 @@
 
 <div class="container">
     @if($vehiculos->isEmpty())
-        <div class="alert alert-primary text-center" role="alert">
-            No hay vehículos.
+        <div class="centered-div">
+            <div class="alert alert-primary text-center" role="alert">
+                No hay vehículos.
+            </div>
         </div>
     @else
         <table id="index" class="table table-striped dt-responsive" style="width: 100%">

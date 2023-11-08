@@ -6,8 +6,7 @@
     <h2>Listado de Direcciones</h2>
 
     <div class="container">
-        <table id="index" class="table table-striped dt-responsive" style="width: 100%">
-    <table id="index" class="table table-striped dt-responsive" style="width: 100%">
+        <table class="table table-striped dt-responsive direcciones-completas" style="width: 100%">
         <thead>
             <tr>
                 <th >ID</th>
@@ -56,7 +55,7 @@
     <br><br>
 
     <div class="container">
-        <table id="index" class="table table-striped dt-responsive" style="width: 100%">
+        <table class="table table-striped dt-responsive direcciones-incompletas" style="width: 100%">
             <thead>
                 <tr>
                     <th >ID</th>
@@ -88,12 +87,13 @@
                     </td>
                     <td>
                         <div class="d-flex">
-                            <a href="{{ route('direcciones.edit', $direccion->idDireccion) }}" class="btn btn-primary mr-1" data-toggle="tooltip" data-placement="top" title="Editar"><i class="bi bi-pencil-square"></i></a>
-                            <form action="{{ route('direcciones.destroy', $direccion->idDireccion) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger" style="margin-left: 5px;" data-toggle="tooltip" data-placement="top" title="Borrar"><i class="bi bi-trash3"></i></button>
-                            </form>
+                            <a href="{{ route('direcciones.edit', $direccion2->idDireccion) }}" class="btn btn-primary mr-1" data-toggle="tooltip" data-placement="top" title="Editar"><i class="bi bi-pencil-square"></i></a>
+                            {{ Form::open(['method' => 'delete', 'route' => ['direcciones.destroy', $direccion2->idDireccion]]) }}
+                            @csrf
+                            <button type="submit" class="btn btn-danger" style="margin-left: 5px;" data-toggle="tooltip" data-placement="top" title="Borrar" onclick="return confirm('¿Está seguro de borrar la dirección?');">
+                                <i class="bi bi-trash3"></i>
+                            </button>
+                            {{ Form::close() }}
                         </div>
                     </td>
     

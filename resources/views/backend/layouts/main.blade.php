@@ -121,12 +121,14 @@
         document.getElementById('btnSwitch').addEventListener('click',()=>{
         if (document.documentElement.getAttribute('data-bs-theme') == 'dark') {
             document.getElementsByTagName('body')[0].setAttribute('data-bs-theme','light');
+            document.getElementsByTagName('nav')[0].setAttribute('data-bs-theme','light');
             document.documentElement.setAttribute('data-bs-theme','light');
             btnModoIcon.setAttribute('d', luna);
         }
         else {
             document.documentElement.setAttribute('data-bs-theme','dark')
             document.getElementsByTagName('body')[0].setAttribute('data-bs-theme','dark');
+            document.getElementsByTagName('nav')[0].setAttribute('data-bs-theme','dark');
             btnModoIcon.setAttribute('d', sol);
         }
         });
@@ -140,12 +142,21 @@
     <script src="https://cdn.datatables.net/responsive/2.3.0/js/responsive.bootstrap5.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('#index').DataTable({
-                "language":{
-                    "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json",
-                    "lengthMenu": "Mostrar de a _MENU_ registros",
-                }
-            });
+
+        $('#index').DataTable({
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json",
+                "lengthMenu": "Mostrar de a MENU registros",
+            }
+        });
+
+
+        $('.vehiculos-table, .direcciones-table, .vehiculos-usuario-table, .direcciones-completas, .direcciones-incompletas').DataTable({
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json",
+                "lengthMenu": "Mostrar de a MENU registros",
+            }
+        });
         });
     </script>
 </body>

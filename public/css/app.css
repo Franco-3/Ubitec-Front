@@ -145,45 +145,76 @@ table label input:checked ~ .check:after {
 
 /* Input's */
 .coolinput {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .coolinput label.text {
-    font-size: 0.75rem;
-    color: #488aec;
-    font-weight: 700;
-    position: relative;
-    top: 0.5rem;
-    margin: 0 0 0 7px;
-    padding: 0 3px;
-    background: white;
-    width: fit-content;
+  font-size: 0.75rem;
+  color: #488aec;
+  font-weight: 700;
+  position: relative;
+  top: 0.5rem;
+  margin: 0 0 0 10px;
+  padding: 0 3px;
+  background: transparent;
+  width: fit-content;
+}
+
+.coolinput input[type="text"].input,
+.coolinput input[type="input"].input,
+.coolinput input[type="password"].input,
+.coolinput select.input,
+.coolinput textarea.input {
+  color: black;
+  font-size: 0.9rem;
+  padding: 10px 10px;
+  border: 2px #488aec solid;
+  border-radius: 5px;
+  background: white;
+  margin-top: 5px;
+}
+
+.coolinput input[type="text"].input:focus,
+.coolinput input[type="input"].input:focus,
+.coolinput input[type="password"].input:focus,
+.coolinput select.input:focus,
+.coolinput textarea.input:focus {
+  outline: none;
+}
+
+.coolinput textarea.input {
+  resize: vertical;
+  border: 2px solid #488aec;
+}
+
+.coolinput textarea.input:focus {
+  border: 2px solid #488aec;
 }
 
 .coolinput input[type="text"].input {
-    color: black;
-    font-size: 0.9rem;
-    padding: 11px 10px;
-    border: 2px #488aec solid;
-    border-radius: 5px;
-    background: white;
+  color: black;
+  font-size: 0.9rem;
+  padding: 11px 10px;
+  border: 2px #488aec solid;
+  border-radius: 5px;
+  background: transparent;
 }
 .coolinput input[type="text"].input:focus {
-    outline: none;
+  outline: none;
 }
 
 .coolinput input[type="input"].input {
-    color: black;
-    font-size: 0.9rem;
-    padding: 11px 10px;
-    border: 2px #488aec solid;
-    border-radius: 5px;
-    background: white;
+  color: black;
+  font-size: 0.9rem;
+  padding: 11px 10px;
+  border: 2px #488aec solid;
+  border-radius: 5px;
+  background: transparent;
 }
 .coolinput input[type="input"].input:focus {
-    outline: none;
+  outline: none;
 }
 
 .coolinput input[type="password"].input {
@@ -192,7 +223,7 @@ font-size: 0.9rem;
 padding: 11px 10px;
 border: 2px #488aec solid;
 border-radius: 5px;
-background: white;
+background: transparent;
 }
 
 .coolinput input[type="password"].input:focus {
@@ -205,7 +236,7 @@ font-size: 0.9rem;
 padding: 11px 10px;
 border: 2px #488aec solid;
 border-radius: 5px;
-background: white;
+background: transparent;
 width: 100%;
 }
 
@@ -214,46 +245,96 @@ outline: none;
 }
 
 .coolinput textarea.input:focus {
-    border: 2px solid #488aec;
+  border: 2px solid #488aec;
 }
 
 .coolinput textarea.input {
-    resize: vertical;
-    padding: 10px;
-    border: 2px solid #488aec;
-    border-radius: 5px;
-    background: white;
-    font-size: 0.9rem;
-    color: black;
-    outline: none;
+  resize: vertical;
+  padding: 10px;
+  border: 2px solid #488aec;
+  border-radius: 5px;
+  background: transparent;
+  font-size: 0.9rem;
+  color: black;
+  outline: none;
 }
+.coolinput input[type="text"].input,
+.coolinput input[type="input"].input,
+.coolinput input[type="password"].input,
+.coolinput select.input,
+.coolinput textarea.input {
+  color: black; 
+
+}
+
+
+[data-bs-theme='dark'] .coolinput input[type="text"].input,
+[data-bs-theme='dark'] .coolinput input[type="input"].input,
+[data-bs-theme='dark'] .coolinput input[type="password"].input,
+[data-bs-theme='dark'] .coolinput select.input,
+[data-bs-theme='dark'] .coolinput textarea.input {
+  color: white; 
+}
+
+[data-bs-theme='dark'] .modal-content {
+  background-color: #2b3035; 
+  color: #FFF; 
+}
+
+[data-bs-theme='dark'] .modal-content input[type="text"].form-control,
+[data-bs-theme='dark'] .modal-content input[type="input"].form-control,
+[data-bs-theme='dark'] .modal-content input[type="password"].form-control,
+[data-bs-theme='dark'] .modal-content label.text {
+  background-color: transparent;
+  color: white; 
+}
+[data-bs-theme='dark'] .svg-white {
+  fill: #488aec; 
+}
+[data-bs-theme='dark'] .coolinput select.input {
+  color: white; 
+  background-color: transparent; 
+}
+[data-bs-theme='dark'] .coolinput select.input option {
+  color: white; 
+  background-color: #333; 
+}
+
 
 /* Tabla */
 .table {
-    background: linear-gradient(to right, #2980b9, #2c3e50);
-    padding: 0;
-    border-radius: 10px;
-    border: none;
-    box-shadow: 0 0 0 5px rgba(0,0,0,0.05);
+  background: linear-gradient(to right, #2980b9, #2c3e50);
+  padding: 0;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 0 0 5px rgba(0,0,0,0.05);
 }
 
 .table thead th {
-    color: #fff;
-    background-color: rgba(255, 255, 255, 0.2);
-    font-size: 16px;
-    font-weight: 500;
-    padding: 12px;
-    border: none;
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.2);
+  font-size: 16px;
+  font-weight: 500;
+  padding: 12px;
+  border: none;
 }
 
 .table tbody td {
-    color: #fff !important;
-    font-size: 15px;
-    padding: 10px 12px;
-    vertical-align: middle;
-    border: none;
+  color: #fff !important;
+  font-size: 15px;
+  padding: 10px 12px;
+  vertical-align: middle;
+  border: none;
 }
 
 .table tbody tr:nth-child(even) {
-    background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.centered-div {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
 }

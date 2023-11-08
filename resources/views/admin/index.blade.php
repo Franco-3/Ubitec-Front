@@ -36,10 +36,8 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-sm"> <!-- Tabla para vehiculos sin asignar -->
-
-                <div class="container">
-                    <table id="index" class="table table-striped dt-responsive border border-dark">
+            <div class="col-sm-12 col-xl-12 col-xxl-6 mt-4 mb-4"> <!-- Tabla para vehiculos sin asignar -->
+                <table class="table table-striped dt-responsive vehiculos-table mt-4 mb-4" style="width: 100%">
                         <caption>Usuarios sin asignar</caption>
                         <thead>
                             <tr>
@@ -60,12 +58,11 @@
                             </tr>
                         @endforeach
                         </tbody>
-                    </table>
-                </div>
+                </table>
             </div>
-            <div class="col-sm"> <!-- Tabla de direcciones sin completar -->
 
-                <table id="index" class="table table-striped dt-responsive border border-dark">
+            <div class="col-sm-12 col-xl-12 col-xxl-6 mt-4 mb-4"> <!-- Tabla de direcciones sin completar -->
+                <table class="table table-striped dt-responsive direcciones-table" style="width: 100%">
                     <caption>Direcciones sin completar</caption>
                     <thead>
                         <tr>
@@ -99,8 +96,8 @@
     </div>
     </div>
 
-    <div class="container">
-        <table id="index" class="table table-striped dt-responsive nowrap border border-dark" style="width: 100%">
+    <div class="container mt-4 mb-4">
+        <table class="table table-striped dt-responsive vehiculos-usuario-table" style="width: 100%">
         <thead>
             <tr>
             <th scope="col">#</th>
@@ -115,7 +112,7 @@
             @foreach ($vehiculosUsuario as  $vUsuario)
                 <?php $indice++ ?>
                 <tr>
-                    <th scope="row">{{$indice}}</th>
+                    <td scope="row">{{$indice}}</td>
                     <td>{{$vUsuario->nombre}}</td>
                     <td>{{$vUsuario->patente}}</td>
                     <td>{{$vUsuario->name}}</td>

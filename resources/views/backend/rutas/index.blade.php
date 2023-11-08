@@ -118,11 +118,24 @@
 			@endif
 </div>
 
-@if ($kmTotal)
-	<div class="container">
-		<p>Km Total de la ruta: {{$kmTotal}}</p>
+<div class="container">
+	<div class="row d-flex justify-content-center">
+		@if ($kmTotal)
+			<div class="bg-primary col-sm-12 col-md-5 rounded mt-2 py-2 text-center text-light border border-secondary">
+				<span>KM Total de la Ruta: {{$kmTotal}}</span>
+			</div>
+		@endif
+		<div class="col-sm-12 col-md-5 mt-2">
+			@if ($kmTotal)
+				<button id="generar_excel" class="btn btn-primary" onclick="generarExcel()">Generar excel</button>
+			@endif
+
+			@if (Session::has('inicio') && Session::has('final'))
+				<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#excelbottom" aria-controls="excelbottom">Cargar Excel</button>
+			@endif
+		</div>
 	</div>
-@endif
+</div>
 
 <div class="container mt-2">
 	<div class="row">
@@ -142,7 +155,7 @@
 				@foreach ($direcciones as  $direccion)
 					<?php $indice++ ?>
 					<tr>
-						<th class="text-center">{{$indice}}</th>
+						<td class="text-center">{{$indice}}</td>
 						<td>{{$direccion->direccion}}</td>
 						<td class="text-center">
 							<!-- Button trigger modal -->
@@ -175,14 +188,6 @@
 	</div>
 </div>
 
-@if ($kmTotal)
-		<button class="btn btn-success p-2 col-sm-12 col-md-3 col-lg-3 col-xl-3" id="generar_excel" onclick="generarExcel()">Generar Excel</button>
-@endif
-<br>
-<br>
-@if (Session::has('inicio') && Session::has('final'))
-		<button class="btn btn-success p-2 col-sm-12 col-md-3 col-lg-3 col-xl-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#excelbottom" aria-controls="excelbottom">Cargar Excel</button>
-@endif
 
 @if ($imagenRuta)
     <script>

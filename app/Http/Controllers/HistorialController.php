@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -18,16 +18,20 @@ class HistorialController extends Controller
         ->join('rutas', 'user_ruta.idRuta', '=', 'rutas.idRuta')
         ->join('direcciones as inicio', function ($join) {
             $join->on('inicio.idRuta', '=', 'rutas.idRuta')
-                 ->where('inicio.tipo', 'inicio');
+                ->where('inicio.tipo', 'inicio');
         })
         ->join('direcciones as final', function ($join) {
             $join->on('final.idRuta', '=', 'rutas.idRuta')
-                 ->where('final.tipo', 'final');
+                ->where('final.tipo', 'final');
         })
         ->select('rutas.idRuta', 'inicio.direccion as direccion_inicio', 'final.direccion as direccion_final', 'rutas.created_at', 'rutas.path')
         ->where('user_ruta.idUsuario', session('idUser'))
-        ->get();
-        return view('backend.historial.index', compact('rutas'));
+        ->paginate(8);
+
+    Paginator::useBootstrap();
+
+    return view('backend.historial.index', compact('rutas'));
+
     }
 
     // public function mostrarDatos()

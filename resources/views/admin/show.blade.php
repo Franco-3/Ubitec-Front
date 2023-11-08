@@ -154,7 +154,7 @@
 				@foreach ($direcciones as  $direccion)
 					<?php $indice++ ?>
 					<tr>
-						<th class="text-center">{{$indice}}</th>
+						<td class="text-center">{{$indice}}</td>
 						<td>{{$direccion->direccion}}</td>
 						@if (!empty($direccion->idDireccion))
 							<td>
