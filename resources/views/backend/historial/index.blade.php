@@ -9,7 +9,7 @@
                 <div class="card" style="width: 18rem;">
                     <img src="{{ asset($ruta->path) }}" class="card-img-top" alt="Captura de la ruta">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
+                        <h5 class="card-title">{{$ruta->created_at}}</h5>
                         <p class="card-text">
                             <strong>Comienzo:</strong> {{ $ruta->direccion_inicio}}
                         </p>
