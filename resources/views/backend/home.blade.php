@@ -81,7 +81,7 @@
                         </h4>
                         <p class="mbr-text mbr-fonts-style mb-4 display-7">Ubitec es un software de enrutamiento facil y confiable para repartidores y empresas, ofrecemos servicios seguros a un precio inmejorable.&nbsp;</p>
                         <div class="mbr-section-btn">
-                            <a class="btn btn-primary display-4" href="https://mobiri.se">Create your own site</a>
+                            <a class="btn btn-primary display-4" href="#servicios">Comienza ahora</a>
                         </div>
                     </div>
                 </div>
@@ -173,7 +173,7 @@
 
                         <p class="mbr-text mbr-fonts-style mt-3 display-7">Puedes usar gratis nuestro servicio de enrutamiento.</p>
                     </div>
-                    {{-- <div class="mbr-section-btn item-footer mt-2"><a href="{{route('register')}}" class="btn btn-primary item-btn display-7" target="_blank">Comienza ahora &gt;</a></div> --}}
+                    {{-- <div class="mbr-section-btn item-footer mt-2"><a href="{{route('register')}}" class="btn btn-primary item-btn display-7" >Comienza ahora &gt;</a></div> --}}
                     <div class="mbr-section-btn text-center">
                         <a href="#pricing2-c" class="btn btn-primary display-4" id="show-container-user">comienza ahora</a>
                     </div>
@@ -188,7 +188,7 @@
 
                         <p class="mbr-text mbr-fonts-style mt-3 display-7">Tenemos los mejores precios para las empresas.</p>
                     </div>
-                    {{-- <div class="mbr-section-btn item-footer mt-2"><a href="{{route('register')}}" class="btn btn-primary item-btn display-7" target="_blank">Ver precios &gt;</a></div> --}}
+                    {{-- <div class="mbr-section-btn item-footer mt-2"><a href="{{route('register')}}" class="btn btn-primary item-btn display-7" >Ver precios &gt;</a></div> --}}
                     <div class="mbr-section-btn text-center">
                         <a href="#pricing2-6" class="btn btn-primary display-4" id="show-container-empresa">comienza ahora</a>
                     </div>
@@ -225,7 +225,7 @@
                             </ul>
                         </div>
                         <div class="mbr-section-btn text-center">
-                            <a href="https://mobiri.se" class="btn btn-primary display-4">Get started</a>
+                            <a href="{{ route('register') }}" class="btn btn-primary display-4">Comienza ahora</a>
                         </div>
                     </div>
                 </div>
@@ -246,7 +246,7 @@
                             </ul>
                         </div>
                         <div class="mbr-section-btn text-center">
-                            <a href="https://mobiri.se" class="btn btn-primary display-4">Get started</a>
+                            <a href="{{ route('register') }}" class="btn btn-primary display-4">Comienza ahora</a>
                         </div>
                     </div>
                 </div>
@@ -267,7 +267,7 @@
                             </ul>
                         </div>
                         <div class="mbr-section-btn text-center">
-                            <a href="" class="btn btn-primary display-4">Get started</a>
+                            <a href="{{ route('register') }}" class="btn btn-primary display-4">Comienza ahora</a>
                         </div>
                     </div>
                 </div>
@@ -296,7 +296,7 @@
                             <ul class="list-group mbr-fonts-style list-group-flush display-7">
                                 <li class="list-group-item">Enrutamiento eficaz</li><li class="list-group-item"><span style="background-color: transparent; font-size: 1.2rem;">Hasta 5 vehículos</span><br></li>Hasta 150 direcciones <br>por vehículo y día</ul>
                         </div>
-                        <div class="mbr-section-btn text-center"><a href="https://mobiri.se" class="btn btn-primary display-4">Prueba Gratiuta Ahora</a></div>
+                        <div class="mbr-section-btn text-center"><a href="{{ route('register') }}" class="btn btn-primary display-4">Prueba Gratiuta Ahora</a></div>
                     </div>
                 </div>
             </div>
@@ -315,7 +315,7 @@
                                 <li class="list-group-item">Enrutamiento eficaz</li><li class="list-group-item">Hasta 15 vehículos</li><li class="list-group-item"><span style="background-color: transparent;"><span style="font-size: 1.2rem;">Hasta 200 direcciones para cada&nbsp;</span>vehículo<span style="font-size: 1.2rem;">&nbsp;por&nbsp;</span></span><span style="font-size: 1.2rem;">día</span></li>
                             </ul>
                         </div>
-                        <div class="mbr-section-btn text-center"><a href="https://mobiri.se" class="btn btn-primary display-4">Comienza ya</a></div>
+                        <div class="mbr-section-btn text-center"><a href="{{ route('register') }}" class="btn btn-primary display-4">Comienza ahora</a></div>
                     </div>
                 </div>
             </div>
@@ -334,7 +334,7 @@
                                 <li class="list-group-item">Enrutamiento eficaz</li><li class="list-group-item">Hasta 30 vehículos</li><li class="list-group-item"><span style="background-color: transparent; font-size: 1.2rem;">Hasta 250 direcciones para cada vehículo por día</span><br></li><li class="list-group-item"><br></li>
                             </ul>
                         </div>
-                        <div class="mbr-section-btn text-center"><a href="https://mobiri.se" class="btn btn-primary display-4">Comienza ya</a></div>
+                        <div class="mbr-section-btn text-center"><a href="{{ route('register') }}" class="btn btn-primary display-4">Comienza ahora</a></div>
                     </div>
                 </div>
             </div>
@@ -355,7 +355,7 @@
                                 <li class="list-group-item"><span style="background-color: transparent; font-size: 1.2rem;">Hasta 250 direcciones para cada vehículo por día</span></li><li class="list-group-item"><br></li>
                             </ul>
                         </div>
-                        <div class="mbr-section-btn text-center"><a href="https://mobiri.se" class="btn btn-primary display-4">Comienza ya</a></div>
+                        <div class="mbr-section-btn text-center"><a href="{{ route('register') }}" class="btn btn-primary display-4">Comienza ahora</a></div>
                     </div>
                 </div>
             </div>
@@ -437,190 +437,6 @@
     </div>
 </section>
 
-<section data-bs-version="5.1" class="slider3 mbr-embla cid-tRPw3iFvyi" id="slider3-d">
-
-
-    <div class="position-relative text-center" id="nosotros">
-        <div class="col-12">
-            <h3 class="mbr-section-title mbr-fonts-style align-center mb-4 display-2"><strong>Nuestro equipo</strong></h3>
-
-        </div>
-        <div class="embla" data-skip-snaps="true" data-align="center" data-contain-scroll="trimSnaps" data-auto-play-interval="5" data-draggable="true">
-            <div class="embla__viewport container-fluid">
-                <div class="embla__container">
-                    <div class="embla__slide slider-image item" style="margin-left: 1rem; margin-right: 1rem;">
-                        <div class="card-wrap">
-                            <div class="item-wrapper position-relative">
-                                <div class="image-wrap">
-                                    <img src="assets/images/team1.jpg" alt="Mobirise Website Builder">
-                                </div>
-                            </div>
-                            <div class="content-wrap">
-                                <h5 class="mbr-section-title card-title mbr-fonts-style align-center m-0 display-5">
-                                    <strong>John Smith</strong>
-                                </h5>
-                                <h6 class="mbr-role mbr-fonts-style align-center mb-3 display-4">
-                                    <strong>Programmer</strong>
-                                </h6>
-                                <p class="card-text mbr-fonts-style align-center display-7">
-                                    No special actions required, all sites you make with Mobirise are mobile-friendly.
-                                </p>
-                                <div class="social-row display-7">
-                                    <div class="soc-item">
-                                        <a href="https://www.facebook.com/Mobirise/" target="_blank">
-                                            <span class="mbr-iconfont socicon socicon-facebook"></span>
-                                        </a>
-                                    </div>
-                                    <div class="soc-item">
-                                        <a href="https://twitter.com/mobirise" target="_blank">
-                                            <span class="mbr-iconfont socicon socicon-twitter"></span>
-                                        </a>
-                                    </div>
-                                    <div class="soc-item">
-                                        <a href="https://instagram.com/mobirise" target="_blank">
-                                            <span class="mbr-iconfont socicon socicon-instagram"></span>
-                                        </a>
-                                    </div>
-
-
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="embla__slide slider-image item" style="margin-left: 1rem; margin-right: 1rem;">
-                        <div class="card-wrap">
-                            <div class="item-wrapper position-relative">
-                                <div class="image-wrap">
-                                    <img src="assets/images/team2.jpg" alt="Mobirise Website Builder">
-                                </div>
-                            </div>
-                            <div class="content-wrap">
-                                <h5 class="mbr-section-title card-title mbr-fonts-style align-center m-0 display-5">
-                                    <strong>Sarah Palmer</strong>
-                                </h5>
-                                <h6 class="mbr-role mbr-fonts-style align-center mb-3 display-4">
-                                    <strong>Manager</strong>
-                                </h6>
-                                <p class="card-text mbr-fonts-style align-center display-7">
-                                    Use Mobirise website building software to create multiple sites for your clients.
-                                </p>
-                                <div class="social-row display-7">
-                                    <div class="soc-item">
-                                        <a href="https://www.facebook.com/Mobirise/" target="_blank">
-                                            <span class="mbr-iconfont socicon socicon-facebook"></span>
-                                        </a>
-                                    </div>
-                                    <div class="soc-item">
-                                        <a href="https://twitter.com/mobirise" target="_blank">
-                                            <span class="mbr-iconfont socicon socicon-twitter"></span>
-                                        </a>
-                                    </div>
-                                    <div class="soc-item">
-                                        <a href="https://instagram.com/mobirise" target="_blank">
-                                            <span class="mbr-iconfont socicon socicon-instagram"></span>
-                                        </a>
-                                    </div>
-
-
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="embla__slide slider-image item" style="margin-left: 1rem; margin-right: 1rem;">
-                        <div class="card-wrap">
-                            <div class="item-wrapper position-relative">
-                                <div class="image-wrap">
-                                    <img src="assets/images/team3.jpg" alt="Mobirise Website Builder">
-                                </div>
-                            </div>
-                            <div class="content-wrap">
-                                <h5 class="mbr-section-title card-title mbr-fonts-style align-center m-0 display-5">
-                                    <strong>Jessica Swift</strong>
-                                </h5>
-                                <h6 class="mbr-role mbr-fonts-style align-center mb-3 display-4">
-                                    <strong>Analyst</strong>
-                                </h6>
-                                <p class="card-text mbr-fonts-style align-center display-7">
-                                    Create multiple pages. Don't forget to set links to your pages after creating them.
-                                </p>
-                                <div class="social-row display-7">
-                                    <div class="soc-item">
-                                        <a href="https://www.facebook.com/Mobirise/" target="_blank">
-                                            <span class="mbr-iconfont socicon socicon-facebook"></span>
-                                        </a>
-                                    </div>
-                                    <div class="soc-item">
-                                        <a href="https://twitter.com/mobirise" target="_blank">
-                                            <span class="mbr-iconfont socicon socicon-twitter"></span>
-                                        </a>
-                                    </div>
-                                    <div class="soc-item">
-                                        <a href="https://instagram.com/mobirise" target="_blank">
-                                            <span class="mbr-iconfont socicon socicon-instagram"></span>
-                                        </a>
-                                    </div>
-
-
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="embla__slide slider-image item" style="margin-left: 1rem; margin-right: 1rem;">
-                        <div class="card-wrap">
-                            <div class="item-wrapper position-relative">
-                                <div class="image-wrap">
-                                    <img src="assets/images/team4.jpg" alt="Mobirise Website Builder">
-                                </div>
-                            </div>
-                            <div class="content-wrap">
-                                <h5 class="mbr-section-title card-title mbr-fonts-style align-center m-0 display-5">
-                                    <strong>Sarah Taylor</strong>
-                                </h5>
-                                <h6 class="mbr-role mbr-fonts-style align-center mb-3 display-4">
-                                    <strong>Analyst</strong>
-                                </h6>
-                                <p class="card-text mbr-fonts-style align-center display-7">
-                                    Create multiple pages. Don't forget to set links to your pages after creating them.
-                                </p>
-                                <div class="social-row display-7">
-                                    <div class="soc-item">
-                                        <a href="https://www.facebook.com/Mobirise/" target="_blank">
-                                            <span class="mbr-iconfont socicon socicon-facebook"></span>
-                                        </a>
-                                    </div>
-                                    <div class="soc-item">
-                                        <a href="https://twitter.com/mobirise" target="_blank">
-                                            <span class="mbr-iconfont socicon socicon-twitter"></span>
-                                        </a>
-                                    </div>
-                                    <div class="soc-item">
-                                        <a href="https://instagram.com/mobirise" target="_blank">
-                                            <span class="mbr-iconfont socicon socicon-instagram"></span>
-                                        </a>
-                                    </div>
-
-
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <button class="embla__button embla__button--prev">
-                <span class="mobi-mbri mobi-mbri-arrow-prev mbr-iconfont" aria-hidden="true"></span>
-                <span class="sr-only visually-hidden visually-hidden">Previous</span>
-            </button>
-            <button class="embla__button embla__button--next">
-                <span class="mobi-mbri mobi-mbri-arrow-next mbr-iconfont" aria-hidden="true"></span>
-                <span class="sr-only visually-hidden visually-hidden">Next</span>
-            </button>
-        </div>
-    </div>
-</section>
 
 <section data-bs-version="5.1" class="contacts2 cid-tRPhe58FwI" id="contacts2-b" >
     <!---->
@@ -641,7 +457,7 @@
                     </div>
                     <div class="text-wrapper">
                         <h6 class="card-title mbr-fonts-style mb-1 display-5">
-                            <strong>Phone</strong>
+                            <strong>Telefono</strong>
                         </h6>
                         <p class="mbr-text mbr-fonts-style display-7">
                             <a href="tel:+12345678910" class="text-primary">0 (800) 123 45 67</a>
@@ -659,7 +475,7 @@
                             <strong>Email</strong>
                         </h6>
                         <p class="mbr-text mbr-fonts-style display-7">
-                            <a href="mailto:info@site.com" class="text-primary">info@site.com</a>
+                            <a href="ubitec@contacto.com" class="text-primary">ubitec@contacto.com</a>
                         </p>
                     </div>
                 </div>
@@ -671,10 +487,10 @@
                     </div>
                     <div class="text-wrapper">
                         <h6 class="card-title mbr-fonts-style mb-1 display-5">
-                            <strong>Address</strong>
+                            <strong>ubicacion</strong>
                         </h6>
                         <p class="mbr-text mbr-fonts-style display-7">
-                            4100 Ross Street, Okawville, IL
+                            Avenida Savio 560, San nicolás de los arroyos, Buenos Aires
                         </p>
                     </div>
                 </div>
@@ -686,10 +502,10 @@
                     </div>
                     <div class="text-wrapper">
                         <h6 class="card-title mbr-fonts-style mb-1 display-5">
-                            <strong>Working Hours</strong>
+                            <strong>Horas de trabajo</strong>
                         </h6>
                         <p class="mbr-text mbr-fonts-style display-7">
-                            9:00 - 18:00
+                            10:00 - 18:00
                         </p>
                     </div>
                 </div>
@@ -714,15 +530,11 @@
 
 
                 <li class="foot-menu-item mbr-fonts-style display-7">
-                        <a class="text-white" href="#" target="_blank">About us</a>
+                        <a class="text-white" href="#">Sobre Nosotros</a>
                     </li><li class="foot-menu-item mbr-fonts-style display-7">
-                        <a class="text-white" href="#" target="_blank">Services</a>
+                        <a class="text-white" href="#" >Servicios</a>
                     </li><li class="foot-menu-item mbr-fonts-style display-7">
-                        <a class="text-white" href="#" target="_blank">Contact Us</a>
-                    </li><li class="foot-menu-item mbr-fonts-style display-7">
-                        <a class="text-white" href="#" target="_blank">Careers</a>
-                    </li><li class="foot-menu-item mbr-fonts-style display-7">
-                        <a class="text-white" href="#" target="_blank">Work</a>
+                        <a class="text-white" href="#" >Contacto</a>
                     </li></ul>
             </div>
             <div class="row social-row">
@@ -734,34 +546,34 @@
 
 
                 <div class="soc-item">
-                        <a href="https://twitter.com/mobirise" target="_blank">
+                        <a href="" >
                             <span class="socicon-twitter socicon mbr-iconfont mbr-iconfont-social"></span>
                         </a>
                     </div><div class="soc-item">
-                        <a href="https://www.facebook.com/pages/Mobirise/1616226671953247" target="_blank">
+                        <a href="" >
                             <span class="socicon-facebook socicon mbr-iconfont mbr-iconfont-social"></span>
                         </a>
                     </div><div class="soc-item">
-                        <a href="https://www.youtube.com/c/mobirise" target="_blank">
+                        <a href="" >
                             <span class="socicon-youtube socicon mbr-iconfont mbr-iconfont-social"></span>
                         </a>
                     </div><div class="soc-item">
-                        <a href="https://instagram.com/mobirise" target="_blank">
+                        <a href="" >
                             <span class="socicon-instagram socicon mbr-iconfont mbr-iconfont-social"></span>
                         </a>
                     </div><div class="soc-item">
-                        <a href="https://plus.google.com/u/0/+Mobirise" target="_blank">
+                        <a href="" >
                             <span class="socicon-googleplus socicon mbr-iconfont mbr-iconfont-social"></span>
                         </a>
                     </div><div class="soc-item">
-                        <a href="https://www.behance.net/Mobirise" target="_blank">
+                        <a href="" >
                             <span class="socicon-behance socicon mbr-iconfont mbr-iconfont-social"></span>
                         </a>
                     </div></div>
             </div>
             <div class="row row-copirayt">
                 <p class="mbr-text mb-0 mbr-fonts-style mbr-white align-center display-7">
-                    © Copyright 2025 Mobirise. All Rights Reserved.
+                    © Copyright 2023 Ubitec. Todos los derechos reservados.
                 </p>
             </div>
         </div>

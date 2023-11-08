@@ -14,7 +14,7 @@
                 <th>Latitud</th>
                 <th>Longitud</th>
                 <th>Tipo</th>
-                <th>Orden</th>
+                <th>Usuario</th>
                 <th>Estado</th>
                 <th>Acción</th>
             </tr>
@@ -27,7 +27,7 @@
                 <td>{{ $direccion->latitud }}</td>
                 <td>{{ $direccion->longitud }}</td>
                 <td>{{ $direccion->tipo }}</td>
-                <td>{{ $direccion->orden }}</td>
+                <td>{{ $direccion->name }}</td>
                 <td class="text-center">
 					<label>
 						<form>
@@ -63,7 +63,7 @@
                     <th>Latitud</th>
                     <th>Longitud</th>
                     <th>Tipo</th>
-                    <th>Orden</th>
+                    <th>usuario</th>
                     <th>Estado</th>
                     <th>Acción</th>
                 </tr>
@@ -76,7 +76,7 @@
                     <td>{{ $direccion2->latitud }}</td>
                     <td>{{ $direccion2->longitud }}</td>
                     <td>{{ $direccion2->tipo }}</td>
-                    <td>{{ $direccion2->orden }}</td>
+                    <td>{{ $direccion2->name }}</td>
                     <td class="text-center">
                         <label>
                             <form>

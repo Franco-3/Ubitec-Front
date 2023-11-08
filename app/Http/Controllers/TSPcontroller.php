@@ -117,15 +117,9 @@ class TSPcontroller extends Controller
             // Obtener las direcciones usando la función searchDirections
             $waypoints = $this->searchDirections(session('idRuta'), false);
 
-            if(sizeof($waypoints) > 25)
-            {
-                $direcciones = [];
+            try {
                 $response = $this->connectOSRM($waypoints); //esto devuelve un array [coordenadas de los puntos ordenadas, polylinea, kmTotal]
                 $coordinates = [];
-                $poly = Polyline::decode($response[1]);
-                $polyline = Polyline::pair($poly);
-
-
 
                 foreach($response[0] as $waypoint)
                 {
@@ -140,32 +134,8 @@ class TSPcontroller extends Controller
                 $citiesPolyline = Polyline::encode($coordinates);
                 $this->updatePolylines(session('idRuta'), $response[1], $citiesPolyline);
                 $this->updateKmTotal(session('idRuta'), $response[2]);
-
-            }
-            elseif(sizeof($waypoints) <= 25 )
-            {
-                $direcciones = [];
-                $response = $this->connectOSRM($waypoints); //esto devuelve un array [coordenadas de los puntos ordenadas, polylinea, kmTotal]
-                $coordinates = [];
-                $poly = Polyline::decode($response[1]);
-                $polyline = Polyline::pair($poly);
-
-
-
-                foreach($response[0] as $waypoint)
-                {
-                    $coordinates[] = [
-                        'lat' => $waypoint->latitud,
-                        'lng' => $waypoint->longitud
-                    ];
-
-                }
-
-                //guardar el recorrido
-                $citiesPolyline = Polyline::encode($coordinates);
-                $this->updatePolylines(session('idRuta'), $response[1], $citiesPolyline);
-                $this->updateKmTotal(session('idRuta'), $response[2]);
-
+            } catch (\Throwable $th) {
+                
             }
             return redirect()->route('rutas.index');
         }else return redirect()->route('rutas.index'); //agregar la respuesta que el error sucedede porque no estan definidos el inicio y el final
@@ -176,53 +146,57 @@ class TSPcontroller extends Controller
     private function connectOSRM(array $waypoints)
     {
 
-        $osrm_api_url = 'http://127.0.0.1:5000/trip/v1/driving/';
+        try {
+            $osrm_api_url = 'http://172.22.185.81:5000/trip/v1/driving/';
 
 
-        // Crear una cadena con las coordenadas de las ubicaciones para la URL
-        $coordinates = '';
-        foreach ($waypoints as $waypoint) {
-            $coordinates .= $waypoint->longitud . ',' . $waypoint->latitud . ';';
-        }
-        $coordinates = rtrim($coordinates, ';'); // Eliminar el punto y coma final
-
-
-
-        // Agregar las coordenadas a la URL
-        $osrm_api_url .= $coordinates;
-
-        // Agregar parámetros adicionales a la URL
-        $osrm_api_url .= '?roundtrip=false&source=first&destination=last&steps=false&geometries=polyline&overview=full&annotations=false'; //?roundtrip=false&source=first&destination=last&steps=false&geometries=geojson&overview=false&annotations=false
-
-        // Configurar la solicitud curl
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL, $osrm_api_url);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-
-        // Realizar la solicitud a la API de OSRM
-        $response = curl_exec($curl);
-        curl_close($curl);
-        // Decodificar la respuesta JSON
-        $response_data = json_decode($response, true);
-
-
-        $orderedCoordinates = [];
-        if(isset($response_data['waypoints']))
-        {
-            foreach ($response_data['waypoints'] as $index => $waypointResponse) {
-                $position = $waypointResponse['waypoint_index'];
-                $orderedCoordinates[$position] = $waypoints[$index];
-
-                $this->updateOrden($waypoints[$index]->idDireccion, $position);
+            // Crear una cadena con las coordenadas de las ubicaciones para la URL
+            $coordinates = '';
+            foreach ($waypoints as $waypoint) {
+                $coordinates .= $waypoint->longitud . ',' . $waypoint->latitud . ';';
             }
+            $coordinates = rtrim($coordinates, ';'); // Eliminar el punto y coma final
+    
+    
+    
+            // Agregar las coordenadas a la URL
+            $osrm_api_url .= $coordinates;
+    
+            // Agregar parámetros adicionales a la URL
+            $osrm_api_url .= '?roundtrip=false&source=first&destination=last&steps=false&geometries=polyline&overview=full&annotations=false'; //?roundtrip=false&source=first&destination=last&steps=false&geometries=geojson&overview=false&annotations=false
+    
+            // Configurar la solicitud curl
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_URL, $osrm_api_url);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    
+            // Realizar la solicitud a la API de OSRM
+            $response = curl_exec($curl);
+            curl_close($curl);
+            // Decodificar la respuesta JSON
+            $response_data = json_decode($response, true);
+    
+    
+            $orderedCoordinates = [];
+            if(isset($response_data['waypoints']))
+            {
+                foreach ($response_data['waypoints'] as $index => $waypointResponse) {
+                    $position = $waypointResponse['waypoint_index'];
+                    $orderedCoordinates[$position] = $waypoints[$index];
+    
+                    $this->updateOrden($waypoints[$index]->idDireccion, $position);
+                }
+            }
+            ksort($orderedCoordinates);
+    
+            $polyline = $response_data['trips'][0]['geometry'];
+    
+            $kmTotal =  $response_data['trips'][0]['distance'] / 1000;
+    
+            return [$orderedCoordinates, $polyline, $kmTotal];
+        } catch (\Throwable $th) {
+            return false;
         }
-        ksort($orderedCoordinates);
-
-        $polyline = $response_data['trips'][0]['geometry'];
-
-        $kmTotal =  $response_data['trips'][0]['distance'] / 1000;
-
-        return [$orderedCoordinates, $polyline, $kmTotal];
 
 
 
@@ -230,50 +204,54 @@ class TSPcontroller extends Controller
 
     public function dividirDirecciones()
     {
-        if (session::has('dataExcel')) {
-            $addresses = session('dataExcel');
-            $coordinates = [];
-
-            $empresa = Auth()->user()->empresa;
-            $vehiculosUsuario = DB::table('users')
-            ->join('vehiculos', 'users.id', '=', 'vehiculos.idUsuario')
-            ->select('*')
-            ->where('users.empresa', '=', $empresa)
-            ->get();
-
-            foreach($addresses as $address)
-            {
-                $coordinates[] = [
-                    'latitude' => $address['lat'],
-                    'longitude' => $address['lng']
-                ];
-
-            }
-
-            $distanceMatrix = $this->generateDistanceMatrix($coordinates);
-            $numVehicles = count($vehiculosUsuario);
-            $responseOrtools = $this->connectPython($distanceMatrix, $numVehicles);
-
-
-            foreach($responseOrtools as &$responseArray) {
-                foreach($responseArray as &$elementoIndice) {
-                    $indice = $elementoIndice;
-                    if (isset($addresses[$indice])) {
-                        $elementoIndice = $addresses[$indice];
-                    } else {
-                        // Manejar el caso donde el índice no existe en $addresses, si es necesario.
-                        // Puedes asignar un valor predeterminado o dejarlo como está.
+        try {
+            if (session::has('dataExcel')) {
+                $addresses = session('dataExcel');
+                $coordinates = [];
+    
+                $empresa = Auth()->user()->empresa;
+                $vehiculosUsuario = DB::table('users')
+                ->join('vehiculos', 'users.id', '=', 'vehiculos.idUsuario')
+                ->select('*')
+                ->where('users.empresa', '=', $empresa)
+                ->get();
+    
+                foreach($addresses as $address)
+                {
+                    $coordinates[] = [
+                        'latitude' => $address['lat'],
+                        'longitude' => $address['lng']
+                    ];
+    
+                }
+    
+                $distanceMatrix = $this->generateDistanceMatrix($coordinates);
+                $numVehicles = count($vehiculosUsuario);
+                $responseOrtools = $this->connectPython($distanceMatrix, $numVehicles);
+    
+    
+                foreach($responseOrtools as &$responseArray) {
+                    foreach($responseArray as &$elementoIndice) {
+                        $indice = $elementoIndice;
+                        if (isset($addresses[$indice])) {
+                            $elementoIndice = $addresses[$indice];
+                        } else {
+                            // Manejar el caso donde el índice no existe en $addresses, si es necesario.
+                            // Puedes asignar un valor predeterminado o dejarlo como está.
+                        }
                     }
                 }
+                //responseOrTools ahora tiene la respuesta de la division de los vehiculos con sus respectivas direcciones, hay que enviarle al usuario para que acepte si quiere ese orden
+                foreach($responseOrtools as $indice => $direccionesArray)
+                {
+    
+                    $idUser = $vehiculosUsuario[$indice]->idUsuario; //$responseOrTools tiene la misma cantidad de elementos(vehiculos) que de usuarios existan
+                    $this->newRuta($idUser, $direccionesArray);
+                }
+    
             }
-            //responseOrTools ahora tiene la respuesta de la division de los vehiculos con sus respectivas direcciones, hay que enviarle al usuario para que acepte si quiere ese orden
-            foreach($responseOrtools as $indice => $direccionesArray)
-            {
-
-                $idUser = $vehiculosUsuario[$indice]->idUsuario; //$responseOrTools tiene la misma cantidad de elementos(vehiculos) que de usuarios existan
-                $this->newRuta($idUser, $direccionesArray);
-            }
-
+        } catch (\Throwable $th) {
+            
         }
 
         return back();
@@ -333,52 +311,60 @@ class TSPcontroller extends Controller
 
     public function generateDistanceMatrix(array $coords)
     {
-        $osrm_api_url = 'http://127.0.0.1:5000/table/v1/driving/';
+        try {
+            $osrm_api_url = 'http://172.22.185.81:5000/table/v1/driving/';
 
 
-        // Crear una cadena con las coordenadas de las ubicaciones para la URL
-        $coordinates = '';
-        foreach ($coords as $waypoint) {
-            $coordinates .= $waypoint['longitude'] . ',' . $waypoint['latitude'] . ';';
+            // Crear una cadena con las coordenadas de las ubicaciones para la URL
+            $coordinates = '';
+            foreach ($coords as $waypoint) {
+                $coordinates .= $waypoint['longitude'] . ',' . $waypoint['latitude'] . ';';
+            }
+            $coordinates = rtrim($coordinates, ';'); // Eliminar el punto y coma final
+    
+    
+    
+            // Agregar las coordenadas a la URL
+            $osrm_api_url .= $coordinates;
+    
+            // Agregar parámetros adicionales a la URL
+            $osrm_api_url .= '?annotations=distance'; //?roundtrip=false&source=first&destination=last&steps=false&geometries=geojson&overview=false&annotations=false
+    
+            // Configurar la solicitud curl
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_URL, $osrm_api_url);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    
+            // Realizar la solicitud a la API de OSRM
+            $response = curl_exec($curl);
+            curl_close($curl);
+            // Decodificar la respuesta JSON
+            $response_data = json_decode($response, true);
+    
+            $distanceMatrix = $response_data['distances'];
+    
+            return $distanceMatrix;
+        } catch (\Throwable $th) {
+            return false;
         }
-        $coordinates = rtrim($coordinates, ';'); // Eliminar el punto y coma final
-
-
-
-        // Agregar las coordenadas a la URL
-        $osrm_api_url .= $coordinates;
-
-        // Agregar parámetros adicionales a la URL
-        $osrm_api_url .= '?annotations=distance'; //?roundtrip=false&source=first&destination=last&steps=false&geometries=geojson&overview=false&annotations=false
-
-        // Configurar la solicitud curl
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL, $osrm_api_url);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-
-        // Realizar la solicitud a la API de OSRM
-        $response = curl_exec($curl);
-        curl_close($curl);
-        // Decodificar la respuesta JSON
-        $response_data = json_decode($response, true);
-
-        $distanceMatrix = $response_data['distances'];
-
-        return $distanceMatrix;
 
     }
 
     private function connectPython($matrix, $numVehicles)
     {
-        $response = Http::post('127.0.0.1:8002', [
-            'matrix' => $matrix,
-            'numVehicles' => $numVehicles,
-        ]);
-
-        // Puedes acceder al contenido de la respuesta de la siguiente manera:
-        $responseData = $response->json(); // Si se espera una respuesta JSON
-
-        return $responseData;
+        try {
+            $response = Http::post('172.22.185.81:8002', [
+                'matrix' => $matrix,
+                'numVehicles' => $numVehicles,
+            ]);
+    
+            // Puedes acceder al contenido de la respuesta de la siguiente manera:
+            $responseData = $response->json(); // Si se espera una respuesta JSON
+    
+            return $responseData;
+        } catch (\Throwable $th) {
+            return false;
+        }
     }
 
     private function newRuta(int $id, array $direcciones)

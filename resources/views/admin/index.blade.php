@@ -68,7 +68,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Direccion</th>
-                            <th>Tipo</th>
+                            <th>Usuario</th>
                             <th>Estado</th>
                         </tr>
                     </thead>
@@ -77,7 +77,7 @@
                         <tr>
                             <td>{{ $direccion->idDireccion }}</td>
                             <td>{{ $direccion->direccion }}</td>
-                            <td>{{ $direccion->tipo }}</td>
+                            <td>{{ $direccion->name }}</td>
                             <td class="text-center">
                                 <label>
                                     <form>

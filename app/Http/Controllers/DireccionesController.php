@@ -18,9 +18,30 @@ class DireccionesController extends Controller
      */
     public function index()
     {
+
+        $empresa = Auth()->user()->empresa;
+
         //MOSTRAR DIRECCIONES
-        $direcciones = Direcciones::where('estado','1')->get();
-        $direcciones2 = Direcciones::where('estado','0')->get();
+        $direcciones = DB::table('direcciones')
+        ->join('rutas', 'direcciones.idRuta', '=', 'rutas.idRuta')
+        ->join('user_ruta', 'rutas.idRuta', '=', 'user_ruta.idRuta')
+        ->join('users', 'user_ruta.idUsuario', '=', 'users.id')
+        ->where('users.empresa', $empresa)
+        ->where('direcciones.estado', true)
+        ->where('direcciones.tipo', '<>', 'inicio')
+        ->where('direcciones.tipo', '<>', 'final')
+        ->select('direcciones.*', 'users.name')
+        ->get();
+        $direcciones2 = DB::table('direcciones')
+        ->join('rutas', 'direcciones.idRuta', '=', 'rutas.idRuta')
+        ->join('user_ruta', 'rutas.idRuta', '=', 'user_ruta.idRuta')
+        ->join('users', 'user_ruta.idUsuario', '=', 'users.id')
+        ->where('users.empresa', $empresa)
+        ->where('direcciones.estado', false)
+        ->where('direcciones.tipo', '<>', 'inicio')
+        ->where('direcciones.tipo', '<>', 'final')
+        ->select('direcciones.*', 'users.name')
+        ->get();
         return view('backend.direcciones.index', compact('direcciones', 'direcciones2'));
 
     }

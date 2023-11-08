@@ -18,7 +18,16 @@ class AdminController extends Controller
     public function index()
     {
         $empresa = Auth()->user()->empresa;
-        $direcciones = Direcciones::all()->where('estado', 0)->whereNotNull('orden');
+        $direcciones = DB::table('direcciones')
+        ->join('rutas', 'direcciones.idRuta', '=', 'rutas.idRuta')
+        ->join('user_ruta', 'rutas.idRuta', '=', 'user_ruta.idRuta')
+        ->join('users', 'user_ruta.idUsuario', '=', 'users.id')
+        ->where('users.empresa', $empresa)
+        ->where('direcciones.estado', false)
+        ->where('direcciones.tipo', '<>', 'inicio')
+        ->where('direcciones.tipo', '<>', 'final')
+        ->select('direcciones.*', 'users.name')
+        ->get();
         $vehiculos = Vehiculo::all()->whereNull('idUsuario');
         //$vehiculos = Vehiculo::all();
         session(['empresa' => $empresa]);
