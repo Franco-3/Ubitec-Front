@@ -83,7 +83,7 @@
 						<div class="btn-group col-12 shadow" role="group" aria-label="Basic Example">
 							<button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom" id="abrirMapaButton">Abrir Mapa <i class="bi bi-globe-americas"></i></button>
 							<a class="btn btn-success" href="{{ route('rutas.create') }}" role="button">Nueva ruta</a>
-							<a class="btn btn-success" href="{{ route('google.ordenar') }}" role="button">Ordenar Direcciones</a>
+							<a class="btn btn-success" href="{{ route('tsp.ordenar') }}" role="button">Ordenar Direcciones</a>
 							<!--<a href="{{ route('tsp.ordenar') }}" class="btn btn-primary">Ordenar Direcciones</a>-->
 						</div>
 					</div>
@@ -97,7 +97,6 @@
                 <div class="offcanvas-body bg-dark-subtle">
                     <div class="container">
 						<div id="map"></div>
-						<button id="screenMap">Take and download screen</button>
                     </div>
                 </div>
             </div>
@@ -147,7 +146,7 @@
 						<td>{{$direccion->direccion}}</td>
 						<td class="text-center">
 							<!-- Button trigger modal -->
-							<button type="button" class="btn btn-success p-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+							<button type="button" class="btn btn-success p-2" id="img_desc" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="cambiarId({{ $direccion->idDireccion }}, '{{ $direccion->descripcion }}', `{{ $direccion->imagen}}`)">
 								Editar
 							</button>
 						</td>
@@ -177,15 +176,17 @@
 </div>
 
 @if ($kmTotal)
-	<button id="generar_excel" onclick="generarExcel()">Generar excel</button>
+		<button class="btn btn-success p-2 col-sm-12 col-md-3 col-lg-3 col-xl-3" id="generar_excel" onclick="generarExcel()">Generar Excel</button>
 @endif
-
+<br>
+<br>
 @if (Session::has('inicio') && Session::has('final'))
-	<button class="btn btn-primary col-sm-12 col-md-3 col-lg-3 col-xl-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#excelbottom" aria-controls="excelbottom">Cargar Excel</button>
+		<button class="btn btn-success p-2 col-sm-12 col-md-3 col-lg-3 col-xl-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#excelbottom" aria-controls="excelbottom">Cargar Excel</button>
 @endif
 
 @if ($imagenRuta)
     <script>
+		console.log('entro');
 		document.addEventListener('DOMContentLoaded', function() {
 			// Agrega un oyente de eventos al botón "Abrir Mapa"
 			const abrirMapaButton = document.getElementById('abrirMapaButton');
@@ -230,17 +231,25 @@
 		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	</div>
 	<div class="modal-body">
-		<form action="">
-		<input type="file" name="imagen" accept="image/png, image/jpeg, image/jpg, image/bmp, image/ tif">
-		<textarea name="descripcion" cols="30" rows="7"></textarea>
+		<form action="{{ route('direccion.imagen') }}" method="post" enctype="multipart/form-data">
+			@csrf <!-- Asegúrate de incluir el token CSRF para proteger tu formulario -->
+			<input class="form-control" type="file" name="imagen" id="imagen" accept="image/png, image/jpeg, image/jpg, image/bmp, image/tif">
+			<textarea class="form-control" name="descripcion" id="descripcion" cols="30" rows="7"></textarea>
+			<input type="hidden" name="id" id="idDireccion">
+			<br>
+			<button class="btn btn-primary" type="submit" id="editForm" class="btn btn-primary">Guardar cambios</button>
 		</form>
+			<br>
+			<button class="btn btn-success p-2" id="botonDescargar">Ver Imagen Actual</button>
 	</div>
 	<div class="modal-footer">
 		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-		<button type="button" id="editForm" class="btn btn-primary">Guardar cambios</button>
 	</div>
 	</div>
 </div>
 </div>
+
+<script src="{{ asset('js/imagen_descripcion.js') }}"></script> {{-- javascript para capturar la imagen y la descripcion --}}
+
 
  @endsection

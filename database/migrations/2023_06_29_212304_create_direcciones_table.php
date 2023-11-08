@@ -25,6 +25,8 @@ return new class extends Migration
             $table->char('tipo');
             $table->integer('orden')->nullable();
             $table->boolean('estado')->default(0);
+            $table->text('descripcion');
+            $table->text('imagen')->nullable();
             $table->timestamps();
         });
     }

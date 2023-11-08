@@ -120,7 +120,7 @@ class TSPcontroller extends Controller
             if(sizeof($waypoints) > 25)
             {
                 $direcciones = [];
-                $response = $this->connectOSRM($waypoints);
+                $response = $this->connectOSRM($waypoints); //esto devuelve un array [coordenadas de los puntos ordenadas, polylinea, kmTotal]
                 $coordinates = [];
                 $poly = Polyline::decode($response[1]);
                 $polyline = Polyline::pair($poly);
@@ -130,8 +130,8 @@ class TSPcontroller extends Controller
                 foreach($response[0] as $waypoint)
                 {
                     $coordinates[] = [
-                        'lat' => $waypoint['latitude'],
-                        'lng' => $waypoint['longitude']
+                        'lat' => $waypoint->latitud,
+                        'lng' => $waypoint->longitud
                     ];
 
                 }
@@ -139,6 +139,7 @@ class TSPcontroller extends Controller
                 //guardar el recorrido
                 $citiesPolyline = Polyline::encode($coordinates);
                 $this->updatePolylines(session('idRuta'), $response[1], $citiesPolyline);
+                $this->updateKmTotal(session('idRuta'), $response[2]);
 
             }
             elseif(sizeof($waypoints) <= 25 )
@@ -386,6 +387,7 @@ class TSPcontroller extends Controller
         $ruta = new Ruta();
         $ruta->estado = 'P';
         $ruta->kmTotal = null;
+        $ruta->path = 'img/imagen_default.jpg';
         $ruta->save();
 
         $idRuta = $ruta->getKey();
@@ -424,6 +426,8 @@ class TSPcontroller extends Controller
         $direccion->longitud = $longitud;
         $direccion->tipo = $tipo;
         $direccion->orden = null;
+        $direccion->descripcion = '';
+        $direccion->imagen = null;
         $direccion->save();
     }
 

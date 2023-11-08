@@ -53,20 +53,14 @@ class RutasController extends Controller
 
             $ruta = Ruta::find(session('idRuta'));
             $rutaPath = $ruta->path;
-            
-            if(!empty($puntosPolylinea->polyline) && $rutaPath == 'storage/images_ruta/default.png')
-            {
 
-                $rutaPath = 'storage/images_ruta/ruta'.session('idRuta').'.png';
-                $ruta->path = $rutaPath;
-                $ruta->save();
+            if( $rutaPath == 'img/imagen_default.jpg')
+            {
+                //si hay una polylinea 
                 $imagenRuta = true;
             }
 
         }
-
-
-        
 
 
         return view('backend.rutas.index', compact('idUsuario', 'direcciones', 'responseData', 'kmTotal', 'imagenRuta'));
@@ -94,7 +88,7 @@ class RutasController extends Controller
         $ruta = new Ruta();
         $ruta->estado = 'P';
         $ruta->kmTotal = null;
-        $ruta->path = 'storage/images_ruta/default.png';
+        $ruta->path = 'img/imagen_default.jpg';
         $ruta->save();
 
         //enlazar la ruta y el usuario en la tabla usuarios_ruta
@@ -160,6 +154,12 @@ class RutasController extends Controller
         // Guarda la imagen en una ubicación deseada en tu servidor
         $image->storeAs('public/images_ruta', $nombreArchivo); // Esto es solo un ejemplo, ajusta la ubicación según tus necesidades
 
+        $ruta = Ruta::find($idRuta);
+
+        $rutaPath = 'storage/images_ruta/ruta'.$idRuta.'.png';
+        $ruta->path = $rutaPath;
+        $ruta->save();
+
         return response()->json(['message' => 'Imagen guardada exitosamente']);
     }
 
@@ -216,7 +216,7 @@ class RutasController extends Controller
         $direccionesUsuario = DB::table('rutas')
                             ->join('direcciones', 'rutas.idRuta', '=', 'direcciones.idRuta')
                             ->where('rutas.idRuta', $idRuta)
-                            ->select('idDireccion','direccion', 'latitud', 'longitud', 'tipo', 'direcciones.estado')
+                            ->select('idDireccion','direccion', 'latitud', 'longitud', 'tipo', 'direcciones.estado', 'direcciones.descripcion', 'direcciones.imagen')
                             ->orderBy('orden', 'asc')
                             ->get();
 

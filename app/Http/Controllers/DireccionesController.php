@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Direcciones;
 use App\Models\Paquete;
 use Symfony\Component\Console\Input\Input;
+use Illuminate\Support\Facades\File;
 
 use function PHPUnit\Framework\isNull;
 
@@ -18,8 +19,9 @@ class DireccionesController extends Controller
     public function index()
     {
         //MOSTRAR DIRECCIONES
-        $direcciones = Direcciones::orderBy('estado','desc')->get();
-        return view('backend.direcciones.index', compact('direcciones'));
+        $direcciones = Direcciones::where('estado','1')->get();
+        $direcciones2 = Direcciones::where('estado','0')->get();
+        return view('backend.direcciones.index', compact('direcciones', 'direcciones2'));
 
     }
 
@@ -53,6 +55,8 @@ class DireccionesController extends Controller
         $direccion->longitud = $request->input('longitud');
         $direccion->tipo = $request->input('tipo');
         $direccion->orden = null;
+        $direccion->descripcion = '';
+        $direccion->imagen = null;
         $direccion->update($validatedData);
         $direccion->save();
 
@@ -66,7 +70,7 @@ class DireccionesController extends Controller
         // $request->session()->flash('status', 'Se guardó correctamente la categoria ' . $categoria->name);
         //return $direccion;
         
-        return redirect()->route('direcciones.index')->with('success', 'Dirección creada correctamente.');
+        return true;
     }
 
     /**
@@ -147,7 +151,65 @@ class DireccionesController extends Controller
     
         $direccion->save();
     }
+
+    public function agregarImagenDireccion(Request $request)
+    {
+        $id = $request->input('id');
+        $descripcion = $request->input('descripcion');
+        $imagen = $request->file('imagen');
+        $rutaImagen = '';
+
+        $this->verificarCarpeta();
+
+        // Verificar que se haya proporcionado una imagen
+        if ($imagen) {
+            $ruta = $imagen->store('images_direccion', 'public');
+            $rutaImagen = storage_path("app/public/".$ruta); // Almacenar la imagen en una carpeta específica
+        }
+
+        if ($descripcion == null) {
+            $descripcion = '';
+        }
+        $direccion = Direcciones::find($id);
+
+        $direccion->update([
+            'descripcion' => $descripcion,
+            'imagen' => $rutaImagen
+        ]);
+
+
+        return redirect()->back();
+    }
+
+
+    public function descargarImagen(Request $request)
+    {
+        $id = $request->input('id');
+        $direccion = Direcciones::find($id);
+
+        if($direccion)
+        {
+            $archivoPath = $direccion->imagen;
+            if($archivoPath != '') return response()->download($archivoPath);
+        }else
+        {
+            $archivoPath = 'No se encontro la imagen';
+        }
+
+        return $archivoPath;
+    }
     
+
+    private function verificarCarpeta()
+    {
+        $carpeta = storage_path("app/public/images_direccion");
+
+        // Verifica si la carpeta ya existe
+        if (!File::exists($carpeta)) {
+            // Si no existe, crea la carpeta
+            File::makeDirectory($carpeta, 0755, true, true);
+        }
+    }
 
 
 }

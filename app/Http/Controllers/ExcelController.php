@@ -112,6 +112,8 @@ class ExcelController extends Controller
         $direccion->longitud = $data['results'][0]['geometry']['location']['lng'];
         $direccion->tipo = 'normal';
         $direccion->orden = null;
+        $direccion->descripcion = '';
+        $direccion->imagen = null;
 
         $direccion->save();
 

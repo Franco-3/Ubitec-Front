@@ -52,6 +52,9 @@ Route::middleware('auth')->group(function () {
     Route::get('generar-excel', [ExcelController::class, 'generarExcel'])->name('generar.excel');
 
     Route::post('subir-imagen', [RutasController::class, 'agregarCaptura'])->name('guardar.captura');
+
+    Route::post('direccion-imagen', [DireccionesController::class, 'agregarImagenDireccion'])->name('direccion.imagen');
+    Route::post('descargar-imagen', [DireccionesController::class, 'descargarImagen'])->name('descargar.imagen');
 });
 
 

@@ -25,9 +25,9 @@ function uploadImageToServer(blob) {
     })
     .then(response => {
         if (response.ok) {
-            alert('Imagen cargada exitosamente');
+
         } else {
-            alert('Error al cargar la imagen');
+
         }
     })
     .catch(error => {
