@@ -135,7 +135,7 @@
                     $('#patente').val(patente);
                     $('#nombre').val(nombre);
                     $('#id').val(id);
-                    var action = 'http://ubitec-front.test/vehiculos/updateUser/' + id;
+                    var action = 'vehiculos/updateUser/' + id;
                     var formulario = $('#form');
                     formulario.attr('action', action);
             });

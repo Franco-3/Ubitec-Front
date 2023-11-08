@@ -129,15 +129,16 @@ class VehiculoController extends Controller
     {
         $vehiculo = Vehiculo::findOrFail($id);
         
-        
-        $validatedData = $request->validate(
-            [
-                'usuario' => 'required',
-            ]
-        );
+        if ($request->input('usuario') != null) {
+            $validatedData = $request->validate(
+                [
+                    'usuario' => 'required',
+                ]
+            );
+        }
 
         $sinUser = $request->input('nouser');
-
+        
         if ($sinUser != null) {
             $vehiculo->idUsuario = null;
         }else{
