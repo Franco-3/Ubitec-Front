@@ -71,69 +71,57 @@
 <!-- Fin Modal -->
 
 
-@forelse($vehiculos as $vehiculo)
-    @if ($loop->first)
-        <div class="container">
-            <table id="index" class="table table-striped dt-responsive" style="width: 100%">
-                <thead>
-                    <tr>
-                        <th>Patente</th>
-                        <th>Nombre</th>
-                        <th class="text-center">Usuario Asignado</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-        @endif
-        <tbody>
-            <tr>
-                <td>{{ $vehiculo->patente }}</td>
-                <td> {{ $vehiculo->nombre }}</a></td>
-                <td class="text-center">
-                    @if($vehiculo->idUsuario != null)
-                    {{ $vehiculo->asignadoA->name . ' ' . $vehiculo->asignadoA->lastName }}
-                    @else
-                    Sin asignar
-                    @endif
-                </td>
-                <td>
-                    {{ Form::model($vehiculo, ['method' => 'delete', 'route' => ['vehiculos.destroy', $vehiculo->idVehiculo]]) }}
-                    @csrf
-                    <div class="d-flex">
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-info edit my-1 m-1" data-id='{{ $vehiculo->idVehiculo }}' data-patente='{{ $vehiculo->patente }}' data-nombre='{{ $vehiculo->nombre }}' data-bs-toggle="modal" data-bs-target="#exampleModal" data-toggle="tooltip" data-placement="top" title="Cambiar usuario">
-                            <span>
-                                <svg class="css-i6dzq1" stroke-linejoin="round" stroke-linecap="round" fill="none" stroke-width="2" stroke="#FFFFFF" height="15" width="15" viewBox="0 0 24 24">
-                                    <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
-                                </svg>
-                            </span>
-                        </button>
-                        <a href="{{ route('vehiculos.edit', ['vehiculo' => $vehiculo->idVehiculo]) }}" class="btn btn-primary my-1" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Editar"><i class="bi bi-pencil-square"></i></a>
-                        <button type="submit" class="btn btn-danger" onclick="if (!confirm('Está seguro de borrar el usuario?')) return false;" data-toggle="tooltip" data-placement="top" title="Borrar">
-                            <i class="bi bi-trash3"></i>
-                        </button>
-                    </div>
-                    {!! Form::close() !!}
-                </td>
-            </tr>
-        </tbody>
-        @if ($loop->last)
-            </table>
-        @endif
+<div class="container">
+    @if($vehiculos->isEmpty())
+        <div class="alert alert-primary text-center" role="alert">
+            No hay vehículos.
         </div>
-        @empty
-        <p class="text-capitalize"> No hay vehiculos.</p>
-    @endforelse
-    </div>
-    {{-- <hr>
-    <!-- Paginación -->
-    <div class="d-flex justify-content-center">
-        <!--
-          Agregar en App\Providers\AppServiceProvider:
-          use Illuminate\Pagination\Paginator;
-              public function boot() { Paginator::useBootstrap(); } -->
-        {!! $vehiculos->links() !!}
-    </div> --}}
-
+    @else
+        <table id="index" class="table table-striped dt-responsive" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>Patente</th>
+                    <th>Nombre</th>
+                    <th class="text-center">Usuario Asignado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($vehiculos as $vehiculo)
+                    <tr>
+                        <td>{{ $vehiculo->patente }}</td>
+                        <td>{{ $vehiculo->nombre }}</td>
+                        <td class="text-center">
+                            @if($vehiculo->idUsuario != null)
+                                {{ $vehiculo->asignadoA->name . ' ' . $vehiculo->asignadoA->lastName }}
+                            @else
+                                Sin asignar
+                            @endif
+                        </td>
+                        <td>
+                            {{ Form::model($vehiculo, ['method' => 'delete', 'route' => ['vehiculos.destroy', $vehiculo->idVehiculo]]) }}
+                            @csrf
+                                <!-- Botón para abrir modal -->
+                                <button type="button" class="btn btn-info edit my-1" data-id='{{ $vehiculo->idVehiculo }}' data-patente='{{ $vehiculo->patente }}' data-nombre='{{ $vehiculo->nombre }}' data-bs-toggle="modal" data-bs-target="#exampleModal" data-toggle="tooltip" data-placement="top" title="Cambiar usuario">
+                                    <span>
+                                        <svg class="css-i6dzq1" stroke-linejoin="round" stroke-linecap="round" fill="none" stroke-width="2" stroke="#FFFFFF" height="15" width="15" viewBox="0 0 24 24">
+                                            <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                                        </svg>
+                                    </span>
+                                </button>
+                                <!-- ... (código del botón) ... -->
+                                <a href="{{ route('vehiculos.edit', ['vehiculo' => $vehiculo->idVehiculo]) }}" class="btn btn-primary my-1" data-toggle="tooltip" data-placement="top" title="Editar"><i class="bi bi-pencil-square"></i></a>
+                                <button type="submit" class="btn btn-danger" onclick="if (!confirm('¿Estás seguro de borrar el Vehículo?')) return false;" data-toggle="tooltip" data-placement="top" title="Borrar">
+                                    <i class="bi bi-trash3"></i>
+                                </button>
+                            {!! Form::close() !!}
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @endif
+</div>
 
     <script>
         $(document).ready(function () {

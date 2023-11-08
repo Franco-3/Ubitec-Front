@@ -90,7 +90,7 @@ class VehiculoController extends Controller
             [
                 'nombre' => 'required',
                 'patente' => 'required',
-                'idUsuario' => 'required',
+                //'idUsuario' => 'required',
             ]
         );
         
@@ -98,7 +98,7 @@ class VehiculoController extends Controller
         
         $vehiculo->nombre = $request->input('nombre');
         $vehiculo->patente = $request->input('patente');
-        $vehiculo->idUsuario = $request->input('idUsuario');
+        //$vehiculo->idUsuario = $request->input('idUsuario');
         
         $vehiculo->save();
 

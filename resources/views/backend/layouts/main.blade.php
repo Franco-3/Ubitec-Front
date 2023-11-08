@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="light">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,7 +35,7 @@
 
 
 </head>
-<body class="d-flex flex-column min-vh-100" data-bs-theme="light">
+<body class="d-flex flex-column min-vh-100">
     <nav class="navbar navbar-expand-md shadow-sm p-3">
         <div class="container-fluid">
             @if(Route::has('users.edit') || Route::has('vehiculos.edit') || Route::has('direcciones.edit'))

@@ -37,7 +37,7 @@
 
                     <div class="coolinput mb-3">
                         {{ Form::label('idUsuario', 'Usuario asignado', ['class' => 'control-label text']) }}
-                        {{ Form::text('idUsuario', '-', ['class' => 'form-control input', 'readonly']) }}
+                        {{ Form::text('idUsuario', $vehiculo->asignadoA->name . ' ' . $vehiculo->asignadoA->lastName, ['class' => 'form-control input', 'readonly']) }}
                         @error('idUsuario')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
