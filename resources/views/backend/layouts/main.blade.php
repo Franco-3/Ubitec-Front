@@ -141,23 +141,23 @@
     <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.3.0/js/responsive.bootstrap5.min.js"></script>
     <script>
-        $(document).ready(function () {
+$(document).ready(function () {
 
-        $('#index').DataTable({
-            "language": {
-                "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json",
-                "lengthMenu": "Mostrar de a MENU registros",
-            }
-        });
+    $('#index').DataTable({
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json",
+            "lengthMenu": "Mostrar de a _MENU_ registros",
+        }
+    });
 
 
-        $('.vehiculos-table, .direcciones-table, .vehiculos-usuario-table, .direcciones-completas, .direcciones-incompletas').DataTable({
-            "language": {
-                "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json",
-                "lengthMenu": "Mostrar de a MENU registros",
-            }
-        });
-        });
+    $('.vehiculos-table, .direcciones-table, .vehiculos-usuario-table, .direcciones-completas, .direcciones-incompletas').DataTable({
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json",
+            "lengthMenu": "Mostrar de a _MENU_ registros",
+        }
+    });
+});
     </script>
 </body>
 </html>
