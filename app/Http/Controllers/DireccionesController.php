@@ -186,10 +186,18 @@ class DireccionesController extends Controller
 
         // Verificar que se haya proporcionado una imagen
         if ($imagen) {
+            
+        }
+
+        if ($imagen && $imagen->isValid() && in_array($imagen->getClientOriginalExtension(), ['jpg', 'jpeg', 'png', 'gif'])) {
             $ruta = 'images_direccion/' . time() . '.' . $imagen->getClientOriginalExtension();
             Image::make($imagen)
+                ->encode('jpg', 60)
                 ->save(storage_path("app/public/" . $ruta)); // Almacenar la imagen en una carpeta específica
             $rutaImagen = storage_path("app/public/" . $ruta);
+        } else {
+            // La variable $imagen no es una imagen válida
+            // Maneja el error de acuerdo a tus necesidades
         }
 
         if ($descripcion == null) {
