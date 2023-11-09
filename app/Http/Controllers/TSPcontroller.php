@@ -147,7 +147,7 @@ class TSPcontroller extends Controller
     {
 
         try {
-            $osrm_api_url = 'http://172.22.185.81:5000/trip/v1/driving/';
+            $osrm_api_url = 'http://127.0.0.1:5000/trip/v1/driving/';
 
 
             // Crear una cadena con las coordenadas de las ubicaciones para la URL
@@ -312,7 +312,7 @@ class TSPcontroller extends Controller
     public function generateDistanceMatrix(array $coords)
     {
         try {
-            $osrm_api_url = 'http://172.22.185.81:5000/table/v1/driving/';
+            $osrm_api_url = 'http://127.0.0.1:5000/table/v1/driving/';
 
 
             // Crear una cadena con las coordenadas de las ubicaciones para la URL
@@ -353,7 +353,7 @@ class TSPcontroller extends Controller
     private function connectPython($matrix, $numVehicles)
     {
         try {
-            $response = Http::post('172.22.185.81:8002', [
+            $response = Http::post('127.0.0.1:8002', [
                 'matrix' => $matrix,
                 'numVehicles' => $numVehicles,
             ]);

@@ -8,6 +8,8 @@ use App\Models\Direcciones;
 use App\Models\Paquete;
 use Symfony\Component\Console\Input\Input;
 use Illuminate\Support\Facades\File;
+use Intervention\Image\ImageManagerStatic as Image;
+
 
 use function PHPUnit\Framework\isNull;
 
@@ -184,8 +186,10 @@ class DireccionesController extends Controller
 
         // Verificar que se haya proporcionado una imagen
         if ($imagen) {
-            $ruta = $imagen->store('images_direccion', 'public');
-            $rutaImagen = storage_path("app/public/".$ruta); // Almacenar la imagen en una carpeta específica
+            $ruta = 'images_direccion/' . time() . '.' . $imagen->getClientOriginalExtension();
+            Image::make($imagen)
+                ->save(storage_path("app/public/" . $ruta)); // Almacenar la imagen en una carpeta específica
+            $rutaImagen = storage_path("app/public/" . $ruta);
         }
 
         if ($descripcion == null) {
@@ -197,7 +201,6 @@ class DireccionesController extends Controller
             'descripcion' => $descripcion,
             'imagen' => $rutaImagen
         ]);
-
 
         return redirect()->back();
     }
